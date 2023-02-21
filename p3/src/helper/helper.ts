@@ -2,7 +2,7 @@ import fs from "fs";
 // import {db} from '../db'
 import express from "express";
 import formidable from "formidable";
-import { formResult } from "../types";
+import { formResult } from "../eg_types";
 
 let onlineUsers: Map<number, { userId: number; username: string }> = new Map();
 

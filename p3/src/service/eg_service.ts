@@ -1,4 +1,4 @@
-import { resultType } from "../types";
+import { resultType } from "../eg_types";
 
 export class Transform {
   add_param_insert(counter: number, len: number): string {

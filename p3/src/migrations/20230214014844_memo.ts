@@ -8,7 +8,7 @@ export async function up(knex: Knex): Promise<void> {
       tableBuilder.string("password").notNullable();
       tableBuilder.string("email").notNullable().unique();
       tableBuilder.string("user_icon").notNullable();
-      tableBuilder.date("date_of_birth");
+      tableBuilder.date("date_of_birth").notNullable();
       tableBuilder.enu("gender", ["male", "female", "unisex"]).notNullable();
       tableBuilder.string("location");
       tableBuilder.boolean("is_public").notNullable();

@@ -11,8 +11,8 @@ import {
 import { createServer } from "http";
 import { Server } from "socket.io";
 
-import { UserController } from "./controller/userController";
-import { MemoController } from "./controller/memoController";
+import { UserController } from "./controller/eg_userController";
+import { MemoController } from "./controller/eg_memoController";
 import knex from "knex";
 import { sessionMiddleware } from "./session";
 
