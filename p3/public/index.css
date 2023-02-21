@@ -1,0 +1,96 @@
+.wrapper{
+    max-width: 1400px;
+    margin: 0px auto;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-rows: 100%;
+  }
+  .admin_section{
+    grid-column: span 1;
+    grid-row: span 1;
+    padding: 10px 10px;
+  }
+  
+
+  .login_form,.logout_form,.memo_form{
+    border: 1px solid #222222;
+  }
+
+
+  .memos_section{
+    grid-column: span 1;
+    grid-row: span 1;
+    background: url(assets/wall.jpeg);
+    background-size: cover;
+    background-position: center center;
+  }
+
+
+  /* form > .memo{
+    background-color: rgb(242, 223, 105);
+    color: white;
+    margin: 0px auto;
+    width: 150px;
+    height: 150px;
+    
+  } */
+
+
+  .memo {
+    background-color: rgb(242, 223, 105);
+    color: white;
+    margin: 12px;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .memo_img{
+    width: 100%;
+  }
+  #img_edit,#img_add{
+    width: 80%;
+  }
+  .btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    border: none;
+    position: absolute;
+  }
+  
+  .trash {
+    right: -5px;
+    bottom: -5px;
+  }
+  .edit {
+    right: -5px;
+    top: -5px;
+  }
+  .like{
+    left: -5px;
+    top: -5px;
+  }
+
+
+  .isHide{
+    display: none;
+  }
+
+
+  .memos_row{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px 30px;
+  }
+  .like_counter{
+    position: absolute;
+    top: -30px;
+    left: 0px;
+  }
