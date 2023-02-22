@@ -2,7 +2,7 @@ import express from "express"
 import { errorHandler } from "../error"
 import { formidable_promise , transfer_formidable_into_obj } from "../helper/helper"
 import { FormResult,User } from "../model"
-import { UserRoutes } from "../routes/route"
+import { UserRoutes } from "../routes/routes"
 import { userService } from "../service/userService"
 
 
