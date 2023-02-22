@@ -10,9 +10,10 @@ app.use(sessionMiddleware);
 
 let userController = new UserController();
 app.use("/user", userController.routes);
-app.get("/test", async (req: express.Request, res: express.Response) => {
-  res.json("s");
-});
+// app.get("/test", async (req: express.Request, res: express.Response) => {
+//   res.json("s");
+// });
+
 app.listen(env_config.PORT, () => {
   console.log(`Listening at http://localhost:${env_config.PORT}/`);
 });
