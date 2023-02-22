@@ -3,7 +3,7 @@ import express from "express";
 import {
   formidable_promise,
   transfer_formidable_into_obj,
-} from "../helper/helper";
+} from "../helper/eg_helper";
 import { errorHandler } from "../error";
 
 import { memoService } from "../service/eg_memoService";

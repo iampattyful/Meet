@@ -5,7 +5,7 @@ import { errorHandler } from "../error";
 import {
   formidable_promise,
   transfer_formidable_into_obj,
-} from "../helper/helper";
+} from "../helper/eg_helper";
 jest.mock("../service/memoService");
 jest.mock("../error");
 jest.mock("../helper/helper");
