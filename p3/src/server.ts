@@ -1,5 +1,6 @@
 import express from "express";
 import { UserController } from "./controller/eg_userController";
+// import { FilterController } from "./controller/filterController";
 import { sessionMiddleware } from "./session";
 import { env_config } from "./env";
 import path from "path";
@@ -19,6 +20,8 @@ app.use("/user", userController.routes);
 // app.get("/test", async (req: express.Request, res: express.Response) => {
 //   res.json("s");
 // });
+
+// app.use("/filter/:id", filterController.routes)
 
 app.get("*", async (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(p, "error.html"));
