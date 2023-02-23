@@ -1,7 +1,6 @@
 import { Knex } from "knex";
 
 import { knex } from "../db";
-import { Transform } from "./eg_service";
 
 interface memo {
   id: number;
@@ -11,10 +10,8 @@ interface memo {
   like_count: number;
 }
 
-export class MemoService extends Transform {
-  constructor(protected knex: Knex) {
-    super();
-  }
+export class MemoService {
+  constructor(protected knex: Knex) {}
   async rollback(txn: Knex.Transaction) {
     await txn.rollback();
   }

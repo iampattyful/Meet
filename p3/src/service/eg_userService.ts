@@ -1,9 +1,9 @@
 import { Knex } from "knex";
 import { knex } from "../db";
-import { Transform } from "./eg_service";
-class UserService extends Transform {
+
+class UserService {
   constructor(protected knex: Knex) {
-    super();
+    
   }
   async login(obj: any) {
     try {

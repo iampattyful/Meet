@@ -1,8 +1,8 @@
 import express from "express"
 import { isLoggedInAPI } from "../guard"
 
-class Routes{
-    routes:express.Router = express.Router()
+class Routes {
+  routes: express.Router = express.Router();
 }
 
 export abstract class UserRoutes extends Routes{
@@ -19,4 +19,3 @@ export abstract class UserRoutes extends Routes{
     public abstract enroll(req:express.Request,res:express.Response):any
     public abstract getCurrentUser(req:express.Request,res:express.Response):any
 }
-
