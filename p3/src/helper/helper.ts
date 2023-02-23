@@ -65,7 +65,7 @@ export let transformer: (data: unknown[], method: string) => resultType = (
   return result;
 };
 
-export let formidablePromise = (req: express.Request) => {
+export function formidablePromise(req: express.Request) {
   return new Promise((resolve, reject) => {
     form.on("error", (err) => {
       console.log(err.message);
@@ -89,12 +89,12 @@ export let formidablePromise = (req: express.Request) => {
       }
     });
   });
-};
+}
 type formResult = {
   fields?: any;
   files?: any;
 };
-export function transferFormidableIntoObj(form_result: formResult) {
+function transferFormidableIntoObj(form_result: formResult) {
   let result = {};
 
   if (form_result.hasOwnProperty("fields")) {

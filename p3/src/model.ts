@@ -10,5 +10,4 @@ export type User = {
     user_icon?:string;
     date_of_birth?:Date;
     gender?:string;
-    about_me?:string;
 }

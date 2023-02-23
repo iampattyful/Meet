@@ -1,5 +1,5 @@
 import express from "express";
-import { UserController } from "./controller/eg_userController";
+import { UserController } from "./controller/userController";
 import { sessionMiddleware } from "./session";
 import { env_config } from "./env";
 

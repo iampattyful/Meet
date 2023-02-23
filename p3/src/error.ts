@@ -11,8 +11,8 @@ export function errorHandler(error:any, req:express.Request,res:express.Response
         
     }    
     
-    // res.status(500).json(result)
-    res.json(result)
+    res.status(500).json(result)
+    // res.json(result)
     
 }
   
