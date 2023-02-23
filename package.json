@@ -1,0 +1,37 @@
+{
+  "name": "p3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/ting510/p3.git",
+  "keywords": [],
+  "author": "namFei <namfly@hotmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ting510/p3/issues"
+  },
+  "homepage": "https://github.com/ting510/p3#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/express-session": "^1.17.6",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.14.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/formidable": "^2.0.5",
+    "@types/pg": "^8.6.6",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "formidable": "^2.1.1",
+    "knex": "^2.4.2",
+    "pg": "^8.9.0",
+    "socket.io": "^4.6.1"
+  }
+}
