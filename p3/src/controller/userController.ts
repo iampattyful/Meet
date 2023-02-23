@@ -1,6 +1,6 @@
 import express from "express"
 import { errorHandler } from "../error"
-import { formidable_promise , transfer_formidable_into_obj } from "../helper/helper"
+import { formidablePromise , transferFormidableIntoObj } from "../helper/helper"
 import { FormResult,User } from "../model"
 import { UserRoutes } from "../routes/routes"
 import { userService } from "../service/userService"
@@ -13,8 +13,8 @@ export class UserController extends UserRoutes{
     }
     async login(req:express.Request,res:express.Response){
         try{
-            let formResult = await formidable_promise(req) as FormResult
-            let obj:User = await transfer_formidable_into_obj(formResult)
+            let formResult = await formidablePromise(req) as FormResult
+            let obj:User = await transferFormidableIntoObj(formResult)
             let usersRows = await userService.login(obj)
 
             if (usersRows){

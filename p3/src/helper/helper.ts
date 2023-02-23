@@ -42,11 +42,11 @@ export let transformer: (data: unknown[], method: string) => resultType = (
     }
     if (method === "insert") {
       result.sql_params =
-        result.sql_params + `${add_param_insert(counter, len)}` + ",";
+        result.sql_params + `${addParamInsert(counter, len)}` + ",";
     } else if (method === "update") {
       result.sql_params =
         result.sql_params +
-        `${add_param_update(counter, Object.keys(obj))}` +
+        `${addParamUpdate(counter, Object.keys(obj))}` +
         ",";
     }
 
@@ -65,7 +65,7 @@ export let transformer: (data: unknown[], method: string) => resultType = (
   return result;
 };
 
-export let formidable_promise = (req: express.Request) => {
+export let formidablePromise = (req: express.Request) => {
   return new Promise((resolve, reject) => {
     form.on("error", (err) => {
       console.log(err.message);
@@ -79,13 +79,13 @@ export let formidable_promise = (req: express.Request) => {
         JSON.stringify({ fields }.fields) !== "{}"
       ) {
         // formidable exist file && formidable exist fields
-        resolve(transfer_formidable_into_obj({ fields, files }));
+        resolve(transferFormidableIntoObj({ fields, files }));
       } else if (JSON.stringify({ fields }.fields) !== "{}") {
         // formidable does not exist file but exist fields
-        resolve(transfer_formidable_into_obj({ fields }));
+        resolve(transferFormidableIntoObj({ fields }));
       } else if (JSON.stringify({ files }.files) !== "{}") {
         // formidable does not exist fields but exist file
-        resolve(transfer_formidable_into_obj({ files }));
+        resolve(transferFormidableIntoObj({ files }));
       }
     });
   });
@@ -94,7 +94,7 @@ type formResult = {
   fields?: any;
   files?: any;
 };
-export function transfer_formidable_into_obj(form_result: formResult) {
+export function transferFormidableIntoObj(form_result: formResult) {
   let result = {};
 
   if (form_result.hasOwnProperty("fields")) {
@@ -113,7 +113,7 @@ export function transfer_formidable_into_obj(form_result: formResult) {
   return result;
 }
 
-function add_param_insert(counter: number, len: number): string {
+function addParamInsert(counter: number, len: number): string {
   let str = "";
   str += "(";
   for (let i = 0; i < len; i++) {
@@ -124,7 +124,7 @@ function add_param_insert(counter: number, len: number): string {
   str += ")";
   return str;
 }
-function add_param_update(counter: number, arr: string[]): string {
+function addParamUpdate(counter: number, arr: string[]): string {
   let str = "";
 
   for (let k of arr) {
