@@ -108,5 +108,5 @@ export async function down(knex: Knex): Promise<void> {
   await knex.schema.dropTableIfExists("tag");
   await knex.schema.dropTableIfExists("image");
   await knex.schema.dropTableIfExists("personal_information");
-  await knex.schema.dropTableIfExists("user");
+  await knex.schema.dropTableIfExists("users");
 }

@@ -3,126 +3,52 @@ select {
 }
 
 /* Start of double input range slider */
-
-*,
-*:before,
-*:after {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-/* body {
-  height: 100vh;
-  display: -ms-grid;
-  display: grid;
-  background-color: #3264fe;
-  place-items: center;
-} */
-.wrapper {
+.double_slider {
   position: relative;
-  width: 80%;
-  background-color: #ffffff;
-  padding: 50px 40px 20px 40px;
-  border-radius: 10px;
+  height: 10px;
+  z-index: 1;
+  user-select: none;
 }
-.container {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  margin-top: 30px;
-}
-.container > input[type="range"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 100%;
-  outline: none;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  background-color: transparent;
-  pointer-events: none;
-}
-.slider-track {
-  width: 100%;
+.track {
   height: 5px;
   position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
+  left: 0%;
+  top: 2px;
+  right: 0%;
   border-radius: 5px;
+  background-color: #c6aee7;
+  z-index: 1;
 }
-.container > input[type="range"]::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
+.range {
   height: 5px;
-}
-.container > input[type="range"]::-moz-range-track {
-  -moz-appearance: none;
-  height: 5px;
-}
-.container > input[type="range"]::-ms-track {
-  appearance: none;
-  height: 5px;
-}
-.container > input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  background-color: #3264fe;
-  cursor: pointer;
-  margin-top: -9px;
-  pointer-events: auto;
-  border-radius: 50%;
-}
-.container > input[type="range"]::-moz-range-thumb {
-  -webkit-appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  cursor: pointer;
-  border-radius: 50%;
-  background-color: #3264fe;
-  pointer-events: auto;
-  border: none;
-}
-.container > input[type="range"]::-ms-thumb {
-  appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  cursor: pointer;
-  border-radius: 50%;
-  background-color: #3264fe;
-  pointer-events: auto;
-}
-.container > input[type="range"]:active::-webkit-slider-thumb {
-  background-color: #ffffff;
-  border: 1px solid #3264fe;
-}
-.container > .values {
-  background-color: #3264fe;
-  width: 32%;
-  position: relative;
-  margin: auto;
-  padding: 10px 0;
-  border-radius: 5px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 25px;
-  color: #ffffff;
-}
-.container > .values:before {
-  content: "";
   position: absolute;
-  height: 0;
-  width: 0;
-  border-top: 15px solid #3264fe;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  margin: auto;
-  bottom: -14px;
-  left: 0;
-  right: 0;
+  left: 0%;
+  top: 2px;
+  right: 0%;
+  bottom: 0px;
+  border-radius: 5px;
+  background-color: #333366;
+  z-index: 2;
+}
+.thumb.left {
+  position: absolute;
+  left: 0%;
+  width: 30px;
+  height: 30px;
+  background-color: #ffc800;
+  border-radius: 50%;
+  transform: translate(-15px, -10px);
+  z-index: 3;
+}
+.thumb.right {
+  position: absolute;
+  right: 0%;
+  width: 30px;
+  height: 30px;
+  background-color: #333366;
+  border-radius: 50%;
+  transform: translate(15px, -10px);
+  z-index: 3;
 }
 
 /* End of double input range slider css */

@@ -2,13 +2,10 @@ import fs from "fs";
 // import {db} from '../db'
 import express from "express";
 import formidable from "formidable";
+import { FormResult } from "../model";
 
-type resultType = {
-  sql_params: string;
-  sql_values: any[];
-  sql_field: string;
-};
 
+// Removed unnecessary functions in memo wall by Jim
 const uploadDir = "uploads";
 fs.mkdirSync(uploadDir, { recursive: true });
 
@@ -19,51 +16,6 @@ const form = formidable({
   maxFileSize: 25000000000, // the default limit is 200KB
   filter: (part) => true,
 });
-export function rm_last(str: string): string {
-  return str.slice(0, -1);
-}
-
-export let transformer: (data: unknown[], method: string) => resultType = (
-  data: unknown[],
-  method: string
-) => {
-  let result: resultType = {
-    sql_params: "",
-    sql_values: [],
-    sql_field: "",
-  };
-
-  let counter = 1;
-  data.forEach((obj: any) => {
-    let len = Object.keys(obj).length;
-
-    for (let val of Object.values(obj)) {
-      result.sql_values.push(val);
-    }
-    if (method === "insert") {
-      result.sql_params =
-        result.sql_params + `${addParamInsert(counter, len)}` + ",";
-    } else if (method === "update") {
-      result.sql_params =
-        result.sql_params +
-        `${addParamUpdate(counter, Object.keys(obj))}` +
-        ",";
-    }
-
-    if (counter === 1) {
-      result.sql_field = Object.keys(obj).reduce(
-        (acc, cur) => acc + cur + ",",
-        ""
-      );
-    }
-
-    counter = counter + 1;
-  });
-
-  result.sql_params = rm_last(result.sql_params);
-  result.sql_field = rm_last(result.sql_field);
-  return result;
-};
 
 export function formidablePromise(req: express.Request) {
   return new Promise((resolve, reject) => {
@@ -90,11 +42,8 @@ export function formidablePromise(req: express.Request) {
     });
   });
 }
-type formResult = {
-  fields?: any;
-  files?: any;
-};
-function transferFormidableIntoObj(form_result: formResult) {
+
+function transferFormidableIntoObj(form_result: FormResult) {
   let result = {};
 
   if (form_result.hasOwnProperty("fields")) {
@@ -111,29 +60,6 @@ function transferFormidableIntoObj(form_result: formResult) {
     result = Object.assign(result, obj);
   }
   return result;
-}
-
-function addParamInsert(counter: number, len: number): string {
-  let str = "";
-  str += "(";
-  for (let i = 0; i < len; i++) {
-    str = str + `$${counter}` + ",";
-    counter = counter + 1;
-  }
-  str = rm_last(str);
-  str += ")";
-  return str;
-}
-function addParamUpdate(counter: number, arr: string[]): string {
-  let str = "";
-
-  for (let k of arr) {
-    str = str + `${k}=$${counter}` + ",";
-    counter = counter + 1;
-  }
-  str = rm_last(str);
-
-  return str;
 }
 
 export function checkExt(filename: string) {

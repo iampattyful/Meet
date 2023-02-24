@@ -1,5 +1,6 @@
 import express from "express";
 import { UserController } from "./controller/userController";
+import { FilterController } from "./controller/filterController";
 import { sessionMiddleware } from "./session";
 import { env_config } from "./env";
 import path from "path";
@@ -10,7 +11,6 @@ app.use(express.json());
 app.use(sessionMiddleware);
 
 let p2 = path.join(__dirname, "../uploads");
-// console.log(p2)
 app.use(express.static(p2));
 let p = path.join(__dirname, "../public");
 app.use(express.static(p));
@@ -24,6 +24,8 @@ app.use("/meet", meetController.routes);
 // });
 
 // app.use("/filter/:id", filterController.routes)
+let filterController = new FilterController();
+app.use("/filter", filterController.routes);
 
 app.get("*", async (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(p, "error.html"));

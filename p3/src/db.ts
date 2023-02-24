@@ -14,6 +14,6 @@ import {env_config} from './env'
 
 import Knex from 'knex'
 
-const knexConfigs = require('./knexfile')
+const knexConfigs = require('../knexfile')
 export const knex = Knex(knexConfigs[env_config.KNEX_ENV])
 

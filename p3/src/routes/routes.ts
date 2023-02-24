@@ -35,3 +35,11 @@ export abstract class MeetRouters extends Routes {
   ): any;
   public abstract likeUser(req: express.Request, res: express.Response): any;
 }
+
+export abstract class FilterRoutes extends Routes {
+  constructor() {
+    super();
+    this.routes.post("/users", this.filter);
+  }
+  public abstract filter(req: express.Request, res: express.Response): any;
+}
