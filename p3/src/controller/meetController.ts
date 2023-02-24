@@ -16,9 +16,10 @@ export class MeetController extends MeetRouters {
   //     }
   //   }
   async likeUser(req: express.Request, res: express.Response) {
+    console.log(2);
     try {
       let fromUserId: any = req.session.userId;
-      let toUserId: any = req.query.id;
+      let toUserId: any = req.params.id;
       let liked = await meetService.likeUser(fromUserId, toUserId);
       res.status(200).json({
         data: liked,
@@ -31,7 +32,8 @@ export class MeetController extends MeetRouters {
   }
   async userInformation(req: express.Request, res: express.Response) {
     try {
-      let userId = req.session.userId!;
+      let userId = Number(req.params.id);
+
       let result = await meetService.userInformation(userId);
       res.status(200).json({
         data: result,

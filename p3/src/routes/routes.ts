@@ -26,8 +26,8 @@ export abstract class UserRoutes extends Routes {
 export abstract class MeetRouters extends Routes {
   constructor() {
     super();
-    this.routes.put("likeUser/:id", isLoggedInAPI, this.likeUser);
-    this.routes.get("userInformation/:id", isLoggedInAPI, this.userInformation);
+    this.routes.put("/likeUser/:id", isLoggedInAPI, this.likeUser);
+    this.routes.get("/userInformation/:id", this.userInformation);
   }
   public abstract userInformation(
     req: express.Request,

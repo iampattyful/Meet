@@ -30,31 +30,33 @@ export class MeetService {
 
   async userInformation(userId: number): Promise<UserInformation> {
     try {
-      let [userInformation] = await this.knex
-        .select(
-          "username",
-          "user_icon",
-          "date_of_birth",
-          "gender",
-          "location",
-          "education_level",
-          "job",
-          "nationality",
-          "height",
-          "weight",
-          "pet",
-          "fitness",
-          "smoke",
-          "drink",
-          "tag_name"
+      let [userInformation] = await this.knex("users")
+        .join(
+          "personal_information",
+          "personal_information.user_id",
+          "=",
+          "users.id"
         )
-        .from("users")
-        .join("personal_information", {
-          "personal_information.user_id": "users.id",
-        })
-        .where("id", userId)
-        .join("tag", { "tag.user_id": "user.id" })
-        .where("id", userId);
+        .join("tag", "tag.user_id", "=", "users.id")
+        .select(
+          "users.username",
+          "users.user_icon",
+          "users.date_of_birth",
+          "users.gender",
+          "users.location",
+          "personal_information.education_level",
+          "personal_information.job",
+          "personal_information.nationality",
+          "personal_information.height",
+          "personal_information.weight",
+          "personal_information.pet",
+          "personal_information.fitness",
+          "personal_information.smoke",
+          "personal_information.drink",
+          "tag.tag_name"
+        )
+        .where("users.id", userId);
+      // ;
 
       return userInformation;
     } catch (err) {
@@ -68,3 +70,8 @@ export let meetService = new MeetService(knex);
 // select liked.liked_from, users.username from liked, users
 // where liked_from in (select like_to from liked where liked_from = req.session.id)
 // AND liked_to = req.session.id and users.id = liked.liked_from
+
+// .from("users")
+//         .join("personal_information", "users.id", "=", "user_id")
+//         .join("tag", "users.id", "=", "user_id")
+//         .where("id", userId);
