@@ -1,14 +1,53 @@
 // This file contains the js code for the filter form
 
 // window onload
-// check if user is logged in
+// check if user is logged in and get user id by isLoggedInAPI()?
 window.onload = async function () {
-  // checkLoginRes = await checkLogin();
-  const res = await fetch(`/filter/users`, {
+  // isLoggedInAPI();
+  // const res = await fetch(`/filter/users`, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(data),
+  // });
+  // let json = await res.json();
+};
+
+// update filter users settings
+const updateFilter = document.querySelector("#filter-form");
+updateFilter.addEventListener("submit", async (event) => {
+  event.preventDefault(); // To prevent the form from submitting synchronously
+  const body = {
+    userId: isLoggedInAPI.users.id, // req.session.id?
+    // content: how to get the value of the radio input and age range?
+    // exampleRadios3 = select all genders
+    content: [
+      document.getElementById("exampleRadios1").value,
+      document.getElementById("exampleRadios2").value,
+      document.getElementById("exampleRadios3").value,
+      minAge,
+      maxAge,
+    ],
+  };
+  const submitFilterForm = await fetch(`/filter/users`, {
     method: "POST",
+    headers: {
+      // Specify any HTTP Headers Here
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(body), // Specify the Request Body
   });
-  let json = await res.json();
-}
+
+  const content = await submitFilterForm.json();
+  if (content.result) {
+    console.log(content.result);
+    submitUserComment.reset();
+    alert("submit filter form successfully");
+  } else {
+    alert("cannot submit filter form");
+  }
+});
 
 /* Start of double input range slider */
 

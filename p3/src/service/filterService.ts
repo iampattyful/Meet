@@ -8,6 +8,10 @@ export class FilterService {
   async filter(obj: FilterForm): Promise<UserRows[]> {
     try {
       // calculate age from date of birth
+      // Method 1: new Date()
+      //   const endDate = new Date();
+      //   endDate.setFullYear(new Date().getFullYear() - obj.minAge);
+      // Method 2: moment.js
       const today = moment();
       const min_year = today.subtract(obj.minAge, "years").format("YYYY-MM-DD");
       const max_year = today.subtract(obj.maxAge, "years").format("YYYY-MM-DD");
