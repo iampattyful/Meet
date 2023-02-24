@@ -2,50 +2,54 @@
 
 // window onload
 // check if user is logged in and get user id by isLoggedInAPI()?
-window.onload = async function () {
-  // isLoggedInAPI();
-  // const res = await fetch(`/filter/users`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(data),
-  // });
-  // let json = await res.json();
-};
+// window.onload = async function () {
+// isLoggedInAPI();
+// const res = await fetch(`/filter/users`, {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   body: JSON.stringify(data),
+// });
+// let json = await res.json();
+// };
 
 // update filter users settings
+
+function formatFormData(formData) {
+  var object = {};
+  formData.forEach(function (value, key) {
+    object[key] = value;
+  });
+  return JSON.stringify(object);
+}
+
 const updateFilter = document.querySelector("#filter-form");
 updateFilter.addEventListener("submit", async (event) => {
   event.preventDefault(); // To prevent the form from submitting synchronously
-  const body = {
-    userId: isLoggedInAPI.users.id, // req.session.id?
-    // content: how to get the value of the radio input and age range?
-    // exampleRadios3 = select all genders
-    content: [
-      document.getElementById("exampleRadios1").value,
-      document.getElementById("exampleRadios2").value,
-      document.getElementById("exampleRadios3").value,
-      minAge,
-      maxAge,
-    ],
-  };
-  const submitFilterForm = await fetch(`/filter/users`, {
+  let formData = new FormData(updateFilter);
+  formData.append("minAge", minAge);
+  formData.append("maxAge", maxAge);
+  // console.log(formatFormData(formData));
+
+  const res = await fetch(`/filter/users`, {
     method: "POST",
     headers: {
       // Specify any HTTP Headers Here
-      "Content-Type": "application/json; charset=utf-8",
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(body), // Specify the Request Body
+    body: formatFormData(formData), // Specify the Request Body
   });
 
-  const content = await submitFilterForm.json();
-  if (content.result) {
-    console.log(content.result);
-    submitUserComment.reset();
-    alert("submit filter form successfully");
+  const json = await res.json();
+  if (!json.isErr) {
+    console.log(json.data);
+    // Fei meet profile page here
+    document.querySelector("#slider_container").innerHTML = json.data.map(
+      (obj) => ``
+    );
   } else {
-    alert("cannot submit filter form");
+    alert(json.errMess);
   }
 });
 

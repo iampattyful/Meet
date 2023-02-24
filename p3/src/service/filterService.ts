@@ -12,9 +12,14 @@ export class FilterService {
       //   const endDate = new Date();
       //   endDate.setFullYear(new Date().getFullYear() - obj.minAge);
       // Method 2: moment.js
-      const today = moment();
-      const min_year = today.subtract(obj.minAge, "years").format("YYYY-MM-DD");
-      const max_year = today.subtract(obj.maxAge, "years").format("YYYY-MM-DD");
+
+      const min_year = moment()
+        .subtract(obj.maxAge, "years")
+        .format("YYYY-MM-DD");
+      const max_year = moment()
+        .subtract(obj.minAge, "years")
+        .format("YYYY-MM-DD");
+
       const usersRows = await this.knex
         .select("username", "user_icon", "date_of_birth", "gender") // add location later?
         .from("users")

@@ -30,12 +30,12 @@ export class UserController extends UserRoutes {
       req.session.isLogin = true;
       req.session.userId = usersRows.id;
 
-      // res.status(200).json({
-      //   data: { isLogin: true, userId: usersRows.id },
-      //   isErr: false,
-      //   errMess: null,
-      // });
-      res.status(200).redirect("/meet");
+      res.status(200).json({
+        data: { isLogin: true, userId: usersRows.id },
+        isErr: false,
+        errMess: null,
+      });
+      // res.status(200).redirect("/meet");
     } catch (err) {
       errorHandler(err, req, res);
     }

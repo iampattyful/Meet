@@ -15,7 +15,11 @@ export class FilterController extends FilterRoutes {
     try {
       let obj: FilterForm = req.body;
       let result = await filterService.filter(obj);
-      res.json(result);
+      res.json({
+        data: result,
+        isErr: false,
+        errMess: null,
+      });
     } catch (err) {
       errorHandler(err, req, res);
     }
