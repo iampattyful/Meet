@@ -6,10 +6,7 @@ import { User } from "../model";
 export class UserService {
   constructor(protected knex: Knex) {}
   async getCurrentUser(id: number): Promise<User> {
-    const [user] = await this.knex
-      .select("*")
-      .from("users")
-      .where("id", id);
+    const [user] = await this.knex.select("*").from("users").where("id", id);
     return user;
   }
   async login(obj: any): Promise<{ id: number }> {

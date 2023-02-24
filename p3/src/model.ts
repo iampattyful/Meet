@@ -12,6 +12,13 @@ export type User = {
   gender?: string;
 };
 
+export type UserInformation = {
+  username?: string;
+  user_icon?: string;
+  date_of_birth?: Date;
+  gender?: string;
+};
+
 // FilterForm type is used in filterController.ts
 export type FilterForm = {
   gender: string;

@@ -23,16 +23,17 @@ export abstract class UserRoutes extends Routes {
   ): any;
 }
 
-export abstract class HomeRoutes extends Routes {
+export abstract class MeetRouters extends Routes {
   constructor() {
     super();
-    this.routes.get("/homePageImage", isLoggedInAPI, this.homePageImage);
+    this.routes.put("likeUser/:id", isLoggedInAPI, this.likeUser);
+    this.routes.get("userInformation/:id", isLoggedInAPI, this.userInformation);
   }
-
-  public abstract homePageImage(
+  public abstract userInformation(
     req: express.Request,
     res: express.Response
   ): any;
+  public abstract likeUser(req: express.Request, res: express.Response): any;
 }
 
 export abstract class FilterRoutes extends Routes {

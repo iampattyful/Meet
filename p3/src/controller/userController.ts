@@ -35,7 +35,7 @@ export class UserController extends UserRoutes {
       //   isErr: false,
       //   errMess: null,
       // });
-      res.status(200).redirect("/meet")
+      res.status(200).redirect("/meet");
     } catch (err) {
       errorHandler(err, req, res);
     }

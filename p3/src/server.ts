@@ -4,6 +4,7 @@ import { FilterController } from "./controller/filterController";
 import { sessionMiddleware } from "./session";
 import { env_config } from "./env";
 import path from "path";
+import { MeetController } from "./controller/meetController";
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -15,9 +16,16 @@ let p = path.join(__dirname, "../public");
 app.use(express.static(p));
 
 let userController = new UserController();
+let meetController = new MeetController();
 app.use("/user", userController.routes);
+app.use("/meet", meetController.routes);
+// app.get("/test", async (req: express.Request, res: express.Response) => {
+//   res.json("s");
+// });
+
+// app.use("/filter/:id", filterController.routes)
 let filterController = new FilterController();
-app.use("/filter", filterController.routes)
+app.use("/filter", filterController.routes);
 
 app.get("*", async (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(p, "error.html"));
