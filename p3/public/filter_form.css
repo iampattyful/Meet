@@ -1,5 +1,6 @@
-select {
-  overflow: auto;
+/* modal filter form */
+.modal-backdrop {
+  z-index: 0;
 }
 
 /* Start of double input range slider */
@@ -8,6 +9,7 @@ select {
   height: 10px;
   z-index: 1;
   user-select: none;
+  margin: 10px 5px 10px 5px;
 }
 .track {
   height: 5px;
@@ -50,7 +52,16 @@ select {
   transform: translate(15px, -10px);
   z-index: 3;
 }
-#filter-form {
-  /* display: none; */
+
+.caption {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
+
+#show-me {
+  font-size: 18px;;
+}
+/* #filter-form { */
+  /* display: none; */
+/* } */
 /* End of double input range slider css */
