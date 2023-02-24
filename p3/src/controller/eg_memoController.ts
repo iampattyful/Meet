@@ -14,8 +14,8 @@ export class MemoController extends MemoRoutes {
   }
   async addMemo(req: express.Request, res: express.Response) {
     try {
-      let obj: any = await formidable_promise(req);
-      obj = await transfer_formidable_into_obj(obj);
+      let obj = await formidable_promise(req) as Memo;
+     
       let userId = req.session.userId!;
       let query_result = await memoService.addMemo(obj, userId);
 

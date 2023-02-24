@@ -1,23 +1,26 @@
-import express from "express"
-import { isLoggedInAPI } from "../guard"
+import express from "express";
+import { isLoggedInAPI } from "../guard";
 
 class Routes {
   routes: express.Router = express.Router();
 }
 
-export abstract class UserRoutes extends Routes{
-    constructor(){
-        super()
-        this.routes.post('/login',this.login)
-        this.routes.post('/logout',isLoggedInAPI,this.logout)
-        this.routes.post('/enroll',this.enroll)
-        this.routes.post('/getCurrentUser',isLoggedInAPI,this.getCurrentUser)
-    }
+export abstract class UserRoutes extends Routes {
+  constructor() {
+    super();
+    this.routes.post("/login", this.login);
+    this.routes.post("/logout", isLoggedInAPI, this.logout);
+    this.routes.post("/enroll", this.enroll);
+    this.routes.post("/getCurrentUser", isLoggedInAPI, this.getCurrentUser);
+  }
 
-    public abstract login(req:express.Request,res:express.Response):any
-    public abstract logout(req:express.Request,res:express.Response):any
-    public abstract enroll(req:express.Request,res:express.Response):any
-    public abstract getCurrentUser(req:express.Request,res:express.Response):any
+  public abstract login(req: express.Request, res: express.Response): any;
+  public abstract logout(req: express.Request, res: express.Response): any;
+  public abstract enroll(req: express.Request, res: express.Response): any;
+  public abstract getCurrentUser(
+    req: express.Request,
+    res: express.Response
+  ): any;
 }
 
 export abstract class HomeRoutes extends Routes {
@@ -30,4 +33,12 @@ export abstract class HomeRoutes extends Routes {
     req: express.Request,
     res: express.Response
   ): any;
+}
+
+export abstract class FilterRoutes extends Routes {
+  constructor() {
+    super();
+    this.routes.post("/users", this.filter);
+  }
+  public abstract filter(req: express.Request, res: express.Response): any;
 }

@@ -35,7 +35,7 @@ export class MemoService {
       throw new Error(`${err.message}`);
     }
   }
-  async addMemo(obj: any, userId: number): Promise<memo[]> {
+  async addMemo(obj: Memo, userId: number): Promise<memo[]> {
     const txn = await this.knex.transaction();
     try {
       obj = Object.assign(obj, { users_id: userId, like_count: 0 });
