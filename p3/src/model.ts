@@ -1,13 +1,21 @@
 export type FormResult = {
-    fields?: any;
-    files?: any;
-  };
+  fields?: any;
+  files?: any;
+};
 
 export type User = {
-    username?:string;
-    password?:string;
-    email?:string;
-    user_icon?:string;
-    date_of_birth?:Date;
-    gender?:string;
-}
+  username?: string;
+  password?: string;
+  email?: string;
+  user_icon?: string;
+  date_of_birth?: Date;
+  gender?: string;
+};
+
+export type UserInformation = {
+  username?: string;
+  user_icon?: string;
+  date_of_birth?: Date;
+  gender?: string;
+  location?: string;
+};

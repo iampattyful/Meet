@@ -26,16 +26,16 @@ export class UserController extends UserRoutes {
   async login(req: express.Request, res: express.Response) {
     try {
       let formResult = (await formidablePromise(req)) as User;
-
       let usersRows = await userService.login(formResult);
-
       req.session.isLogin = true;
       req.session.userId = usersRows.id;
-      res.status(200).json({
-        data: { isLogin: true, userId: usersRows.id },
-        isErr: false,
-        errMess: null,
-      });
+
+      // res.status(200).json({
+      //   data: { isLogin: true, userId: usersRows.id },
+      //   isErr: false,
+      //   errMess: null,
+      // });
+      res.status(200).redirect("/meet");
     } catch (err) {
       errorHandler(err, req, res);
     }
@@ -56,7 +56,6 @@ export class UserController extends UserRoutes {
   async enroll(req: express.Request, res: express.Response) {
     try {
       let formResult = (await formidablePromise(req)) as User;
-
       let user = await userService.enrol(formResult);
       req.session.isLogin = true;
       req.session.userId = user.id;

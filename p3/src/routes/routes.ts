@@ -23,13 +23,15 @@ export abstract class UserRoutes extends Routes {
   ): any;
 }
 
-export abstract class HomeRoutes extends Routes {
+export abstract class MeetRouters extends Routes {
   constructor() {
     super();
-    this.routes.get("/homePageIcon", isLoggedInAPI, this.homePageIcon);
-    this.routes.put("/likeUser", isLoggedInAPI, this.likeUser);
+    this.routes.put("likeUser/:id", isLoggedInAPI, this.likeUser);
+    this.routes.get("userInformation/:id", isLoggedInAPI, this.userInformation);
   }
-
-  public abstract homePageIcon(req: express.Request, res: express.Request): any;
+  public abstract userInformation(
+    req: express.Request,
+    res: express.Response
+  ): any;
   public abstract likeUser(req: express.Request, res: express.Response): any;
 }
