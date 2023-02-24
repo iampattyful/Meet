@@ -50,5 +50,7 @@ select {
   transform: translate(15px, -10px);
   z-index: 3;
 }
-
+#filter-form {
+  /* display: none; */
+}
 /* End of double input range slider css */

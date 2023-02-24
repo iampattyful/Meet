@@ -1,14 +1,57 @@
 // This file contains the js code for the filter form
 
 // window onload
-// check if user is logged in
-window.onload = async function () {
-  // checkLoginRes = await checkLogin();
+// check if user is logged in and get user id by isLoggedInAPI()?
+// window.onload = async function () {
+// isLoggedInAPI();
+// const res = await fetch(`/filter/users`, {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   body: JSON.stringify(data),
+// });
+// let json = await res.json();
+// };
+
+// update filter users settings
+
+function formatFormData(formData) {
+  var object = {};
+  formData.forEach(function (value, key) {
+    object[key] = value;
+  });
+  return JSON.stringify(object);
+}
+
+const updateFilter = document.querySelector("#filter-form");
+updateFilter.addEventListener("submit", async (event) => {
+  event.preventDefault(); // To prevent the form from submitting synchronously
+  let formData = new FormData(updateFilter);
+  formData.append("minAge", minAge);
+  formData.append("maxAge", maxAge);
+  // console.log(formatFormData(formData));
+
   const res = await fetch(`/filter/users`, {
     method: "POST",
+    headers: {
+      // Specify any HTTP Headers Here
+      "Content-Type": "application/json",
+    },
+    body: formatFormData(formData), // Specify the Request Body
   });
-  let json = await res.json();
-}
+
+  const json = await res.json();
+  if (!json.isErr) {
+    console.log(json.data);
+    // Fei meet profile page here
+    document.querySelector("#slider_container").innerHTML = json.data.map(
+      (obj) => ``
+    );
+  } else {
+    alert(json.errMess);
+  }
+});
 
 /* Start of double input range slider */
 
