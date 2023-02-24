@@ -38,7 +38,7 @@ export abstract class HomeRoutes extends Routes {
 export abstract class FilterRoutes extends Routes {
   constructor() {
     super();
-    this.routes.post("/users", this.filter);
+    this.routes.post("/users", this.filter); // add isLoggedInAPI later
   }
   public abstract filter(req: express.Request, res: express.Response): any;
 }

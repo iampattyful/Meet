@@ -1,3 +1,15 @@
+// This file contains the js code for the filter form
+
+// window onload
+// check if user is logged in
+window.onload = async function () {
+  // checkLoginRes = await checkLogin();
+  const res = await fetch(`/filter/users`, {
+    method: "POST",
+  });
+  let json = await res.json();
+}
+
 /* Start of double input range slider */
 
 let thumbL = document.querySelector(".thumb.left");

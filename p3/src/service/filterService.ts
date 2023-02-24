@@ -2,17 +2,17 @@ import { Knex } from "knex";
 import moment from "moment";
 import { knex } from "../db";
 import { FilterForm, UserRows } from "../model";
-// calculate age from date of birth
 
 export class FilterService {
   constructor(protected knex: Knex) {}
   async filter(obj: FilterForm): Promise<UserRows[]> {
     try {
+      // calculate age from date of birth
       const today = moment();
       const min_year = today.subtract(obj.minAge, "years").format("YYYY-MM-DD");
       const max_year = today.subtract(obj.maxAge, "years").format("YYYY-MM-DD");
       const usersRows = await this.knex
-        .select("username", "user_icon", "date_of_birth", "gender", "location")
+        .select("username", "user_icon", "date_of_birth", "gender") // add location later?
         .from("users")
         .where("gender", obj.gender)
         .andWhere("date_of_birth", ">=", min_year)
