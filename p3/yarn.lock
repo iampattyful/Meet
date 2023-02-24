@@ -787,7 +787,7 @@
 
 "@types/pg@^8.6.6":
   version "8.6.6"
-  resolved "https://registry.npmjs.org/@types/pg/-/pg-8.6.6.tgz"
+  resolved "https://registry.yarnpkg.com/@types/pg/-/pg-8.6.6.tgz#21cdf873a3e345a6e78f394677e3b3b1b543cb80"
   integrity sha512-O2xNmXebtwVekJDD+02udOncjVcMZQuTEQEMpKJ0ZRf5E7/9JJX3izhKUcUifBkyKpljyUM6BTgy2trmviKlpw==
   dependencies:
     "@types/node" "*"
@@ -2335,7 +2335,7 @@ kleur@^3.0.3:
 
 knex@^2.4.2:
   version "2.4.2"
-  resolved "https://registry.npmjs.org/knex/-/knex-2.4.2.tgz"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-2.4.2.tgz#a34a289d38406dc19a0447a78eeaf2d16ebedd61"
   integrity sha512-tMI1M7a+xwHhPxjbl/H9K1kHX+VncEYcvCx5K00M16bWvpYPKAZd6QrCu68PtHAdIZNQPWZn0GVhqVBEthGWCg==
   dependencies:
     colorette "2.0.19"
@@ -2707,7 +2707,7 @@ pg-types@^2.1.0, pg-types@^2.2.0:
 
 pg@^8.9.0:
   version "8.9.0"
-  resolved "https://registry.npmjs.org/pg/-/pg-8.9.0.tgz"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-8.9.0.tgz#73c5d77a854d36b0e185450dacb8b90c669e040b"
   integrity sha512-ZJM+qkEbtOHRuXjmvBtOgNOXOtLSbxiMiUVMgE4rV6Zwocy03RicCVvDXgx8l4Biwo8/qORUnEqn2fdQzV7KCg==
   dependencies:
     buffer-writer "2.0.0"
