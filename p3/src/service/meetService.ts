@@ -28,8 +28,15 @@ export class MeetService {
     }
   }
 
-  async userInformation(userId: number): Promise<UserInformation> {
+  async userInformation(
+    fromUserId: number,
+    toUserId: number
+  ): Promise<UserInformation> {
     try {
+      const subquery = knex
+        .select("liked_to")
+        .from("liked")
+        .where("liked_from", fromUserId);
       let [userInformation] = await this.knex("users")
         .join(
           "personal_information",
@@ -55,8 +62,11 @@ export class MeetService {
           "personal_information.drink",
           "tag.tag_name"
         )
-        .where("users.id", userId);
+        .where("users.id", toUserId)
+        .whereNot("users.id", fromUserId)
+        .whereNot("users.id", "in", subquery);
       // ;
+      console.log(userInformation);
 
       return userInformation;
     } catch (err) {

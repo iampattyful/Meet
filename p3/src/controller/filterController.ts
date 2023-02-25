@@ -4,8 +4,6 @@ import { FilterForm } from "../model";
 import { FilterRoutes } from "../routes/routes";
 import { filterService } from "../service/filterService";
 
-
-
 export class FilterController extends FilterRoutes {
   constructor() {
     super();
