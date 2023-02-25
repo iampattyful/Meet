@@ -64,7 +64,8 @@ export class MeetService {
         )
         .where("users.id", toUserId)
         .whereNot("users.id", fromUserId)
-        .whereNot("users.id", "in", subquery);
+        .whereNot("users.id", "in", subquery)
+        .orderByRaw("users.created_at DESC LIMIT 20");
       // ;
       console.log(userInformation);
 
