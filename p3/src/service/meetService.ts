@@ -17,17 +17,6 @@ export class MeetService {
   //   }
   // }
 
-  async likeUser(fromUserId: string, toUserId: string) {
-    try {
-      let [like] = await this.knex("liked")
-        .insert({ liked_from: fromUserId, liked_to: toUserId })
-        .returning(["liked_from", "liked_to"]);
-      return like;
-    } catch (err) {
-      throw new Error(`${err.message}`);
-    }
-  }
-
   async userInformation(
     fromUserId: number,
     toUserId: number
@@ -72,6 +61,17 @@ export class MeetService {
       return userInformation;
     } catch (err) {
       throw new Error(err.message);
+    }
+  }
+
+  async likeUser(fromUserId: string, toUserId: string) {
+    try {
+      let [like] = await this.knex("liked")
+        .insert({ liked_from: fromUserId, liked_to: toUserId })
+        .returning(["liked_from", "liked_to"]);
+      return like;
+    } catch (err) {
+      throw new Error(`${err.message}`);
     }
   }
 }

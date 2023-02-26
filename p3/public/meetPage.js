@@ -17,6 +17,7 @@ async function userImagePost() {
   console.log(json());
   const postWall = document.querySelector("#userMeetPage");
   postWall.innerHTML = `
+    <button type="button" class="btn btn-outline-primary">filter</button>
     <div class="shapeOfImage card" id="shapeOfImage">
         <img class="userImage" id="userImage" src="${json.user.icon}"/>
         <div class="userName" id="userName">${json.user.username}</div>
