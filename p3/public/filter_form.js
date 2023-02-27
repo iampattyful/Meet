@@ -43,9 +43,9 @@ updateFilter.addEventListener("submit", async (event) => {
   if (!json.isErr) {
     console.log(json.data);
     // redirect meet profile page here
-    document.querySelector("#slider_container").innerHTML = json.data.map(
-      (obj) => ``
-    );
+    document.querySelector("#slider_container").innerHTML = json.data
+      .map((obj) => ``)
+      .join("");
   } else {
     alert(json.errMess);
   }

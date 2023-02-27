@@ -49,11 +49,11 @@ export class MeetService {
         )
         .whereNotIn("id", function () {
           this.select("liked_to").from("liked").where("liked_from", toUserId);
-        })
-        // .where("users.id", toUserId)
-        // .whereNot("users.id", fromUserId)
-        // .whereNot("users.id", "in", subquery)
-        // .orderByRaw("users.created_at DESC LIMIT 20");
+        });
+      // .where("users.id", toUserId)
+      // .whereNot("users.id", fromUserId)
+      // .whereNot("users.id", "in", subquery)
+      // .orderByRaw("users.created_at DESC LIMIT 20");
       // ;
       console.log(userInformation);
 
