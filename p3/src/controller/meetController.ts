@@ -32,9 +32,10 @@ export class MeetController extends MeetRouters {
   }
   async userInformation(req: express.Request, res: express.Response) {
     try {
-      let userId = Number(req.params.id);
+      let fromUserId = Number(req.session.userId);
+      let toUserId = Number(req.params.id);
 
-      let result = await meetService.userInformation(userId);
+      let result = await meetService.userInformation(fromUserId, toUserId);
       res.status(200).json({
         data: result,
         isErr: false,

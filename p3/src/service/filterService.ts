@@ -7,12 +7,12 @@ export class FilterService {
   constructor(protected knex: Knex) {}
   async filter(obj: FilterForm): Promise<UserRows[]> {
     try {
+      // console.log(obj);
       // calculate age from date of birth
       // Method 1: new Date()
       //   const endDate = new Date();
       //   endDate.setFullYear(new Date().getFullYear() - obj.minAge);
       // Method 2: moment.js
-
       const min_year = moment()
         .subtract(obj.maxAge, "years")
         .format("YYYY-MM-DD");
@@ -21,11 +21,20 @@ export class FilterService {
         .format("YYYY-MM-DD");
 
       const usersRows = await this.knex
-        .select("username", "user_icon", "date_of_birth", "gender") // add location later?
+        .select("id", "username", "user_icon", "date_of_birth", "gender") // add location later?
         .from("users")
-        .where("gender", obj.gender)
+        .whereNotIn("id", function () {
+          this.select("liked_to").from("liked").where("liked_from", obj.userId);
+        })
+        .whereIn("gender", obj.gender)
+        // .where("gender" = any )
         .andWhere("date_of_birth", ">=", min_year)
-        .andWhere("date_of_birth", "<=", max_year);
+        .andWhere("date_of_birth", "<=", max_year)
+        .andWhereNot("id", obj.userId)
+        // .whereNot("users.id", req.session.id) //myself
+        // .whereNot("users.id", "in", liked table)
+        .orderByRaw("random()")
+        .limit(2);
       if (usersRows.length == 0) {
         throw new Error("No users found");
       }

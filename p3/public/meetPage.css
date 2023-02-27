@@ -1,0 +1,13 @@
+.shapeOfImage {
+  margin-top: 10px;
+}
+
+.buttonTable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+.btn {
+  margin: 20px;
+}

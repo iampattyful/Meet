@@ -17,19 +17,15 @@ export class MeetService {
   //   }
   // }
 
-  async likeUser(fromUserId: string, toUserId: string) {
+  async userInformation(
+    fromUserId: number,
+    toUserId: number
+  ): Promise<UserInformation> {
     try {
-      let [like] = await this.knex("liked")
-        .insert({ liked_from: fromUserId, liked_to: toUserId })
-        .returning(["liked_from", "liked_to"]);
-      return like;
-    } catch (err) {
-      throw new Error(`${err.message}`);
-    }
-  }
-
-  async userInformation(userId: number): Promise<UserInformation> {
-    try {
+      const subquery = knex
+        .select("liked_to")
+        .from("liked")
+        .where("liked_from", fromUserId);
       let [userInformation] = await this.knex("users")
         .join(
           "personal_information",
@@ -55,12 +51,27 @@ export class MeetService {
           "personal_information.drink",
           "tag.tag_name"
         )
-        .where("users.id", userId);
+        .where("users.id", toUserId)
+        .whereNot("users.id", fromUserId)
+        .whereNot("users.id", "in", subquery)
+        .orderByRaw("users.created_at DESC LIMIT 20");
       // ;
+      console.log(userInformation);
 
       return userInformation;
     } catch (err) {
       throw new Error(err.message);
+    }
+  }
+
+  async likeUser(fromUserId: string, toUserId: string) {
+    try {
+      let [like] = await this.knex("liked")
+        .insert({ liked_from: fromUserId, liked_to: toUserId })
+        .returning(["liked_from", "liked_to"]);
+      return like;
+    } catch (err) {
+      throw new Error(`${err.message}`);
     }
   }
 }

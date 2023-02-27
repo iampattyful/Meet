@@ -4,8 +4,6 @@ import { FilterForm } from "../model";
 import { FilterRoutes } from "../routes/routes";
 import { filterService } from "../service/filterService";
 
-
-
 export class FilterController extends FilterRoutes {
   constructor() {
     super();
@@ -14,6 +12,9 @@ export class FilterController extends FilterRoutes {
   async filter(req: express.Request, res: express.Response) {
     try {
       let obj: FilterForm = req.body;
+      // let user_id = parseInt(req.session.id!);
+      // obj = { ...obj, userId:user_id };
+      obj = { ...obj, userId: 5 };
       let result = await filterService.filter(obj);
       res.json({
         data: result,

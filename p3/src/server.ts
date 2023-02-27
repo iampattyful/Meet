@@ -25,14 +25,9 @@ app.use(express.static(p));
 
 let userController = new UserController();
 let meetController = new MeetController();
+let filterController = new FilterController();
 app.use("/user", userController.routes);
 app.use("/meet", meetController.routes);
-// app.get("/test", async (req: express.Request, res: express.Response) => {
-//   res.json("s");
-// });
-
-// app.use("/filter/:id", filterController.routes)
-let filterController = new FilterController();
 app.use("/filter", filterController.routes);
 
 app.get("*", async (req: express.Request, res: express.Response) => {
