@@ -21,9 +21,10 @@ export type UserInformation = {
 
 // FilterForm type is used in filterController.ts
 export type FilterForm = {
-  gender: string;
+  gender: string[];
   minAge: number;
   maxAge: number;
+  userId?: number;
 };
 
 // UserRows type is used in filterService.ts

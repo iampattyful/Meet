@@ -38,6 +38,7 @@ export async function seed(knex: Knex): Promise<void> {
       },
     ])
     .returning("id");
+  console.log(d1);
   await knex("personal_information").insert([
     {
       user_id: d1.id,
