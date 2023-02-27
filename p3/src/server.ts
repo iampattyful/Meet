@@ -5,14 +5,14 @@ import { sessionMiddleware } from "./session";
 import { env_config } from "./env";
 import path from "path";
 import { MeetController } from "./controller/meetController";
-import SocketIO from "socket.io";
+// import SocketIO from "socket.io";
 import http from "http";
-import { IOServer } from "./IOServer";
+// import { IOServer } from "./IOServer.ts";
 
 const app = express();
 const server = http.createServer(app);
-const io = new SocketIO.Server(server);
-export const ioServer = new IOServer(io, sessionMiddleware);
+// const io = new SocketIO.Server(server);
+// export const ioServer = new IOServer(io, sessionMiddleware);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
