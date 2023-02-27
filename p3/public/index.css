@@ -1,0 +1,7 @@
+.login_form,
+.logout_form {
+  border: 1px solid #222222;
+}
+.isHide {
+  display: none;
+}

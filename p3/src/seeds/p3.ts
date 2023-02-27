@@ -53,4 +53,7 @@ export async function seed(knex: Knex): Promise<void> {
       drink: false,
     },
   ]);
+  // await knex("liked").insert([
+  //   {
+
 }
