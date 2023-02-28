@@ -44,3 +44,15 @@ new match
     where group.matched_user_id1 = req.session.userId 
     or group.matched_user_id2 = req.session.userId 
     order by group.created_at dect
+
+
+select liked.liked_from, users.user_icon, users.username, message.message 
+from liked,users,message,group 
+where liked.liked_from in (select liked.liked_to from liked where liked.like_from = 1) 
+and liked_to = 1
+and users.id = liked.liked_from
+and users.id = message.user_id
+order by message.created_at
+order by group.created_at
+
+
