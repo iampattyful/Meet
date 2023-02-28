@@ -1,8 +1,8 @@
 
 Matched:
     select liked.liked_from, users.username, users.user_icon from liked,users 
-    where liked_from in (select liked_to from liked where like_from = req.session.userId) 
-    and liked_to = req.session.userId 
+    where liked.liked_from in (select liked.liked_to from liked where liked.like_from = 1) 
+    and liked_to = 1
     and users.id = liked.liked_from
 
 last message:?
@@ -12,13 +12,14 @@ last message:?
     order by chatroom.created_at dect
 
 join:
-    select liked.liked_from, users.username, users.user_icon, chatroom.message 
+    select liked.liked_from, users.username, users.user_icon, chatroom.message, MAX(chatroom.created_at) 
     from liked, users, chatroom 
-    where liked_from in (select liked_to from liked where liked_from = req.session.userId) 
-    and liked_to = req.session.userId 
+    where liked.liked_from in (select liked_to from liked where liked_from = 1) 
+    and liked.liked_to = 1
     and users.id = liked.liked_from
 
-    having max(created_at)
+    <!-- group by
+    having max(chatroom.created_at) -->
 
 liked_from  liked_to
 liked_to    session.id  message             created_at
