@@ -21,6 +21,7 @@ function formatData(formData) {
   return JSON.stringify(object);
 }
 
+let numOfSlider = 0;
 async function handleFilterFormHttpRequest(formatFormData) {
   const res = await fetch(`/filter/users`, {
     method: "POST",
@@ -32,14 +33,73 @@ async function handleFilterFormHttpRequest(formatFormData) {
   });
   // localStorage.setItem(key, value);
   const json = await res.json();
+
   if (!json.isErr) {
     console.log(json.data);
+    numOfSlider = json.data.length;
     // redirect meet profile page here
     document.querySelector("#slider_container").innerHTML = json.data
-      .map((obj) => ``)
+      .map(
+        (obj) => `
+        <div class="slider ">
+        
+          
+            <img class="userImage" id="userImage" src="${obj.user_icon}" />
+            <div class="userName" id="userName">${obj.username}</div>
+            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
+            <div class="buttonTable">
+              <button type="button" class="btn btn-outline-danger dislikeBtn">
+                Dis Like
+              </button>
+              <button type="button" class="btn btn-outline-success likeBtn">
+                Like
+              </button>
+            </div>
+          
+      
+      </div>
+      `
+      )
       .join("");
+
+    reg_like_btn_event();
+    reg_dislike_btn_event();
   } else {
     alert(json.errMess);
+  }
+}
+let pos = 0;
+function nextSlider(id) {
+  const slider_container = document.querySelector("#slider_container");
+  pos = parseInt(pos);
+  let slider_width = document.querySelectorAll(".slider")[`${pos}`].clientWidth;
+  slider_container.style.transition = "transform 0.5s ease-in-out 0s";
+  slider_container.style.transform = `translate(-${slider_width * pos}px, 0px)`;
+}
+
+function reg_like_btn_event() {
+  let allLikeBtn = document.querySelectorAll(".likeBtn");
+  for (let btn of allLikeBtn) {
+    btn.addEventListener("click", (e) => {
+      pos++;
+      if (numOfSlider <= pos) {
+        return;
+      }
+      nextSlider();
+    });
+  }
+}
+
+function reg_dislike_btn_event() {
+  let allDisLikeBtn = document.querySelectorAll(".dislikeBtn");
+  for (let btn of allDisLikeBtn) {
+    btn.addEventListener("click", (e) => {
+      pos++;
+      if (numOfSlider <= pos) {
+        return;
+      }
+      nextSlider();
+    });
   }
 }
 
