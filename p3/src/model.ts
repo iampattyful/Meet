@@ -29,6 +29,7 @@ export type FilterForm = {
 
 // UserRows type is used in filterService.ts
 export type UserRows = {
+  id: number;
   username: string;
   user_icon: string;
   date_of_birth: Date;
