@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import populateEnv from "populate-env";
 import path from "path";
-let p = path.join(__dirname, "../.env");
+let p = path.join(__dirname, "..", ".env");
 // const p = `C:\\Users\\Patty\\Documents\\tecky\\p3\\p3\.env`;
 config({ path: p });
 
