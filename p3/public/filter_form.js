@@ -2,6 +2,13 @@
 
 window.onload = async function () {
   // isLoggedInAPI();
+  // localStorage.getItem(key, value);
+  let formatFormData = {
+    gender: ["male", "female", "unisex"],
+    maxAge: "100",
+    minAge: "18",
+  };
+  handleFilterFormHttpRequest(formatFormData);
 };
 
 // update filter users settings
@@ -14,22 +21,7 @@ function formatData(formData) {
   return JSON.stringify(object);
 }
 
-const updateFilter = document.querySelector("#filter-form");
-updateFilter.addEventListener("submit", async (event) => {
-  event.preventDefault(); // To prevent the form from submitting synchronously
-  let formData = new FormData(updateFilter);
-  formData.append("minAge", minAge);
-  formData.append("maxAge", maxAge);
-  let formatFormData = JSON.parse(formatData(formData));
-
-  if (formatFormData.gender === "ALL") {
-    formatFormData.gender = ["male", "female"];
-  } else if (formatFormData.gender === "male") {
-    formatFormData.gender = ["male"];
-  } else if (formatFormData.gender === "female") {
-    formatFormData.gender = ["female"];
-  }
-  console.log(formatFormData);
+async function handleFilterFormHttpRequest(formatFormData) {
   const res = await fetch(`/filter/users`, {
     method: "POST",
     headers: {
@@ -43,12 +35,31 @@ updateFilter.addEventListener("submit", async (event) => {
   if (!json.isErr) {
     console.log(json.data);
     // redirect meet profile page here
-    document.querySelector("#slider_container").innerHTML = json.data.map(
-      (obj) => ``
-    );
+    document.querySelector("#slider_container").innerHTML = json.data
+      .map((obj) => ``)
+      .join("");
   } else {
     alert(json.errMess);
   }
+}
+
+const updateFilter = document.querySelector("#filter-form");
+updateFilter.addEventListener("submit", async (event) => {
+  event.preventDefault(); // To prevent the form from submitting synchronously
+  let formData = new FormData(updateFilter);
+  formData.append("minAge", minAge);
+  formData.append("maxAge", maxAge);
+  let formatFormData = JSON.parse(formatData(formData));
+
+  if (formatFormData.gender === "ALL") {
+    formatFormData.gender = ["male", "female", "unisex"];
+  } else if (formatFormData.gender === "male") {
+    formatFormData.gender = ["male"];
+  } else if (formatFormData.gender === "female") {
+    formatFormData.gender = ["female"];
+  }
+  console.log(formatFormData);
+  handleFilterFormHttpRequest(formatFormData);
 });
 
 /* Start of double input range slider */
@@ -139,7 +150,7 @@ slider.addEventListener("mousemove", (e) => {
   }
 });
 slider.addEventListener("touchmove", (e) => {
-  mouse_pos = e.clientX;
+  mouse_pos = e.touches[0].clientX;
 
   let trackWidth = track.getBoundingClientRect().width;
   let thumbRight = thumbR.getBoundingClientRect().left;

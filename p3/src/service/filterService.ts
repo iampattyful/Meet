@@ -7,7 +7,6 @@ export class FilterService {
   constructor(protected knex: Knex) {}
   async filter(obj: FilterForm): Promise<UserRows[]> {
     try {
-      // console.log(obj);
       // calculate age from date of birth
       // Method 1: new Date()
       //   const endDate = new Date();
@@ -27,12 +26,9 @@ export class FilterService {
           this.select("liked_to").from("liked").where("liked_from", obj.userId);
         })
         .whereIn("gender", obj.gender)
-        // .where("gender" = any )
         .andWhere("date_of_birth", ">=", min_year)
         .andWhere("date_of_birth", "<=", max_year)
         .andWhereNot("id", obj.userId)
-        // .whereNot("users.id", req.session.id) //myself
-        // .whereNot("users.id", "in", liked table)
         .orderByRaw("random()")
         .limit(2);
       if (usersRows.length == 0) {

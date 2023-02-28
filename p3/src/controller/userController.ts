@@ -12,6 +12,7 @@ export class UserController extends UserRoutes {
   async getCurrentUser(req: express.Request, res: express.Response) {
     try {
       let id = req.session.userId!;
+      console.log(id);
       let user = await userService.getCurrentUser(id);
       let obj = { ...user, isLogin: true };
       res.status(200).json({

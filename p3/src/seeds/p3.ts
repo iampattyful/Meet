@@ -36,6 +36,46 @@ export async function seed(knex: Knex): Promise<void> {
         is_public: "true",
         is_admin: "false",
       },
+      {
+        username: "demo3",
+        password: hash_password,
+        email: "demo3@gmail.com",
+        user_icon: "1.jpg",
+        date_of_birth: "1962-06-22",
+        gender: "male",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo4",
+        password: hash_password,
+        email: "demo4@gmail.com",
+        user_icon: "1.jpg",
+        date_of_birth: "1991-02-12",
+        gender: "female",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo5",
+        password: hash_password,
+        email: "demo5@gmail.com",
+        user_icon: "1.jpg",
+        date_of_birth: "1942-09-22",
+        gender: "unisex",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo6",
+        password: hash_password,
+        email: "demo6@gmail.com",
+        user_icon: "1.jpg",
+        date_of_birth: "1981-02-12",
+        gender: "unisex",
+        is_public: "true",
+        is_admin: "false",
+      },
     ])
     .returning("id");
   console.log(d1);
@@ -51,6 +91,33 @@ export async function seed(knex: Knex): Promise<void> {
       fitness: false,
       smoke: false,
       drink: false,
+    },
+  ]);
+
+  // user 1 and 2 liked each other,
+  // user 1 liked user 3 but user 3 didn't like user 1
+  // user 2 liked user 3 but user 3 didn't like user 2
+  // user 4 liked user 3 but user 3 didn't like user 4
+  await knex("liked").insert([
+    {
+      liked_from: 1,
+      liked_to: 2,
+    },
+    {
+      liked_from: 1,
+      liked_to: 3,
+    },
+    {
+      liked_from: 2,
+      liked_to: 1,
+    },
+    {
+      liked_from: 2,
+      liked_to: 3,
+    },
+    {
+      liked_from: 4,
+      liked_to: 3,
     },
   ]);
 }

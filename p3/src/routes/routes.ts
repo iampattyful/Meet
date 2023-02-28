@@ -11,7 +11,7 @@ export abstract class UserRoutes extends Routes {
     this.routes.post("/login", this.login);
     this.routes.post("/logout", isLoggedInAPI, this.logout);
     this.routes.post("/enroll", this.enroll);
-    this.routes.post("/getCurrentUser", isLoggedInAPI, this.getCurrentUser);
+    this.routes.get("/getCurrentUser", isLoggedInAPI, this.getCurrentUser);
   }
 
   public abstract login(req: express.Request, res: express.Response): any;

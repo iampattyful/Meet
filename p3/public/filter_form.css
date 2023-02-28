@@ -4,6 +4,12 @@
 }
 
 /* Start of double input range slider */
+#filter-modal {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
 .double_slider {
   position: relative;
   height: 10px;
@@ -60,9 +66,9 @@
 }
 
 #show-me {
-  font-size: 18px;;
+  font-size: 18px;
 }
 /* #filter-form { */
-  /* display: none; */
+/* display: none; */
 /* } */
 /* End of double input range slider css */
