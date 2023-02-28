@@ -31,28 +31,30 @@ export class IOServer {
         });
       });
 
-      async function matched() {
+      socket.on("matched", async (data) => {
         try {
           const subquery = await knex("liked")
             .select("liked_to")
             .where("liked_from", req.session.userId);
-          const matchedUsers = await knex("liked")
-            .join("users", "users.id", "=", "liked.liked_from")
-            .select("liked.liked_from", "users.username", "users.user_icon")
+          const matchedUsers = await knex("users")
+            .join("liked", "users.id", "=", "liked.liked_from")
+            .join("chatroom","users.id","=","chatroom.user_id")
+            .select("liked.liked_from", "users.username", "users.user_icon","chatroom.message")
             .whereIn("liked_from", subquery)
             .where("liked_to", req.session.userId)
             .orderBy("liked.created_at", "desc");
-          return matchedUsers;
+            // return matchedUsers
+            io.emit("created matched users list", matchedUsers)
         } catch (err) {
           throw new Error(err.message);
         }
-      }
-
-      this.io.emit("matched", {
-        matchedUserList: "",
       });
 
-      
+      socket.on("disconnect", () => {
+        if (req.session.userId) {
+          this.users.delete(req.session.userId);
+        }
+      });
     });
   }
 }
