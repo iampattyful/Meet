@@ -18,7 +18,7 @@ export class MeetService {
   // }
 
   async userInformation(
-    fromUserId: number,
+    // fromUserId: number,
     toUserId: number
   ): Promise<UserInformation> {
     try {
@@ -68,6 +68,16 @@ export class MeetService {
       let [like] = await this.knex("liked")
         .insert({ liked_from: fromUserId, liked_to: toUserId })
         .returning(["liked_from", "liked_to"]);
+      let rows = await this.knex("liked")
+        .select("id")
+        .where("liked_from", like.liked_to)
+        .andWhere("liked_to", like.liked_from);
+      if (rows.length > 0) {
+        await this.knex("group").insert({
+          matched_user_id1: like.liked_from,
+          matched_user_id2: like.liked_to,
+        });
+      }
       return like;
     } catch (err) {
       throw new Error(`${err.message}`);
