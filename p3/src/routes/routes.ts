@@ -43,3 +43,14 @@ export abstract class FilterRoutes extends Routes {
   }
   public abstract filter(req: express.Request, res: express.Response): any;
 }
+
+export abstract class EditProfileRouters extends Routes {
+  constructor() {
+    super();
+    this.routes.put("/editProfile", this.editProfileOfUser);
+  }
+  public abstract editProfileOfUser(
+    req: express.Request,
+    res: express.Response
+  ): any;
+}
