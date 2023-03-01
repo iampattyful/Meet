@@ -8,6 +8,7 @@ import { MeetController } from "./controller/meetController";
 // import SocketIO from "socket.io";
 import http from "http";
 import { knex } from "./db";
+import { EditProfileController } from "./controller/editProfileController";
 // import { IOServer } from "./IOServer.ts";
 
 const app = express();
@@ -27,44 +28,45 @@ app.use(express.static(p));
 let userController = new UserController();
 let meetController = new MeetController();
 let filterController = new FilterController();
+let editProfileController = new EditProfileController();
+
 app.use("/user", userController.routes);
 app.use("/meet", meetController.routes);
 app.use("/filter", filterController.routes);
+app.use("/editProfile", editProfileController.routes);
 
 app.get("/test", async (req: express.Request, res: express.Response) => {
   // const subquery = await knex("liked")
   //   .select("liked_to")
   //   .where("liked_from", 1);
-  
+
   // const matchedUsers = await knex("users")
-    // .distinct("*")
-    // .join("liked", "users.id", "=", "liked.liked_from")
-    // .join("chatroom", "users.id", "=", "chatroom.user_id")
-    // .select(
-    //   "liked.liked_from as id",
-    //   "users.username",
-    //   "users.user_icon",
-    //   "chatroom.message as last_message"
-    // )
-    // .whereIn("liked_from", function () {
-    //   this.select("liked_to").from("liked").where("liked_from", 71);
-    // })
-    // .where("liked_to", 71)
-    // .orderBy([
-    //   { column: "liked.created_at", order: "desc" },
-    //   { column: "chatroom.created_at", order: "desc" },
-    // ]);
+  // .distinct("*")
+  // .join("liked", "users.id", "=", "liked.liked_from")
+  // .join("chatroom", "users.id", "=", "chatroom.user_id")
+  // .select(
+  //   "liked.liked_from as id",
+  //   "users.username",
+  //   "users.user_icon",
+  //   "chatroom.message as last_message"
+  // )
+  // .whereIn("liked_from", function () {
+  //   this.select("liked_to").from("liked").where("liked_from", 71);
+  // })
+  // .where("liked_to", 71)
+  // .orderBy([
+  //   { column: "liked.created_at", order: "desc" },
+  //   { column: "chatroom.created_at", order: "desc" },
+  // ]);
 
-
-    const matchedUsers = await knex("message")
-    .join("users","users.id","=","message.user_id")
-    .join("group","group.id","=","message.group_id")
+  const matchedUsers = await knex("message")
+    .join("users", "users.id", "=", "message.user_id")
+    .join("group", "group.id", "=", "message.group_id")
     .select("message.message")
-    .max("message.created_at","desc")
-    .where("group.match_user_id1",req.session.userId)
-    .orWhere("group.matched_user_id2",req.session.userId)
-    .orderBy("group.created_at","desc")
-    
+    .max("message.created_at", "desc")
+    .where("group.match_user_id1", req.session.userId)
+    .orWhere("group.matched_user_id2", req.session.userId)
+    .orderBy("group.created_at", "desc");
 
   //.distinct("liked.liked_from");
   // .limit(1)

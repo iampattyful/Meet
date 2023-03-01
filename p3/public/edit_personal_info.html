@@ -10,6 +10,13 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <link rel="stylesheet" href="edit_personal_info.css" />
     <title>編輯個人資料</title>
@@ -174,23 +181,54 @@
               <!-- pet -->
               <div>
                 <div>寵物</div>
-                <select name="pet" id="pet">
-                  <option value="cat">喵星人</option>
-                  <option value="dog">汪星人</option>
-                  <option value="bird">烏類</option>
-                  <option value="reptilia">爬蟲類</option>
-                  <option value="other">其他</option>
-                  <option value="humanity">人...人類?!</option>
-                </select>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" checked name="pet" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
               </div>
-              <!-- fit -->
+              <!-- fitness -->
               <div>
-                <label class="switch">
-                  <input type="checkbox" />
-                  <span class="slider"></span>
-                </label>
+                <div>運動習慣</div>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <!-- smoke -->
+              <div>
+                <div>吸煙習慣</div>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <!-- drink -->
+              <div>
+                <div>酗酒習慣</div>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
               </div>
             </form>
+            <!-- tag -->
+            <div class="card">
+              <div>Tag</div>
+              <select name="tag" id="tag">
+                <option value="test1">test1</option>
+                <option value="test2">test2</option>
+                <option value="test3">test3</option>
+                <option value="test4">test4</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
