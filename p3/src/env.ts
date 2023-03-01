@@ -16,6 +16,9 @@ export const env_config = {
   POSTGRES_DB_TEST: "",
   POSTGRES_USER_TEST: "",
   POSTGRES_PASSWORD_TEST: "",
+  AWS_S3_ACCESS_KEY_ID: "",
+  AWS_S3_SECRET_ACCESS_KEY: "",
+  AWS_S3_BUCKET_NAME: "",
 };
 
 populateEnv(env_config, { mode: "halt" });
