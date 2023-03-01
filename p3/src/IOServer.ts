@@ -45,11 +45,23 @@ export class IOServer {
             .where("liked_to", req.session.userId)
             .orderBy("liked.created_at", "desc");
             // return matchedUsers
+
+
+            
             io.emit("created matched users list", matchedUsers)
         } catch (err) {
           throw new Error(err.message);
         }
       });
+
+      socket.on("join room",async(data)=>{
+        try{
+            //select group
+            //io.emit("",)
+        }catch(err){
+            throw new Error(err.message);
+        }
+      })
 
       socket.on("disconnect", () => {
         if (req.session.userId) {

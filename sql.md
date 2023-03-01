@@ -43,7 +43,7 @@ new match
     from group,message 
     where group.matched_user_id1 = req.session.userId 
     or group.matched_user_id2 = req.session.userId 
-    order by group.created_at dect
+    order by group.created_at desc
 
 
 select liked.liked_from, users.user_icon, users.username, message.message 
@@ -55,4 +55,8 @@ and users.id = message.user_id
 order by message.created_at
 order by group.created_at
 
+subq = select group.id from group 
+        where matched_user_id1 =  res.session.userId 
+        orwhere matched_user_id2 = res.session.userId
 
+select message, max('created_at','decs') from message wherein subq 

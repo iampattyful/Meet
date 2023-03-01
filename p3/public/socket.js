@@ -26,7 +26,12 @@ socket.on("created matched users list",(data)=>{
                 </div>
             </div>
             `
-        )
-        .join("")
+            )
+            .join("")
 })
-
+        
+let joinRoom = document.querySelector(`.handleClickUserId=${obj.users.id}`)
+joinRoom.addEventListener("click",e=>{
+    io.to(`room${group.id}`).emit("join room")
+})
+        
