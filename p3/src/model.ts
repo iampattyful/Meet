@@ -40,6 +40,7 @@ export type UserRows = {
 export type EditProfile = {
   //user
   username?: string;
+  about_me?: string;
   password?: string;
   //////user icon maybe s3///////
   user_icon?: string;

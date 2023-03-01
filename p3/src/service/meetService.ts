@@ -47,7 +47,7 @@ export class MeetService {
           "personal_information.drink",
           "tag.tag_name"
         )
-        .whereNotIn("id", function () {
+        .whereNotIn("users.id", function () {
           this.select("liked_to").from("liked").where("liked_from", toUserId);
         });
       // .where("users.id", toUserId)

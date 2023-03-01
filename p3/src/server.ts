@@ -8,6 +8,7 @@ import { MeetController } from "./controller/meetController";
 // import SocketIO from "socket.io";
 import http from "http";
 import { knex } from "./db";
+import { EditProfileController } from "./controller/editProfileController";
 // import { IOServer } from "./IOServer.ts";
 
 const app = express();
@@ -27,9 +28,12 @@ app.use(express.static(p));
 let userController = new UserController();
 let meetController = new MeetController();
 let filterController = new FilterController();
+let editProfileController = new EditProfileController();
+
 app.use("/user", userController.routes);
 app.use("/meet", meetController.routes);
 app.use("/filter", filterController.routes);
+app.use("/editProfile", editProfileController.routes);
 
 app.get("/test", async (req: express.Request, res: express.Response) => {
   // const subquery = await knex("liked")
