@@ -1,0 +1,26 @@
+.login_form,
+.logout_form {
+  border: 1px solid #222222;
+}
+.isHide {
+  display: none;
+}
+.content {
+  grid-area: content;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  border: 1px solid;
+  overflow: hidden;
+}
+#slider_container {
+  display: flex;
+  width: 2000%;
+}
+.slider {
+  position: relative;
+  min-width: 100%;
+}
+.userImage {
+  width: 100%;
+}
