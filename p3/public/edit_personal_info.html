@@ -1,24 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
-    <link rel="stylesheet" href="#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="edit_personal_info.css" />
     <title>編輯個人資料</title>
-</head>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="imageCard">
+            <div class="image">
+              <img src="assets/bugCat5.gif" id="icon1" />
+              <img src="assets/bugCat5.gif" id="icon2" />
+              <img src="assets/bugCat5.gif" id="icon3" />
+              <img src="assets/bugCat5.gif" id="icon4" />
+              <img src="assets/bugCat5.gif" id="icon5" />
+              <img src="assets/bugCat5.gif" id="icon6" />
+            </div>
+          </div>
+          <div class="user">
+            <form id="editForm">
+              <!-- user name -->
+              <div>
+                <div>名稱</div>
+                <input
+                  type="text"
+                  class="writeBoxName"
+                  name="username"
+                  placeholder="User name"
+                />
+              </div>
+              <!-- Password -->
+              <div>
+                <div>密碼</div>
+                <input
+                  type="password"
+                  class="writeBoxPassword"
+                  name="password"
+                  placeholder="password"
+                />
+              </div>
+              <!-- Location -->
+              <div>
+                <div>地區</div>
+                <select name="location" id="location">
+                  <option value="Central and Western">中西區</option>
+                  <option value="Wan Chai">灣仔</option>
+                  <option value="Eastern">東區</option>
+                  <option value="Southern">南區</option>
+                  <option value="Yan Tsim Mong">油尖旺</option>
+                  <option value="Sham Shui Po">深水埗</option>
+                  <option value="Kowloon City">九龍城</option>
+                  <option value="Wong Tai Sin">黃大仙</option>
+                  <option value="Kwun Tong">觀塘</option>
+                  <option value="Kwai Tsing">葵青</option>
+                  <option value="Tsuen Wan">荃灣</option>
+                  <option value="Tuen Mun">屯門</option>
+                  <option value="Yuen Long">元朗</option>
+                  <option value="North">北區</option>
+                  <option value="Tai Po">大埔</option>
+                  <option value="Sha Tin">沙田</option>
+                  <option value="Sai Kung">西貢</option>
+                  <option value="Islands">離島</option>
+                </select>
+              </div>
+              <!-- About me -->
+              <div>
+                <div>關於我</div>
+                <textarea
+                  type="text"
+                  class="writeBoxAboutMe"
+                  name="about_me"
+                  rows="3"
+                  placeholder="Hello! Nice to meet you!"
+                ></textarea>
+              </div>
+              <!-- education_level -->
+              <div>
+                <div></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<body>
-    <!-- layout: user photos, about me, education, job, nationality, height, weight, pet, fitness, smoke, drink, users tags -->
-    <h1>編輯個人資料</h1>>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-    <script src="#"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="edit_personal_info.js"></script>
+  </body>
 </html>
