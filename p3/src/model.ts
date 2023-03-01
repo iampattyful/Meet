@@ -36,3 +36,27 @@ export type UserRows = {
   gender: string;
   // location?: string;
 };
+
+export type EditProfile = {
+  //user
+  username?: string;
+  password?: string;
+  //////user icon maybe s3///////
+  user_icon?: string;
+  ///////////////////////////
+  location?: string;
+
+  //personal_information
+  education_level?: string;
+  job?: string;
+  nationality?: string;
+  height?: number;
+  weight?: number;
+  pet?: boolean;
+  fitness?: boolean;
+  smoke?: boolean;
+  drink?: boolean;
+
+  //tag
+  tag?: string;
+};
