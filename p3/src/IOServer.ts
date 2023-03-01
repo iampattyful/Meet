@@ -40,15 +40,28 @@ export class IOServer {
             .join("liked", "users.id", "=", "liked.liked_from")
             .join("chatroom","users.id","=","chatroom.user_id")
             .select("liked.liked_from", "users.username", "users.user_icon","chatroom.message")
+            .max("chatroom.created_at")
             .whereIn("liked_from", subquery)
             .where("liked_to", req.session.userId)
             .orderBy("liked.created_at", "desc");
             // return matchedUsers
+
+
+            
             io.emit("created matched users list", matchedUsers)
         } catch (err) {
           throw new Error(err.message);
         }
       });
+
+      socket.on("join room",async(data)=>{
+        try{
+            //select group
+            //io.emit("",)
+        }catch(err){
+            throw new Error(err.message);
+        }
+      })
 
       socket.on("disconnect", () => {
         if (req.session.userId) {

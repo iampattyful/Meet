@@ -18,15 +18,20 @@ socket.on("created matched users list",(data)=>{
     matchedUserList.innerHTML = data.matchedUserList
         .map(
             (obj)=> `
-            <div class="matchedUser handleClickUserId=${obj.id}">
-                <div class="usericon">${obj.icon}</div>
+            <div class="matchedUser handleClickUserId=${obj.users.id}">
+                <div class="usericon">${obj.users.user_icon}</div>
                 <div class="userbox">
-                    <div class="username">${obj.username}</div>
-                    <div class="lastMessage">${obj.message}</div>
+                    <div class="username">${obj.users.username}</div>
+                    <div class="lastMessage">${obj.chatroom.message}</div>
                 </div>
             </div>
             `
-        )
-        .join("")
+            )
+            .join("")
 })
-
+        
+let joinRoom = document.querySelector(`.handleClickUserId=${obj.users.id}`)
+joinRoom.addEventListener("click",e=>{
+    io.to(`room${group.id}`).emit("join room")
+})
+        

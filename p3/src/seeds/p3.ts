@@ -14,7 +14,7 @@ export async function seed(knex: Knex): Promise<void> {
   let hash_password = await hashPassword("123");
   console.log(hash_password);
   // Inserts seed entries
-  let [d1] = await knex("users")
+  let [d1, d2, d3, d4, d5] = await knex("users")
     .insert([
       {
         username: "demo1",
@@ -30,7 +30,7 @@ export async function seed(knex: Knex): Promise<void> {
         username: "demo2",
         password: hash_password,
         email: "demo2@gmail.com",
-        user_icon: "1.jpg",
+        user_icon: "2.jpg",
         date_of_birth: "2001-02-12",
         gender: "female",
         is_public: "true",
@@ -40,7 +40,7 @@ export async function seed(knex: Knex): Promise<void> {
         username: "demo3",
         password: hash_password,
         email: "demo3@gmail.com",
-        user_icon: "1.jpg",
+        user_icon: "3.jpg",
         date_of_birth: "1962-06-22",
         gender: "male",
         is_public: "true",
@@ -50,7 +50,7 @@ export async function seed(knex: Knex): Promise<void> {
         username: "demo4",
         password: hash_password,
         email: "demo4@gmail.com",
-        user_icon: "1.jpg",
+        user_icon: "4.jpg",
         date_of_birth: "1991-02-12",
         gender: "female",
         is_public: "true",
@@ -60,7 +60,7 @@ export async function seed(knex: Knex): Promise<void> {
         username: "demo5",
         password: hash_password,
         email: "demo5@gmail.com",
-        user_icon: "1.jpg",
+        user_icon: "5.jpg",
         date_of_birth: "1942-09-22",
         gender: "unisex",
         is_public: "true",
@@ -70,7 +70,7 @@ export async function seed(knex: Knex): Promise<void> {
         username: "demo6",
         password: hash_password,
         email: "demo6@gmail.com",
-        user_icon: "1.jpg",
+        user_icon: "6.jpg",
         date_of_birth: "1981-02-12",
         gender: "unisex",
         is_public: "true",
@@ -100,24 +100,94 @@ export async function seed(knex: Knex): Promise<void> {
   // user 4 liked user 3 but user 3 didn't like user 4
   await knex("liked").insert([
     {
-      liked_from: 1,
-      liked_to: 2,
+      liked_from: d1.id,
+      liked_to: d2.id,
     },
     {
-      liked_from: 1,
-      liked_to: 3,
+      liked_from: d1.id,
+      liked_to: d3.id,
     },
     {
-      liked_from: 2,
-      liked_to: 1,
+      liked_from: d1.id,
+      liked_to: d4.id,
     },
     {
-      liked_from: 2,
-      liked_to: 3,
+      liked_from: d1.id,
+      liked_to: d5.id,
     },
     {
-      liked_from: 4,
-      liked_to: 3,
+      liked_from: d2.id,
+      liked_to: d1.id,
+    },
+    {
+      liked_from: d2.id,
+      liked_to: d3.id,
+    },
+    {
+      liked_from: d3.id,
+      liked_to: d1.id,
+    },
+    {
+      liked_from: d4.id,
+      liked_to: d3.id,
+    },
+    {
+      liked_from: d4.id,
+      liked_to: d1.id,
+    },
+    {
+      liked_from: d5.id,
+      liked_to: d1.id,
     },
   ]);
+
+  await knex("chatroom").insert([
+    {
+      user_id: d1.id,
+      message: "hi",
+    },
+  ]);
+  await sleep(1000);
+
+  await knex("chatroom").insert([
+    {
+      user_id: d2.id,
+      message: "hi",
+    },
+  ]);
+
+  await sleep(1000);
+
+  await knex("chatroom").insert([
+    {
+      user_id: d2.id,
+      message: "nice to meet u",
+    },
+  ]);
+
+  await sleep(1000);
+
+  await knex("chatroom").insert([
+    {
+      user_id: d3.id,
+      message: "gd night",
+    },
+  ]);
+
+  await sleep(1000);
+
+  await knex("chatroom").insert([
+    {
+      user_id: d4.id,
+      message: "gd morning",
+    },
+  ]);
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("a");
+    }, ms);
+  });
 }
