@@ -4,6 +4,11 @@ import { formidablePromise } from "../helper/helper";
 import { User } from "../model";
 import { UserRoutes } from "../routes/routes";
 import { userService } from "../service/userService";
+import { env_config } from "../env";
+import AWS from "aws-sdk";
+import * as fs from "fs";
+import * as path from "path";
+
 
 export class UserController extends UserRoutes {
   constructor() {
@@ -56,13 +61,29 @@ export class UserController extends UserRoutes {
   }
   async enroll(req: express.Request, res: express.Response) {
     try {
-      let formResult = (await formidablePromise(req)) as User;
-      let user = await userService.enrol(formResult);
+      // let user = (await formidablePromise(req)) as User;
+      // console.log(user);
       req.session.isLogin = true;
-      req.session.userId = user.id;
-
+      // req.session.userId = user.id;
+      // s3 logic below
+      const s3 = new AWS.S3({
+        accessKeyId: env_config.AWS_S3_ACCESS_KEY_ID,
+        secretAccessKey: env_config.AWS_S3_SECRET_ACCESS_KEY,
+      });
+      // const filename = user.user_icon as string;
+      let imagePath = path.join(__dirname, "..", "..", "uploads", "test.jpg");
+      console.log(imagePath);
+      const blob = fs.readFileSync(imagePath);
+      const uploadedImage = await s3
+        .upload({
+          Bucket: env_config.AWS_S3_BUCKET_NAME,
+          Key: "test.jpg",
+          Body: blob,
+        })
+        .promise();
+      console.log(uploadedImage.Location);
       res.status(200).json({
-        data: { isLogin: true, userId: user.id },
+        data: { isLogin: true },
         isErr: false,
         errMess: null,
       });
