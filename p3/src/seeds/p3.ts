@@ -3,7 +3,7 @@ import { hashPassword } from "../hash";
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
-  await knex("chatroom").del();
+  await knex("message").del();
   await knex("ref_liked_users").del();
   await knex("liked").del();
   await knex("tag").del();
@@ -140,8 +140,27 @@ export async function seed(knex: Knex): Promise<void> {
       liked_to: d1.id,
     },
   ]);
+  
+  await knex("group").insert([
+    {
+      matched_user_id1: d1.id,
+      matched_user_id2: d2.id,
+    },
+    {
+      matched_user_id1: d1.id,
+      matched_user_id2: d3.id,
+    },
+    {
+      matched_user_id1: d1.id,
+      matched_user_id2: d4.id,
+    },
+    {
+      matched_user_id1: d1.id,
+      matched_user_id2: d5.id,
+    }
+  ]);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d1.id,
       message: "hi",
@@ -149,7 +168,7 @@ export async function seed(knex: Knex): Promise<void> {
   ]);
   await sleep(1000);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d2.id,
       message: "hi",
@@ -158,7 +177,7 @@ export async function seed(knex: Knex): Promise<void> {
 
   await sleep(1000);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d2.id,
       message: "nice to meet u",
@@ -167,7 +186,7 @@ export async function seed(knex: Knex): Promise<void> {
 
   await sleep(1000);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d3.id,
       message: "gd night",
@@ -176,7 +195,7 @@ export async function seed(knex: Knex): Promise<void> {
 
   await sleep(1000);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d4.id,
       message: "gd morning",

@@ -35,7 +35,7 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   // const subquery = await knex("liked")
   //   .select("liked_to")
   //   .where("liked_from", 1);
-  
+
   // const matchedUsers = await knex("users")
     // .distinct("*")
     // .join("liked", "users.id", "=", "liked.liked_from")
@@ -61,8 +61,8 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
     .join("group","group.id","=","message.group_id")
     .select("message.message")
     .max("message.created_at","desc")
-    .where("group.match_user_id1",req.session.userId)
-    .orWhere("group.matched_user_id2",req.session.userId)
+    .where("group.match_user_id1",83)
+    .orWhere("group.matched_user_id2",83)
     .orderBy("group.created_at","desc")
     
 
