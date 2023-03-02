@@ -7,14 +7,18 @@ export class MeetController extends MeetRouters {
   constructor() {
     super();
   }
-  //   async homePageImage(req: express.Request, res: express.Response) {
-  //     try {
-  //       const homePageImage = await homeService.homePageImage();
-  //       res.status(200).json({ homePageImage: homePageImage });
-  //     } catch (err: any) {
-  //       errorHandler(err, req, res);
-  //     }
+
+  // async mainPageImage(req: express.Request, res: express.Response) {
+  //   try {
+  //     let minAge = Date(req.params.date_of_birth);
+  //     let maxAge = Date(req.params.date_of_birth)
+  //     let homePageImage = await meetService.mainPageImage(minAge,maxAge);
+  //     res.status(200).json({ homePageImage: homePageImage });
+  //   } catch (err: any) {
+  //     errorHandler(err, req, res);
   //   }
+  // }
+
   async likeUser(req: express.Request, res: express.Response) {
     console.log(2);
     try {

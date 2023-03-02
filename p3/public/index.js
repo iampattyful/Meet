@@ -6,9 +6,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
   main();
 });
 
-// async function main() {
-//   reg_login_click_event();
-// }
+async function main() {
+  reg_login_click_event();
+}
 
 // async function reg_login_click_event() {
 //   login_form.addEventListener("submit", async (e) => {
@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 async function render_all_form() {
   if (user.isLogin) {
-    window.location.href = "/meet";
+    window.location.href = "/";
   } else {
     login_form.classList.remove("isHide");
   }
