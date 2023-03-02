@@ -59,5 +59,8 @@ export type EditProfile = {
   drink?: boolean;
 
   //tag
-  tag?: string;
+  tag_name?: string;
+
+  // image
+  image: string;
 };

@@ -5,11 +5,10 @@ import { formidablePromise } from "../helper/helper";
 import { User } from "../model";
 import { UserRoutes } from "../routes/routes";
 import { userService } from "../service/userService";
-// import { env_config } from "../env";
-// import AWS from "aws-sdk";
-// import * as fs from "fs";
-// import * as path from "path";
-
+import { s3Client } from "../aws";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import fs from "fs";
+import path from "path";
 
 export class UserController extends UserRoutes {
   constructor() {
@@ -60,6 +59,7 @@ export class UserController extends UserRoutes {
       errorHandler(err, req, res);
     }
   }
+
   async enroll(req: express.Request, res: express.Response) {
     try {
       let user = (await formidablePromise(req)) as User;
@@ -68,23 +68,9 @@ export class UserController extends UserRoutes {
       req.session.isLogin = true;
       let result = await userService.enroll(user);
       // req.session.userId = user.id;
-      // s3 logic below
-      // const s3 = new AWS.S3({
-      //   accessKeyId: env_config.AWS_S3_ACCESS_KEY_ID,
-      //   secretAccessKey: env_config.AWS_S3_SECRET_ACCESS_KEY,
-      // });
-      // // const filename = user.user_icon as string;
-      // let imagePath = path.join(__dirname, "..", "..", "uploads", "test.jpg");
-      // console.log(imagePath);
-      // const blob = fs.readFileSync(imagePath);
-      // const uploadedImage = await s3
-      //   .upload({
-      //     Bucket: env_config.AWS_S3_BUCKET_NAME,
-      //     Key: "test.jpg",
-      //     Body: blob,
-      //   })
-      //   .promise();
-      // console.log(uploadedImage.Location);
+
+      //fetch python server
+
       res.status(200).json({
         data: result,
         isErr: false,
@@ -95,3 +81,55 @@ export class UserController extends UserRoutes {
     }
   }
 }
+
+// s3 logic below
+let BUCKET_NAME = "meet-tecky";
+const findMimeType = (ext: string) => {
+  if (ext === "jpeg") {
+    return "image/jpeg";
+  } else if (ext === "jpg") {
+    return "image/jpg";
+  } else if (ext === "png") {
+    return "image/png";
+  } else if (ext === "gif") {
+    return "image/gif";
+  } else if (ext === "svg") {
+    return "image/svg+xml";
+  } else {
+    return "";
+  }
+};
+const filename = path.join(
+  process.cwd() /*, "..", ".."*/,
+  "uploads",
+  "test.jpg"
+);
+const ext: string = findMimeType(filename.split(".")[1]);
+const fileContent = fs.readFileSync(filename);
+console.log(fileContent, "fileContent");
+
+const params = {
+  Bucket: BUCKET_NAME,
+  Key: "test.jpg",
+  Body: fileContent,
+  ContentType: ext,
+};
+
+async function uploadFace(/* params: paramsType */): Promise<any> {
+  try {
+    const data = await s3Client.send(new PutObjectCommand(params));
+    console.log(
+      "successfully created " +
+        params.Key +
+        " and uploaded to " +
+        params.Bucket +
+        "/" +
+        params.Key
+    );
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+uploadFace();
