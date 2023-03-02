@@ -3,7 +3,7 @@ import { hashPassword } from "../hash";
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
-  await knex("chatroom").del();
+  await knex("message").del();
   await knex("ref_liked_users").del();
   await knex("liked").del();
   await knex("tag").del();
@@ -140,46 +140,100 @@ export async function seed(knex: Knex): Promise<void> {
       liked_to: d1.id,
     },
   ]);
+  
+  let [g1, g2, g3, g4] = await knex("group").insert([
+    {
+      matched_user_id1: d1.id,
+      matched_user_id2: d2.id,
+    },
+    {
+      matched_user_id1: d1.id,
+      matched_user_id2: d3.id,
+    },
+    {
+      matched_user_id1: d1.id,
+      matched_user_id2: d4.id,
+    },
+    {
+      matched_user_id1: d1.id,
+      matched_user_id2: d5.id,
+    }
+  ]).returning("id");;
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d1.id,
+      group_id:g1.id,
       message: "hi",
     },
   ]);
   await sleep(1000);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d2.id,
+      group_id:g1.id,
       message: "hi",
     },
   ]);
 
   await sleep(1000);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d2.id,
+      group_id:g1.id,
       message: "nice to meet u",
     },
   ]);
 
   await sleep(1000);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d3.id,
+      group_id:g2.id,
       message: "gd night",
     },
   ]);
 
   await sleep(1000);
 
-  await knex("chatroom").insert([
+  await knex("message").insert([
     {
       user_id: d4.id,
+      group_id:g3.id,
       message: "gd morning",
+    },
+  ]);
+
+  await sleep(1000);
+
+  await knex("message").insert([
+    {
+      user_id: d1.id,
+      group_id:g3.id,
+      message: "long time no c",
+    },
+  ]);
+
+  await sleep(1000);
+
+  await knex("message").insert([
+    {
+      user_id: d5.id,
+      group_id:g4.id,
+      message: "yo",
+    },
+  ]);
+
+  await sleep(1000);
+
+  await knex("message").insert([
+    {
+      user_id: d1.id,
+      group_id:g4.id,
+      message: "yo yo",
     },
   ]);
 }

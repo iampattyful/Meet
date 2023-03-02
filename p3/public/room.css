@@ -1,0 +1,151 @@
+.roomContainer{
+    border: 3px solid #eeeeee;
+    width: 360px;
+    height: 667px;
+    min-width: 360px;
+    min-height: 667px;
+    max-height: 700px;
+    overflow:scroll;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.matchedUser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(10% - 3px) ;
+    border-bottom: 3px solid #eeeeee;
+}
+
+.backBtn{
+    width: 10%;
+    height: 100%;
+    border-right: 3px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconContainer{
+    width: 15%;
+    height: 100%;
+    /* border-right: 3px solid #eeeeee; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userIcon{
+    position: relative;
+    background-color: white;
+    min-height: 40px;
+    max-height: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    border: 3px solid #eeeeee;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.userIcon > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userBox{
+    width: calc(75% - 6px);
+    height: 100%;
+}
+
+.username{
+    display:flex;
+    align-items: center;
+    font-size: large;
+    padding-left: 2%;
+    height: 100%;
+}
+
+.messageContainer{
+    width: 100%;
+    height: calc(82% - 3px);
+    overflow:scroll;
+    padding-top: 3%;
+    background-color: black;
+    /* background: url(/p3/public/assets/4170820.jpg);
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+.chatBar{
+    height: calc(8% - 9px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+}
+
+.textarea{
+    width: calc(83% - 12px);
+    height: 50%;
+    padding-left: 3%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    overflow:scroll;
+    margin-right: 1%;
+}
+
+.send{
+    width: 10%;
+    height: 65%;
+    background-color: white;
+    color: #AAAAAA;
+    /* border: 3px solid #eeeeee; */
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 140%;
+}
+
+.messageBox{
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.message{
+    width: auto;
+    height: auto;
+    max-width: 70%;
+    padding: 1% 3%;
+    border: 3px solid #eeeeee;
+    border-radius: 10px;
+    margin: 5%;
+    word-wrap: break-word;
+}
+
+.item-right{
+    justify-content: end;
+}
+
+.item-right > div{
+    background-color: #e7ffdd;
+}
+
+.item-left{
+    justify-content: start;
+}
+
+.item-left > div{
+    background-color: white;
+}

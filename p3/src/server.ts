@@ -59,17 +59,41 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //   { column: "chatroom.created_at", order: "desc" },
   // ]);
 
-  const matchedUsers = await knex("message")
-    .join("users", "users.id", "=", "message.user_id")
-    .join("group", "group.id", "=", "message.group_id")
-    .select("message.message")
-    .max("message.created_at", "desc")
-    .where("group.match_user_id1", req.session.userId)
-    .orWhere("group.matched_user_id2", req.session.userId)
-    .orderBy("group.created_at", "desc");
+  // const matchedUsers = await knex("message")
+  // .join("users","users.id","=","message.user_id")
+  // .join("group","group.id","=","message.group_id")
+  // .select("group.id","users.username","users.user_icon","message.message","message.created_at")
+  // .where("group.matched_user_id1",89)
+  // .orWhere("group.matched_user_id2",89)
+  // .orderBy("message.created_at","desc")
+  // .groupBy("group.id","users.username","users.user_icon","message.message")
+  // .max("message.created_at")
 
-  //.distinct("liked.liked_from");
-  // .limit(1)
+  // const subquery = await knex ("message")
+  // .join("group","group_id","=","group.id")
+  // .select("group_id")
+  // .max("message.created_at")
+  // .groupBy("group_id")
+
+  // const matchedUsers = await knex("message")
+  // .join(function(){
+  //   this.select("group_id")
+  //   .max("message.created_at")
+  //   .from("message")
+  //   .join("group","group_id","=","group.id")
+  //   .groupBy("group_id")
+  //   .as("user_message")
+  // },"message.group_id","user_message.group_id")
+  // .join("users","users.id","message.user_id")
+  // .select("user_message.group_id","users.user_icon","users.username","message.message")
+  // .where("user_message.max","=","message.created_at")
+  // .orderBy("user_message.max","desc")
+
+  const matchedUsers = (
+    await knex.raw(
+     `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = 89 or "group".matched_user_id2 = 89 group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
+    )
+  ).rows;
 
   res.json(matchedUsers);
 });

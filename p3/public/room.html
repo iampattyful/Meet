@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="room.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+  />
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="roomContainer">
+            <div class="matchedUser handleClickUserId=${obj.group.id}">
+                <div class="backBtn"><i class="fa-solid fa-chevron-left"></i></div>
+                <div class="iconContainer">
+                    <div class="userIcon"><img src ="${obj.user_icon}"/></div>
+                </div>
+                <div class="userBox">
+                    <div class="username">${obj.username}</div>
+                </div>
+            </div>
+            <div class="messageContainer">
+                <div class="messageBox item-right">
+                    <div class="message">jnkjnkvfjnvkckv</div>
+                </div>
+                <div class="messageBox item-left">
+                    <div class="message">BBC News provides trusted World and UK news as well as local and regional perspectives. Also entertainment, business, science, technology and health news.</div>
+                </div>
+                <div class="messageBox item-right">
+                    <div class="message"> mx mxncjxncnjxncjjfksdbvfkdbkvbdskvbkdsbvkdhsbkvbdskjvbkdssdjvbkskjsddjdjsjjdjddhbdhcbb xkzb cnbkdjnckjdncjdncjknxb hbxmb njbj xbhdbchdbhcdjsdnjssdkjckv</div>
+                </div>
+                <div class="messageBox item-right">
+                    <div class="message">jnkjnkvfjnvkjfdnvkfjdsncvkbhkcdsbckjsdbchdbchdbcc bzxjncxznc mx mxncjxncnjxncjnxjncxm cmx cmxnckjsdkjfksdbvfkdbkvbdskvbkdsbvkdhsbkvbdskjvbkdssdjvbkskjsddjdjsjjdjddhbdhcbb xkzb cnbkdjnckjdncjdncjknxb hbxmb njbj xbhdbchdbhcdjsdnjssdkjckv</div>
+                </div>
+            </div>
+            <form class="chatBar">
+                  <input name="chatroomMessage" class="textarea" type="text" />
+                  <div class="send" type="submit"><i class="fa-solid fa-comment-dots"></i></div>
+                  <!-- <input class="send" type="submit" value=""/> -->
+            </form>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./socket.js"></script>
+</body>
+</html>

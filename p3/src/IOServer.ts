@@ -1,6 +1,6 @@
 import SocketIO from "socket.io";
 import express, { RequestHandler } from "express";
-import knex from "knex";
+import { knex } from "./db";
 
 export class IOServer {
   private users: Map<number, { userId: number; username: string }>;
@@ -33,21 +33,13 @@ export class IOServer {
 
       socket.on("matched", async (data) => {
         try {
-          const subquery = await knex("liked")
-            .select("liked_to")
-            .where("liked_from", req.session.userId);
-          const matchedUsers = await knex("users")
-            .join("liked", "users.id", "=", "liked.liked_from")
-            .join("chatroom","users.id","=","chatroom.user_id")
-            .select("liked.liked_from", "users.username", "users.user_icon","chatroom.message")
-            .max("chatroom.created_at")
-            .whereIn("liked_from", subquery)
-            .where("liked_to", req.session.userId)
-            .orderBy("liked.created_at", "desc");
-            // return matchedUsers
+            const matchedUsers = (
+                await knex.raw(
+                 `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = ${req.session.userId} or "group".matched_user_id2 = ${req.session.userId} group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
+                )
+              ).rows;
 
 
-            
             io.emit("created matched users list", matchedUsers)
         } catch (err) {
           throw new Error(err.message);
