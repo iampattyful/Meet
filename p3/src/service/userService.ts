@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 import { knex } from "../db";
-import { checkPassword, hashPassword } from "../hash";
+import { checkPassword } from "../hash";
 import { User } from "../model";
 
 export class UserService {
@@ -33,7 +33,6 @@ export class UserService {
   }
   async enroll(obj: User): Promise<{ id: number }> {
     try {
-      obj.password = await hashPassword(obj.password!);
       let [user] = await this.knex("users")
         .insert({
           username: obj.username,

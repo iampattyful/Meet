@@ -113,7 +113,7 @@ export class UserController extends UserRoutes {
       req.session.userId = Number(userId);
 
       res.status(200).json({
-        data: { isLogin: true },
+        data: { isLogin: true, userId: userId},
         isErr: false,
         errMess: null,
       });
