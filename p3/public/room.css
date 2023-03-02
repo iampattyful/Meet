@@ -32,7 +32,7 @@
 .iconContainer{
     width: 15%;
     height: 100%;
-    border-right: 3px solid #eeeeee;
+    /* border-right: 3px solid #eeeeee; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,6 +79,9 @@
     overflow:scroll;
     padding-top: 3%;
     background-color: black;
+    /* background: url(/p3/public/assets/4170820.jpg);
+    background-repeat: no-repeat;
+    background-size: cover; */
 }
 
 .chatBar{

@@ -1,5 +1,6 @@
 import express from "express";
 import { errorHandler } from "../error";
+// import { hashPassword } from "../hash";
 import { formidablePromise } from "../helper/helper";
 import { User } from "../model";
 import { UserRoutes } from "../routes/routes";
@@ -58,9 +59,11 @@ export class UserController extends UserRoutes {
       errorHandler(err, req, res);
     }
   }
+
   async enroll(req: express.Request, res: express.Response) {
     try {
       // let user = (await formidablePromise(req)) as User;
+      // user.password = await hashPassword(user.password!);
       // console.log(user);
       req.session.isLogin = true;
       // req.session.userId = user.id;

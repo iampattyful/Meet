@@ -13,3 +13,8 @@ document.querySelector("#weight").addEventListener("mouseup", () => {
   weight = parseInt(document.querySelector("#weight").value);
   newWeight.innerHTML = weight;
 });
+
+//tag
+// let tag = "";
+// let newTag =document.querySelector("#tagName");
+// document.querySelector("#")
