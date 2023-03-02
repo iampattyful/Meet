@@ -1,14 +1,16 @@
 import express from "express";
 import { errorHandler } from "../error";
-// import { hashPassword } from "../hash";
+import { hashPassword } from "../hash";
 import { formidablePromise } from "../helper/helper";
 import { User } from "../model";
 import { UserRoutes } from "../routes/routes";
 import { userService } from "../service/userService";
-import { s3Client } from "../aws";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+
+// import fetch from "node-fetch";
+import axios from "axios";
 import fs from "fs";
 import path from "path";
+import { findMimeType, uploadFace } from "../aws";
 
 export class UserController extends UserRoutes {
   constructor() {
@@ -62,13 +64,53 @@ export class UserController extends UserRoutes {
 
   async enroll(req: express.Request, res: express.Response) {
     try {
-      // let user = (await formidablePromise(req)) as User;
-      // user.password = await hashPassword(user.password!);
-      // console.log(user);
-      req.session.isLogin = true;
-      // req.session.userId = user.id;
+      let user = (await formidablePromise(req)) as User;
+      user.password = await hashPassword(user.password!);
+      console.log(user);
 
       //fetch python server
+      const filename = path.join(
+        process.cwd() /*, "..", ".."*/,
+        "uploads",
+        user.user_icon!
+      );
+      const mimeType: string = findMimeType(filename.split(".")[1]);
+      const fileContent = fs.readFileSync(filename);
+      console.log(fileContent, "fileContent");
+      // s3 logic below
+      let BUCKET_NAME = "meet-tecky";
+      const params = {
+        Bucket: BUCKET_NAME,
+        Key: user.user_icon,
+        Body: fileContent,
+        ContentType: mimeType,
+      };
+      await uploadFace(params);
+
+      // node fetch python
+      // let py_res = await fetch("http://localhost:8000", {
+      //   method: "POST",
+      //   body: JSON.stringify(filename),
+      //   headers: { "Content-Type": "application/json" },
+      // });
+      // let py_res_json = await py_res.json();
+      // console.log(py_res_json, "py_res_json");
+
+      let py_res = await axios.post("http://127.0.0.1:8000/face_detection", {
+        filename: user.user_icon,
+      });
+
+      let py_res_json = py_res.data;
+
+      console.log({py_res_json})
+
+      if (!(py_res_json as  { isFace : boolean}).isFace) {
+        throw new Error("Face not detected");
+      }
+
+      let userId = await userService.enroll(user);
+      req.session.isLogin = true;
+      req.session.userId = Number(userId);
 
       res.status(200).json({
         data: { isLogin: true },
@@ -80,55 +122,3 @@ export class UserController extends UserRoutes {
     }
   }
 }
-
-// s3 logic below
-let BUCKET_NAME = "meet-tecky";
-const findMimeType = (ext: string) => {
-  if (ext === "jpeg") {
-    return "image/jpeg";
-  } else if (ext === "jpg") {
-    return "image/jpg";
-  } else if (ext === "png") {
-    return "image/png";
-  } else if (ext === "gif") {
-    return "image/gif";
-  } else if (ext === "svg") {
-    return "image/svg+xml";
-  } else {
-    return "";
-  }
-};
-const filename = path.join(
-  process.cwd() /*, "..", ".."*/,
-  "uploads",
-  "test.jpg"
-);
-const ext: string = findMimeType(filename.split(".")[1]);
-const fileContent = fs.readFileSync(filename);
-console.log(fileContent, "fileContent");
-
-const params = {
-  Bucket: BUCKET_NAME,
-  Key: "test.jpg",
-  Body: fileContent,
-  ContentType: ext,
-};
-
-async function uploadFace(/* params: paramsType */): Promise<any> {
-  try {
-    const data = await s3Client.send(new PutObjectCommand(params));
-    console.log(
-      "successfully created " +
-        params.Key +
-        " and uploaded to " +
-        params.Bucket +
-        "/" +
-        params.Key
-    );
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-uploadFace();

@@ -31,7 +31,7 @@ export class UserService {
       throw new Error(`${err.message}`);
     }
   }
-  async enrol(obj: User): Promise<{ id: number }> {
+  async enroll(obj: User): Promise<{ id: number }> {
     try {
       obj.password = await hashPassword(obj.password!);
       let [user] = await this.knex("users")
@@ -46,7 +46,7 @@ export class UserService {
           is_admin: false,
         })
         .returning("id");
-      return user;
+      return user.id;
     } catch (err) {
       throw new Error(`${err.message}`);
     }
