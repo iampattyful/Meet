@@ -1,6 +1,6 @@
 import express from "express";
 import { errorHandler } from "../error";
-// import { hashPassword } from "../hash";
+import { hashPassword } from "../hash";
 import { formidablePromise } from "../helper/helper";
 import { User } from "../model";
 import { UserRoutes } from "../routes/routes";
@@ -62,10 +62,11 @@ export class UserController extends UserRoutes {
   }
   async enroll(req: express.Request, res: express.Response) {
     try {
-      // let user = (await formidablePromise(req)) as User;
-      // user.password = await hashPassword(user.password!);
+      let user = (await formidablePromise(req)) as User;
+      user.password = await hashPassword(user.password!);
       // console.log(user);
       req.session.isLogin = true;
+      let result = await userService.enroll(user);
       // req.session.userId = user.id;
       // s3 logic below
       // const s3 = new AWS.S3({
@@ -85,7 +86,7 @@ export class UserController extends UserRoutes {
       //   .promise();
       // console.log(uploadedImage.Location);
       res.status(200).json({
-        data: { isLogin: true },
+        data: result,
         isErr: false,
         errMess: null,
       });

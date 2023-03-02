@@ -23,7 +23,7 @@ async function reg_login_click_event() {
 
     if (!res_json.isErr) {
       user = res_json.data;
-      console.log(user);
+
       render_all_form();
     } else {
       alert(res_json.errMess);
@@ -34,7 +34,7 @@ async function reg_login_click_event() {
 
 async function render_all_form() {
   if (user.isLogin) {
-    window.location.href = "/";
+    window.location.href = "/main.html";
   } else {
     login_form.classList.remove("isHide");
   }

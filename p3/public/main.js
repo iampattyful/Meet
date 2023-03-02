@@ -36,11 +36,12 @@ async function reg_login_click_event() {
     });
 
     let res_json = await res.json();
-
+    alert("login2");
     if (!res_json.isErr) {
       user = res_json.data;
       console.log(user);
-      render_all_form();
+      socket.emit("matched");
+      // render_all_form();
     } else {
       alert(res_json.errMess);
       user = { isLogin: false };

@@ -33,27 +33,27 @@ export class IOServer {
 
       socket.on("matched", async (data) => {
         try {
-            const matchedUsers = (
-                await knex.raw(
-                 `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = ${req.session.userId} or "group".matched_user_id2 = ${req.session.userId} group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
-                )
-              ).rows;
+          const matchedUsers = (
+            await knex.raw(
+              `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = ${req.session.userId} or "group".matched_user_id2 = ${req.session.userId} group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
+            )
+          ).rows;
 
-
-            io.emit("created matched users list", matchedUsers)
+          console.log(matchedUsers);
+          io.emit("created matched users list", matchedUsers);
         } catch (err) {
           throw new Error(err.message);
         }
       });
 
-      socket.on("join room",async(data)=>{
-        try{
-            //select group
-            //io.emit("",)
-        }catch(err){
-            throw new Error(err.message);
+      socket.on("join room", async (data) => {
+        try {
+          //select group
+          //io.emit("",)
+        } catch (err) {
+          throw new Error(err.message);
         }
-      })
+      });
 
       socket.on("disconnect", () => {
         if (req.session.userId) {
