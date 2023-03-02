@@ -5,8 +5,8 @@ import { formidablePromise } from "../helper/helper";
 import { User } from "../model";
 import { UserRoutes } from "../routes/routes";
 import { userService } from "../service/userService";
-import { s3Client } from "../aws";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+// import { s3Client } from "../aws";
+// import { PutObjectCommand } from "@aws-sdk/client-s3";
 import fs from "fs";
 import path from "path";
 
@@ -115,21 +115,23 @@ const params = {
   ContentType: ext,
 };
 
-async function uploadFace(/* params: paramsType */): Promise<any> {
-  try {
-    const data = await s3Client.send(new PutObjectCommand(params));
-    console.log(
-      "successfully created " +
-        params.Key +
-        " and uploaded to " +
-        params.Bucket +
-        "/" +
-        params.Key
-    );
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
+console.log(params)
 
-uploadFace();
+// async function uploadFace(/* params: paramsType */): Promise<any> {
+//   try {
+//     const data = await s3Client.send(new PutObjectCommand(params));
+//     console.log(
+//       "successfully created " +
+//         params.Key +
+//         " and uploaded to " +
+//         params.Bucket +
+//         "/" +
+//         params.Key
+//     );
+//     return data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+// uploadFace();
