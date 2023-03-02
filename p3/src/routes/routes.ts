@@ -17,10 +17,7 @@ export abstract class UserRoutes extends Routes {
   public abstract login(req: express.Request, res: express.Response): any;
   public abstract logout(req: express.Request, res: express.Response): any;
   public abstract enroll(req: express.Request, res: express.Response): any;
-  public abstract getCurrentUser(
-    req: express.Request,
-    res: express.Response
-  ): any;
+  public abstract getCurrentUser(req: express.Request, res: express.Response): any;
 }
 
 export abstract class MeetRouters extends Routes {
@@ -29,10 +26,7 @@ export abstract class MeetRouters extends Routes {
     this.routes.put("/likeUser/:id", isLoggedInAPI, this.likeUser);
     this.routes.get("/userInformation/:id", this.userInformation);
   }
-  public abstract userInformation(
-    req: express.Request,
-    res: express.Response
-  ): any;
+  public abstract userInformation(req: express.Request, res: express.Response): any;
   public abstract likeUser(req: express.Request, res: express.Response): any;
 }
 
@@ -50,12 +44,6 @@ export abstract class EditProfileRouters extends Routes {
     this.routes.get("/editProfile", this.loadProfileOfUser);
     this.routes.put("/editProfile", this.editProfileOfUser);
   }
-  public abstract loadProfileOfUser(
-    req: express.Request,
-    res: express.Response
-  ): any;
-  public abstract editProfileOfUser(
-    req: express.Request,
-    res: express.Response
-  ): any;
+  public abstract loadProfileOfUser(req: express.Request, res: express.Response): any;
+  public abstract editProfileOfUser(req: express.Request, res: express.Response): any;
 }

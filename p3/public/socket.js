@@ -9,7 +9,8 @@ socket.on("office", (msg) => {
   });
 
 socket.on('connect',()=>{
-    console.log('client connect to server : ', socket.id)    
+    console.log('client connect to server : ', socket.id) 
+    socket.emit("matched");   
 })
 
 socket.on("created matched users list",(data)=>{
