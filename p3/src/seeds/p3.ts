@@ -220,6 +220,26 @@ export async function seed(knex: Knex): Promise<void> {
         is_public: "true",
         is_admin: "false",
       },
+      {
+        username: "demo21",
+        password: hash_password,
+        email: "demo21@gmail.com",
+        user_icon: "21.jpg",
+        date_of_birth: "2004-06-22",
+        gender: "male",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo22",
+        password: hash_password,
+        email: "demo22@gmail.com",
+        user_icon: "22.jpg",
+        date_of_birth: "2003-06-22",
+        gender: "male",
+        is_public: "true",
+        is_admin: "false",
+      },
     ])
     .returning("id");
   console.log(d1);
