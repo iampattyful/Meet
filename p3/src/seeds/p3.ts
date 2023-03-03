@@ -76,6 +76,146 @@ export async function seed(knex: Knex): Promise<void> {
         is_public: "true",
         is_admin: "false",
       },
+      {
+        username: "demo7",
+        password: hash_password,
+        email: "demo7@gmail.com",
+        user_icon: "7.jpg",
+        date_of_birth: "1992-06-22",
+        gender: "male",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo8",
+        password: hash_password,
+        email: "demo8@gmail.com",
+        user_icon: "8.jpg",
+        date_of_birth: "2000-02-12",
+        gender: "female",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo9",
+        password: hash_password,
+        email: "demo9@gmail.com",
+        user_icon: "9.jpg",
+        date_of_birth: "1952-06-22",
+        gender: "male",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo10",
+        password: hash_password,
+        email: "demo10@gmail.com",
+        user_icon: "10.jpg",
+        date_of_birth: "1981-02-12",
+        gender: "female",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo11",
+        password: hash_password,
+        email: "demo11@gmail.com",
+        user_icon: "11.jpg",
+        date_of_birth: "1972-09-22",
+        gender: "unisex",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo12",
+        password: hash_password,
+        email: "demo12@gmail.com",
+        user_icon: "12.jpg",
+        date_of_birth: "1999-02-12",
+        gender: "unisex",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo13",
+        password: hash_password,
+        email: "demo13@gmail.com",
+        user_icon: "13.jpg",
+        date_of_birth: "1979-02-12",
+        gender: "female",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo14",
+        password: hash_password,
+        email: "demo14@gmail.com",
+        user_icon: "14.jpg",
+        date_of_birth: "1976-09-22",
+        gender: "unisex",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo15",
+        password: hash_password,
+        email: "demo15@gmail.com",
+        user_icon: "15.jpg",
+        date_of_birth: "1949-02-12",
+        gender: "unisex",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo16",
+        password: hash_password,
+        email: "demo16@gmail.com",
+        user_icon: "16.jpg",
+        date_of_birth: "1962-09-22",
+        gender: "male",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo17",
+        password: hash_password,
+        email: "demo17@gmail.com",
+        user_icon: "17.jpg",
+        date_of_birth: "1985-02-12",
+        gender: "unisex",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo18",
+        password: hash_password,
+        email: "demo18@gmail.com",
+        user_icon: "18.jpg",
+        date_of_birth: "1959-02-12",
+        gender: "female",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo19",
+        password: hash_password,
+        email: "demo19@gmail.com",
+        user_icon: "19.jpg",
+        date_of_birth: "1974-09-22",
+        gender: "unisex",
+        is_public: "true",
+        is_admin: "false",
+      },
+      {
+        username: "demo20",
+        password: hash_password,
+        email: "demo20@gmail.com",
+        user_icon: "20.jpg",
+        date_of_birth: "1939-02-12",
+        gender: "male",
+        is_public: "true",
+        is_admin: "false",
+      },
     ])
     .returning("id");
   console.log(d1);
@@ -140,30 +280,32 @@ export async function seed(knex: Knex): Promise<void> {
       liked_to: d1.id,
     },
   ]);
-  
-  let [g1, g2, g3, g4] = await knex("group").insert([
-    {
-      matched_user_id1: d1.id,
-      matched_user_id2: d2.id,
-    },
-    {
-      matched_user_id1: d1.id,
-      matched_user_id2: d3.id,
-    },
-    {
-      matched_user_id1: d1.id,
-      matched_user_id2: d4.id,
-    },
-    {
-      matched_user_id1: d1.id,
-      matched_user_id2: d5.id,
-    }
-  ]).returning("id");;
+
+  let [g1, g2, g3, g4] = await knex("group")
+    .insert([
+      {
+        matched_user_id1: d1.id,
+        matched_user_id2: d2.id,
+      },
+      {
+        matched_user_id1: d1.id,
+        matched_user_id2: d3.id,
+      },
+      {
+        matched_user_id1: d1.id,
+        matched_user_id2: d4.id,
+      },
+      {
+        matched_user_id1: d1.id,
+        matched_user_id2: d5.id,
+      },
+    ])
+    .returning("id");
 
   await knex("message").insert([
     {
       user_id: d1.id,
-      group_id:g1.id,
+      group_id: g1.id,
       message: "hi",
     },
   ]);
@@ -172,7 +314,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("message").insert([
     {
       user_id: d2.id,
-      group_id:g1.id,
+      group_id: g1.id,
       message: "hi",
     },
   ]);
@@ -182,7 +324,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("message").insert([
     {
       user_id: d2.id,
-      group_id:g1.id,
+      group_id: g1.id,
       message: "nice to meet u",
     },
   ]);
@@ -192,7 +334,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("message").insert([
     {
       user_id: d3.id,
-      group_id:g2.id,
+      group_id: g2.id,
       message: "gd night",
     },
   ]);
@@ -202,7 +344,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("message").insert([
     {
       user_id: d4.id,
-      group_id:g3.id,
+      group_id: g3.id,
       message: "gd morning",
     },
   ]);
@@ -212,7 +354,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("message").insert([
     {
       user_id: d1.id,
-      group_id:g3.id,
+      group_id: g3.id,
       message: "long time no c",
     },
   ]);
@@ -222,7 +364,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("message").insert([
     {
       user_id: d5.id,
-      group_id:g4.id,
+      group_id: g4.id,
       message: "yo",
     },
   ]);
@@ -232,7 +374,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("message").insert([
     {
       user_id: d1.id,
-      group_id:g4.id,
+      group_id: g4.id,
       message: "yo yo",
     },
   ]);
