@@ -26,6 +26,7 @@ export class MeetService {
   ): Promise<UserInformation> {
     try {
       let userInformation = await this.knex("users")
+        .distinct()
         .join(
           "personal_information",
           "personal_information.user_id",

@@ -65,7 +65,7 @@ export class EditProfileService {
   async loadProfileOfUser(
     obj: EditProfile,
     userId: number
-  ): Promise<EditProfile> {
+  ): Promise<EditProfile[]> {
     try {
       let rows = await this.knex("users")
         .join(
@@ -97,7 +97,7 @@ export class EditProfileService {
         .where("users.id", userId);
       console.log(rows);
 
-      return [rows] as any;
+      return rows;
     } catch (err) {
       throw new Error(`${err.message}`);
     }

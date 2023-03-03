@@ -10,31 +10,31 @@ async function main() {
   reg_login_click_event();
 }
 
-// async function reg_login_click_event() {
-//   login_form.addEventListener("submit", async (e) => {
-//     e.preventDefault();
-//     let formData = new FormData(login_form);
-//     let res = await fetch("user/login", {
-//       method: "POST",
-//       body: formData,
-//     });
+async function reg_login_click_event() {
+  login_form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let formData = new FormData(login_form);
+    let res = await fetch("user/login", {
+      method: "POST",
+      body: formData,
+    });
 
-//     let res_json = await res.json();
+    let res_json = await res.json();
 
-//     if (!res_json.isErr) {
-//       user = res_json.data;
-//       console.log(user);
-//       render_all_form();
-//     } else {
-//       alert(res_json.errMess);
-//       user = { isLogin: false };
-//     }
-//   });
-// }
+    if (!res_json.isErr) {
+      user = res_json.data;
+      console.log(user);
+      render_all_form();
+    } else {
+      alert(res_json.errMess);
+      user = { isLogin: false };
+    }
+  });
+}
 
 async function render_all_form() {
   if (user.isLogin) {
-    window.location.href = "/";
+    window.location.href = "/main.html";
   } else {
     login_form.classList.remove("isHide");
   }
