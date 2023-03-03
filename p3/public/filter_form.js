@@ -107,7 +107,7 @@ async function handleFilterFormHttpRequest(formatFormData) {
   if (!json.isErr) {
     console.log(json.data);
     numOfSlider = json.data.length;
-    // redirect meet profile page here
+    // create filtered users result here
     document.querySelector("#slider_container").innerHTML = json.data
       .map(
         (obj) => `

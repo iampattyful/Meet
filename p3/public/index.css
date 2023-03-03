@@ -1,7 +1,53 @@
+html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
 body {
   background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
 }
 
+#index-container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.logo-img {
+  width: 100x;
+  height: 100px;
+  object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  font-size: 100px;
+  background: transparent;
+}
+
+.meet-description {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.meet-logo {
+  object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.meet-text {
+  font-size: 100px;
+}
 #login_modal {
   display: flex;
   flex-direction: column;

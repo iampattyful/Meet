@@ -76,7 +76,7 @@ export class UserController extends UserRoutes {
       const mimeType: string = findMimeType(filename.split(".")[1]);
       const fileContent = fs.readFileSync(filename);
       console.log(fileContent, "fileContent");
-      
+
       // s3 logic below
       let BUCKET_NAME = "meet-tecky";
       const params = {
@@ -102,10 +102,10 @@ export class UserController extends UserRoutes {
 
       let py_res_json = py_res.data;
 
-      console.log({ py_res_json });
+      console.log( py_res_json );
 
-      if (!(py_res_json as { isFace: boolean }).isFace) {
-        throw new Error("Face not detected");
+      if (!py_res_json.isFace) {
+        throw new Error("AI無法識別相片中是否存在人面,請重新上載個人頭像!");
       }
 
       let userId = await userService.enroll(user);
