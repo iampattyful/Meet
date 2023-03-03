@@ -68,6 +68,8 @@ async function handleFilterFormHttpRequest(formatFormData) {
     alert(json.errMess);
   }
 }
+
+// when click filter submit button, redirect to slider page
 let pos = 0;
 function nextSlider(id) {
   const slider_container = document.querySelector("#slider_container");
