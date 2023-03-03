@@ -102,9 +102,9 @@ export class UserController extends UserRoutes {
 
       let py_res_json = py_res.data;
 
-      console.log({py_res_json})
+      console.log({ py_res_json });
 
-      if (!(py_res_json as  { isFace : boolean}).isFace) {
+      if (!(py_res_json as { isFace: boolean }).isFace) {
         throw new Error("Face not detected");
       }
 
@@ -113,7 +113,7 @@ export class UserController extends UserRoutes {
       req.session.userId = Number(userId);
 
       res.status(200).json({
-        data: { isLogin: true, userId: userId},
+        data: { isLogin: true, userId: userId },
         isErr: false,
         errMess: null,
       });

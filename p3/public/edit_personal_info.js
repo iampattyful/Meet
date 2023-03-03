@@ -1,3 +1,17 @@
+let edit_form = document.querySelector("#editForm");
+console.log(edit_form);
+edit_form.addEventListener("submit", async function (event) {
+  event.preventDefault();
+  const formData = new FormData(edit_form);
+  const res = await fetch("/editProfile/editProfile", {
+    method: "PUT",
+    body: formData,
+  });
+
+  const result = await res.json();
+  console.log(result);
+});
+
 //hight
 let hight = 160;
 let newHight = document.querySelector("#numOfHight");
@@ -18,20 +32,6 @@ document.querySelector("#weight").addEventListener("mouseup", () => {
 // let tag = "";
 // let newTag =document.querySelector("#tagName");
 // document.querySelector("#")
-
-let edit_form = document.querySelector("#editForm");
-console.log(edit_form);
-edit_form.addEventListener("submit", async function (event) {
-  event.preventDefault();
-  const formData = new FormData(edit_form);
-  const res = await fetch("/editProfile/editProfile", {
-    method: "PUT",
-    body: formData,
-  });
-
-  const result = await res.json();
-  console.log(result);
-});
 
 //  const formData = new FormData(edit_form);
 
