@@ -13,8 +13,8 @@ const form = formidable({
   uploadDir,
   keepExtensions: true,
   maxFiles: 1,
-  maxFileSize: 25000000000, // the default limit is 200KB
-  filter: (part) => true,
+  maxFileSize: 10 * 1024 * 1024,
+  filter: (part) => part.mimetype?.startsWith("image/") || false,
 });
 
 export function formidablePromise(req: express.Request) {

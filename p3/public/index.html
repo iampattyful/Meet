@@ -11,25 +11,49 @@
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="index.css" />
-  <title>index</title>
+  <title>Meet</title>
 </head>
 
 <body>
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="card mb-3">
-          <img src="assets/bugCat5.gif" class="card-img-top" />
-          <div class="card-body">
-            <form class="login_form">
-              <h2>Login</h2>
-              <input type="text" name="email" />
-              <input type="password" name="password" />
-              <input type="submit" value="login" />
-              <div class="col" id="menubar"></div>
-            </form>
-          </div>
+        <!-- <div class="card mb-3"> -->
+        <img src="assets/bugCat5.gif" class="card-img-top" />
+        <div id="login_modal">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            登入
+          </button>
 
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">用戶登入</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="login_form">
+                    <div class="mb-3">
+                      <label class="form-label">電郵地址</label>
+                      <input type="text" name="email" required="required" placeholder="example@example.com" />
+                    </div>
+                    <div class="mb-3"><label class="form-label">密碼</label>
+                      <input type="password" name="password" required="required" placeholder="密碼" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="登入">登入</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="signup_modal">
           <!-- Sign up Button trigger modal -->
           <button type="button" class="btn btn-primary" data-bs-toggle="modal"
             data-bs-target="#staticBackdrop">註冊</button>
@@ -44,21 +68,52 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="enrollForm">
-                  <form id="enroll-form">
+                  <form id="enroll_form">
                     <div class="mb-3">
-                      <label class="form-label">電郵地址</label>
-                      <input type="text" name="email" placeholder="example@example.com" />
+                      <label class="form-label">用戶名稱</label>
+                      <input type="text" name="username" required="required" placeholder="用戶名稱" />
                     </div>
                     <div class="mb-3"><label class="form-label">設定密碼</label>
-                      <input type="password" name="password" placeholder="password" />
+                      <input type="password" name="password" required="required" placeholder="密碼" />
                     </div>
-                    <div class="mb-3"><label class="form-label">確認密碼</label>
-                      <input type="password" name="password2" placeholder="password" />
+                    <div class="mb-3">
+                      <label class="form-label">電郵地址</label>
+                      <input type="text" name="email" required="required" placeholder="example@example.com" />
                     </div>
-                  </form>
+                    <div class="mb-3">
+                      <label class="form-label">上載個人頭像</label>
+                      <input type="file" required="required" name="user_icon" />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">出生日期</label>
+                      <input type="date" id="start" required="required" name="date_of_b" />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">性別</label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="male" />
+                        <label class="form-check-label" for="exampleRadios1">
+                          男
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="female" />
+                        <label class="form-check-label" for="exampleRadios2">
+                          女
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="exampleRadios3" value="unisex" />
+                        <label class="form-check-label" for="exampleRadios3">
+                          其他
+                        </label>
+                      </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">完成</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="完成">完成</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -66,6 +121,9 @@
         </div>
       </div>
     </div>
+    <div class="col" id="menubar"></div>
+  </div>
+
   </div>
 
   <script src="index.js"></script>

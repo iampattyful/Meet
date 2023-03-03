@@ -65,7 +65,7 @@ export class UserController extends UserRoutes {
     try {
       let user = (await formidablePromise(req)) as User;
       user.password = await hashPassword(user.password!);
-      console.log(user);
+      // console.log(user);
 
       //fetch python server
       const filename = path.join(
@@ -76,6 +76,7 @@ export class UserController extends UserRoutes {
       const mimeType: string = findMimeType(filename.split(".")[1]);
       const fileContent = fs.readFileSync(filename);
       console.log(fileContent, "fileContent");
+      
       // s3 logic below
       let BUCKET_NAME = "meet-tecky";
       const params = {
