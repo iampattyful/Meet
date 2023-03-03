@@ -8,6 +8,6 @@ enrollForm.addEventListener("submit",async e=>{
       });
     const res_json = await res.json()
     if (res_json.isLogin) {
-        res.status(200).redirect("/index.html")
+        res.status(200).redirect("/main.html")
     }
 })
