@@ -62,5 +62,5 @@ export type EditProfile = {
   tag_name?: string;
 
   // image
-  image: string;
+  image?: string;
 };

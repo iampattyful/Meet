@@ -1,13 +1,17 @@
 import { Knex } from "knex";
+
 import { hashPassword } from "../hash";
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
+
+  // await knex("ref_liked_users").del();
+
+  await knex("image").del();
   await knex("message").del();
-  await knex("ref_liked_users").del();
+  await knex("group").del();
   await knex("liked").del();
   await knex("tag").del();
-  await knex("image").del();
   await knex("personal_information").del();
   await knex("users").del();
 
@@ -233,7 +237,14 @@ export async function seed(knex: Knex): Promise<void> {
       drink: false,
     },
   ]);
-
+  await knex("tag").insert([
+    { user_id: d1.id, tag_name: "run" },
+    { user_id: d2.id, tag_name: "swim" },
+    { user_id: d2.id, tag_name: "sleep" },
+    { user_id: d3.id, tag_name: "basketball" },
+    { user_id: d4.id, tag_name: "sleep" },
+    { user_id: d5.id, tag_name: "eat" },
+  ]);
   // user 1 and 2 liked each other,
   // user 1 liked user 3 but user 3 didn't like user 1
   // user 2 liked user 3 but user 3 didn't like user 2
@@ -378,8 +389,50 @@ export async function seed(knex: Knex): Promise<void> {
       message: "yo yo",
     },
   ]);
-}
 
+  await knex("image").insert([
+    {
+      user_id: d1.id,
+      image: "test.jpg",
+    },
+    {
+      user_id: d2.id,
+      image: "test2.jpg",
+    },
+    {
+      user_id: d3.id,
+      image: "test3.jpg",
+    },
+    {
+      user_id: d4.id,
+      image: "test4.jpg",
+    },
+    {
+      user_id: d5.id,
+      image: "test5.jpg",
+    },
+    {
+      user_id: d1.id,
+      image: "test6.jpg",
+    },
+    {
+      user_id: d2.id,
+      image: "test7.jpg",
+    },
+    {
+      user_id: d3.id,
+      image: "test8.jpg",
+    },
+    {
+      user_id: d4.id,
+      image: "test9.jpg",
+    },
+    {
+      user_id: d5.id,
+      image: "test10.jpg",
+    },
+  ]);
+}
 function sleep(ms: number) {
   return new Promise((resolve) => {
     setTimeout(() => {

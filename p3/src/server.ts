@@ -101,8 +101,8 @@ io.on("connection", async (socket) => {
         )
         .where("matched_user_id1", req.session.userId)
         .orWhere("matched_user_id2", req.session.userId);
-      const myId = req.session.userId
-      io.emit("created message in room", {rows:rows, myId:myId});
+      const myId = req.session.userId;
+      io.emit("created message in room", { rows: rows, myId: myId });
     } catch (err) {
       console.log(err.message);
     }

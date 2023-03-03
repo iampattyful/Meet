@@ -48,10 +48,10 @@ async function handleFilterFormHttpRequest(formatFormData) {
             <div class="userName" id="userName">${obj.username}</div>
             <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
             <div class="buttonTable">
-              <button type="button" class="btn btn-outline-danger dislikeBtn">
+              <button class="btn btn-outline-danger dislikeBtn">
                 Dis Like
               </button>
-              <button type="button" class="btn btn-outline-success likeBtn">
+              <button class="btn btn-outline-success likeBtn">
                 Like
               </button>
             </div>
@@ -77,15 +77,24 @@ function nextSlider(id) {
   slider_container.style.transform = `translate(-${slider_width * pos}px, 0px)`;
 }
 
+let likeUser = document.querySelector("#like");
+
 function reg_like_btn_event() {
   let allLikeBtn = document.querySelectorAll(".likeBtn");
   for (let btn of allLikeBtn) {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", async (e) => {
       pos++;
       if (numOfSlider <= pos) {
         return;
       }
       nextSlider();
+
+      const res = await fetch("/meet/likeUser/:id", {
+        method: "PUT",
+      });
+
+      const result = await res.json();
+      console.log(result);
     });
   }
 }
