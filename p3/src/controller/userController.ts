@@ -102,9 +102,9 @@ export class UserController extends UserRoutes {
 
       let py_res_json = py_res.data;
 
-      console.log({py_res_json})
+      console.log({ py_res_json });
 
-      if (!(py_res_json as  { isFace : boolean}).isFace) {
+      if (!(py_res_json as { isFace: boolean }).isFace) {
         throw new Error("Face not detected");
       }
 
@@ -113,7 +113,7 @@ export class UserController extends UserRoutes {
       req.session.userId = Number(userId);
 
       res.status(200).json({
-        data: { isLogin: true, userId: userId},
+        data: { isLogin: true, userId: userId },
         isErr: false,
         errMess: null,
       });
@@ -122,60 +122,3 @@ export class UserController extends UserRoutes {
     }
   }
 }
-<<<<<<< HEAD
-
-// s3 logic below
-let BUCKET_NAME = "meet-tecky";
-const findMimeType = (ext: string) => {
-  if (ext === "jpeg") {
-    return "image/jpeg";
-  } else if (ext === "jpg") {
-    return "image/jpg";
-  } else if (ext === "png") {
-    return "image/png";
-  } else if (ext === "gif") {
-    return "image/gif";
-  } else if (ext === "svg") {
-    return "image/svg+xml";
-  } else {
-    return "";
-  }
-};
-const filename = path.join(
-  process.cwd() /*, "..", ".."*/,
-  "uploads",
-  "test.jpg"
-);
-const ext: string = findMimeType(filename.split(".")[1]);
-const fileContent = fs.readFileSync(filename);
-console.log(fileContent, "fileContent");
-
-const params = {
-  Bucket: BUCKET_NAME,
-  Key: "test.jpg",
-  Body: fileContent,
-  ContentType: ext,
-};
-
-console.log(params);
-
-// async function uploadFace(/* params: paramsType */): Promise<any> {
-//   try {
-//     const data = await s3Client.send(new PutObjectCommand(params));
-//     console.log(
-//       "successfully created " +
-//         params.Key +
-//         " and uploaded to " +
-//         params.Bucket +
-//         "/" +
-//         params.Key
-//     );
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
-// uploadFace();
-=======
->>>>>>> 8cac2fa34b68815e2bb107be964e46619b04a02d
