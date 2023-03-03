@@ -1,18 +1,19 @@
 import { Knex } from "knex";
 import { knex } from "../db";
 import { UserInformation } from "../model";
-
 export class MeetService {
   constructor(protected knex: Knex) {
     this.knex = knex;
   }
-  // async homePageImage(minAge: Date, maxAge: Date) {
+  // async mainPageImage(minAge: Date, maxAge: Date) {
   //   try {
   //     let image = await this.knex
   //       .select("id,username, user_icon, date_of_birth")
   //       .from("users")
   //       .whereBetween("date_of_birth", [minAge, maxAge])
   //       .orderBy("RAND()"); //not yet done!
+  //     console.log(image);
+
   //     return image;
   //   } catch (err) {
   //     throw new Error(`${err.message}`);
@@ -24,33 +25,38 @@ export class MeetService {
     toUserId: number
   ): Promise<UserInformation> {
     try {
-      let userInformation = await this.knex("users").join(
-        "personal_information",
-        "personal_information.user_id",
-        "=",
-        "users.id"
-      );
-      //.join("tag", "tag.user_id", "=", "users.id");
-      // .select(
-      //   "users.username",
-      //   "users.user_icon",
-      //   "users.date_of_birth",
-      //   "users.gender",
-      //   "users.location",
-      //   "personal_information.education_level",
-      //   "personal_information.job",
-      //   "personal_information.nationality",
-      //   "personal_information.height",
-      //   "personal_information.weight",
-      //   "personal_information.pet",
-      //   "personal_information.fitness",
-      //   "personal_information.smoke",
-      //   "personal_information.drink",
-      //   "tag.tag_name"
-      // );
-      // .whereNotIn("users.id", function () {
-      //   this.select("liked_to").from("liked").where("liked_from", toUserId);
-      // });
+      let userInformation = await this.knex("users")
+        .distinct()
+        .join(
+          "personal_information",
+          "personal_information.user_id",
+          "=",
+          "users.id"
+        )
+        .join("tag", "tag.user_id", "=", "users.id")
+        .join("image", "image.user_id", "=", "users.id")
+        .select(
+          "users.username",
+          "users.user_icon",
+          "users.date_of_birth",
+          "users.gender",
+          "users.location",
+          "users.about_me",
+          "personal_information.education_level",
+          "personal_information.job",
+          "personal_information.nationality",
+          "personal_information.height",
+          "personal_information.weight",
+          "personal_information.pet",
+          "personal_information.fitness",
+          "personal_information.smoke",
+          "personal_information.drink",
+          "tag.tag_name",
+          "image.image"
+        )
+        .whereNotIn("users.id", function () {
+          this.select("liked_to").from("liked").where("liked_from", toUserId);
+        });
       // .where("users.id", toUserId)
       // .whereNot("users.id", fromUserId)
       // .whereNot("users.id", "in", subquery)

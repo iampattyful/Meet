@@ -153,12 +153,12 @@
                 <div class="hightBar">
                   <label for="customRange2" class="form-label"></label>
                   <input
-                    name="hight"
+                    name="height"
                     type="range"
                     class="form-range"
                     min="90"
                     max="230"
-                    id="hight"
+                    id="height"
                   />
                 </div>
               </div>
@@ -193,7 +193,7 @@
                 <div>運動習慣</div>
                 <div>
                   <label class="switch">
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked name="fitness" />
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -203,7 +203,7 @@
                 <div>吸煙習慣</div>
                 <div>
                   <label class="switch">
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked name="smoke" />
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -213,22 +213,25 @@
                 <div>酗酒習慣</div>
                 <div>
                   <label class="switch">
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked name="drink" />
                     <span class="slider round"></span>
                   </label>
                 </div>
               </div>
+              <div class="card">
+                <div>Tag</div>
+                <div class="tagContainer"></div>
+                <input
+                  type="text"
+                  class="writeBoxtag"
+                  name="tag_name"
+                  placeholder="..."
+                />
+              </div>
+              <button type="submit" class="submit_button">提交</button>
             </form>
+
             <!-- tag -->
-            <div class="card">
-              <div>Tag</div>
-              <select name="tag" id="tag">
-                <option value="test1">test1</option>
-                <option value="test2">test2</option>
-                <option value="test3">test3</option>
-                <option value="test4">test4</option>
-              </select>
-            </div>
           </div>
         </div>
       </div>

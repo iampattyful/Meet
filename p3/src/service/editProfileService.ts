@@ -5,16 +5,15 @@ import { EditProfile } from "../model";
 
 export class EditProfileService {
   constructor(protected knex: Knex) {}
-  async editProfileOfUser(
-    obj: EditProfile,
-    userId: number
-  ): Promise<EditProfile> {
+  async editProfileOfUser(obj: EditProfile, userId: number): Promise<any> {
     try {
+      console.log(userId);
       if (obj.password !== undefined) {
         obj.password = await hashPassword(obj.password);
       }
 
-      let [userUpload] = await this.knex("users")
+      let arr = [];
+      let userUpload = await this.knex("users")
         .where("id", userId)
         .update({
           username: obj.username,
@@ -24,9 +23,10 @@ export class EditProfileService {
           about_me: obj.about_me,
         })
         .returning("*");
+      arr.push(userUpload);
 
-      [userUpload] = await this.knex("personal_information")
-        .where("id", userId)
+      let userUpload2 = await this.knex("personal_information")
+        .where("user_id", userId)
         .update({
           education_level: obj.education_level,
           job: obj.job,
@@ -39,22 +39,23 @@ export class EditProfileService {
           drink: obj.drink,
         })
         .returning("*");
+      arr.push(userUpload2);
 
-      [userUpload] = await this.knex("tag")
-        .where("id", userId)
-        .update({
-          tag_name: obj.tag_name,
-        })
+      let userUpload3 = await this.knex("tag")
+        .where("user_id", userId)
+        .update({ tag_name: obj.tag_name })
         .returning("*");
+      arr.push(userUpload3);
 
-      [userUpload] = await this.knex("image")
-        .where("id", userId)
-        .update({
-          image: obj.image,
-        })
+      let userUpload4 = await this.knex("image")
+        .where("user_id", userId)
+        .update({ image: obj.image })
         .returning("*");
+      arr.push(userUpload4);
 
-      return userUpload;
+      console.log(arr);
+
+      return arr;
     } catch (err) {
       throw new Error(`${err.message}`);
     }
@@ -64,9 +65,9 @@ export class EditProfileService {
   async loadProfileOfUser(
     obj: EditProfile,
     userId: number
-  ): Promise<EditProfile> {
+  ): Promise<EditProfile[]> {
     try {
-      let [rows] = await this.knex("users")
+      let rows = await this.knex("users")
         .join(
           "personal_information",
           "personal_information.user_id",

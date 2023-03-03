@@ -10,7 +10,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
 async function main() {
   await getCurrentUser();
 
-  reg_login_click_event();
   reg_logout_click_event();
 }
 
@@ -26,28 +25,7 @@ async function getCurrentUser() {
   }
   render_all_form();
 }
-async function reg_login_click_event() {
-  login_form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    let formData = new FormData(login_form);
-    let res = await fetch("user/login", {
-      method: "POST",
-      body: formData,
-    });
 
-    let res_json = await res.json();
-    alert("login2");
-    if (!res_json.isErr) {
-      user = res_json.data;
-      console.log(user);
-      socket.emit("matched");
-      // render_all_form();
-    } else {
-      alert(res_json.errMess);
-      user = { isLogin: false };
-    }
-  });
-}
 function reg_logout_click_event() {
   logout_form.addEventListener("submit", async (e) => {
     e.preventDefault();

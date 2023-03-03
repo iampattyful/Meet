@@ -35,6 +35,7 @@ async function reg_login_click_event() {
 async function render_all_form() {
   if (user.isLogin) {
     window.location.href = "/main.html";
+    // let res = await fetch('')
   } else {
     login_form.classList.remove("isHide");
   }

@@ -30,7 +30,7 @@ export class FilterService {
         .andWhere("date_of_birth", "<=", max_year)
         .andWhereNot("id", obj.userId)
         .orderByRaw("random()")
-        .limit(2);
+        .limit(20); // limit more users when there are more users in the database
       if (usersRows.length == 0) {
         throw new Error("No users found");
       }

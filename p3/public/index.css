@@ -1,7 +1,23 @@
-.login_form,
-.logout_form {
-  border: 1px solid #222222;
+body {
+  background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
 }
-.isHide {
-  display: none;
+
+#login_modal {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+#signup_modal {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
 }

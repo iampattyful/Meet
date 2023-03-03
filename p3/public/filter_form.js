@@ -1,15 +1,82 @@
-// This file contains the js code for the filter form
+let login_form = document.querySelector(".login_form");
+let logout_form = document.querySelector(".logout_form");
+let filterBtn = document.querySelector(".btn");
+let userCard = document.querySelector(".slider");
 
-window.onload = async function () {
-  // isLoggedInAPI();
-  // localStorage.getItem(key, value);
+window.addEventListener("DOMContentLoaded", (event) => {
+  main();
+});
+
+async function main() {
+  await getCurrentUser();
   let formatFormData = {
     gender: ["male", "female", "unisex"],
     maxAge: "100",
     minAge: "18",
   };
-  handleFilterFormHttpRequest(formatFormData);
-};
+  await handleFilterFormHttpRequest(formatFormData);
+  reg_logout_click_event();
+}
+
+async function getCurrentUser() {
+  let res = await fetch("user/getCurrentUser");
+  let res_json = await res.json();
+  console.log(res_json);
+  if (res_json.isErr) {
+    console.log(res_json.errMess);
+    user = { isLogin: false };
+  } else {
+    user = res_json.data;
+  }
+  render_all_form();
+}
+
+function reg_logout_click_event() {
+  logout_form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let res = await fetch("user/logout", {
+      headers: {
+        "Content-type": "Application/json",
+      },
+      method: "POST",
+      body: "",
+    });
+
+    let res_json = await res.json();
+
+    user = res_json.data;
+
+    if (!res_json.isErr) {
+      render_all_form();
+    } else {
+      alert(res_json.errMess);
+    }
+  });
+}
+
+async function render_all_form() {
+  if (user.isLogin) {
+    login_form.classList.add("isHide");
+    logout_form.classList.remove("isHide");
+    filterBtn.classList.remove("isHide");
+  } else {
+    login_form.classList.remove("isHide");
+    logout_form.classList.add("isHide");
+    filterBtn.classList.add("isHide");
+  }
+}
+// const init = async function () {
+//   // isLoggedInAPI();
+//   // localStorage.getItem(key, value);
+//   let formatFormData = {
+//     gender: ["male", "female", "unisex"],
+//     maxAge: "100",
+//     minAge: "18",
+//   };
+//   await handleFilterFormHttpRequest(formatFormData);
+// };
+// init();
 
 // update filter users settings
 
@@ -23,6 +90,7 @@ function formatData(formData) {
 
 let numOfSlider = 0;
 async function handleFilterFormHttpRequest(formatFormData) {
+  console.log(formatFormData);
   const res = await fetch(`/filter/users`, {
     method: "POST",
     headers: {
@@ -48,10 +116,10 @@ async function handleFilterFormHttpRequest(formatFormData) {
             <div class="userName" id="userName">${obj.username}</div>
             <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
             <div class="buttonTable">
-              <button type="button" class="btn btn-outline-danger dislikeBtn">
+              <button class="btn btn-outline-danger dislikeBtn">
                 Dis Like
               </button>
-              <button type="button" class="btn btn-outline-success likeBtn">
+              <button class="btn btn-outline-success likeBtn">
                 Like
               </button>
             </div>
@@ -68,6 +136,8 @@ async function handleFilterFormHttpRequest(formatFormData) {
     alert(json.errMess);
   }
 }
+
+// when click filter submit button, redirect to slider page
 let pos = 0;
 function nextSlider(id) {
   const slider_container = document.querySelector("#slider_container");
@@ -77,15 +147,24 @@ function nextSlider(id) {
   slider_container.style.transform = `translate(-${slider_width * pos}px, 0px)`;
 }
 
+let likeUser = document.querySelector("#like");
+
 function reg_like_btn_event() {
   let allLikeBtn = document.querySelectorAll(".likeBtn");
   for (let btn of allLikeBtn) {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", async (e) => {
       pos++;
       if (numOfSlider <= pos) {
         return;
       }
       nextSlider();
+
+      const res = await fetch("/meet/likeUser/:id", {
+        method: "PUT",
+      });
+
+      const result = await res.json();
+      console.log(result);
     });
   }
 }
@@ -119,7 +198,8 @@ updateFilter.addEventListener("submit", async (event) => {
     formatFormData.gender = ["female"];
   }
   console.log(formatFormData);
-  handleFilterFormHttpRequest(formatFormData);
+  await handleFilterFormHttpRequest(formatFormData);
+  //window.location = "/main.html";
 });
 
 /* Start of double input range slider */

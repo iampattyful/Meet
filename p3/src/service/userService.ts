@@ -45,7 +45,7 @@ export class UserService {
           is_admin: false,
         })
         .returning("id");
-      return user;
+      return user.id;
     } catch (err) {
       throw new Error(`${err.message}`);
     }
