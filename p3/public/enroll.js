@@ -10,8 +10,8 @@ enrollForm.addEventListener("submit", async (event) => {
   });
   const res_json = await res.json();
 
-  // console.log(res_json.data.isLogin);
-  if (res_json.data.isLogin) {
+  console.log(res_json);
+  if (!res_json.isErr) {
     window.location.href = "/main.html";
   } else {
     alert(res_json.errMess);
