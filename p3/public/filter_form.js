@@ -1,6 +1,6 @@
 // This file contains the js code for the filter form
 
-window.onload = async function () {
+const init = async function () {
   // isLoggedInAPI();
   // localStorage.getItem(key, value);
   let formatFormData = {
@@ -8,8 +8,9 @@ window.onload = async function () {
     maxAge: "100",
     minAge: "18",
   };
-  handleFilterFormHttpRequest(formatFormData);
+  await handleFilterFormHttpRequest(formatFormData);
 };
+init();
 
 // update filter users settings
 
@@ -23,6 +24,7 @@ function formatData(formData) {
 
 let numOfSlider = 0;
 async function handleFilterFormHttpRequest(formatFormData) {
+  console.log(formatFormData);
   const res = await fetch(`/filter/users`, {
     method: "POST",
     headers: {
@@ -130,7 +132,8 @@ updateFilter.addEventListener("submit", async (event) => {
     formatFormData.gender = ["female"];
   }
   console.log(formatFormData);
-  handleFilterFormHttpRequest(formatFormData);
+  await handleFilterFormHttpRequest(formatFormData);
+  //window.location = "/main.html";
 });
 
 /* Start of double input range slider */
