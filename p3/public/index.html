@@ -15,48 +15,51 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="index-container">
     <div class="row">
       <div class="col">
         <div class="meet-logo">
-          <h1> Meet Logo</h1>
+          <img src="assets/208-2081748_meeting-icon-two-people-icon-png-transparent-png.png" class="logo-img" />
+          <div class="meet-text">Meet</div>
         </div>
+        <div class="meet-description">
+          <h1>交友、約會、
+            一次到位</h1>
+        </div>
+
       </div>
     </div>
     <div class="row">
-      <div class="col">
-        <!-- <div class="card mb-3"> -->
-        <img src="assets/bugCat5.gif" class="card-img-top" />
-        <div id="login_modal">
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            登入
-          </button>
+      <!-- <div class="card mb-3"> -->
 
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">用戶登入</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form class="login_form">
-                    <div class="mb-3">
-                      <label class="form-label">電郵地址</label>
-                      <input type="text" name="email" required="required" placeholder="example@example.com" />
-                    </div>
-                    <div class="mb-3"><label class="form-label">密碼</label>
-                      <input type="password" name="password" required="required" placeholder="密碼" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="登入">登入</button>
-                  </form>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                </div>
+      <div id="login_modal">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          登入
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">用戶登入</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form class="login_form">
+                  <div class="mb-3">
+                    <label class="form-label">電郵地址</label>
+                    <input type="text" name="email" required="required" placeholder="meet@clsfei.link" />
+                  </div>
+                  <div class="mb-3"><label class="form-label">密碼</label>
+                    <input type="password" name="password" required="required" placeholder="密碼" />
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="登入">登入</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
               </div>
             </div>
           </div>
@@ -64,7 +67,7 @@
         <div id="signup_modal">
           <!-- Sign up Button trigger modal -->
           <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop">註冊</button>
+            data-bs-target="#staticBackdrop">建立新帳號</button>
 
           <!-- Sign up Modal -->
           <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -76,25 +79,25 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="enrollForm">
-                  <form id="enroll_form">
+                  <form id="enroll_form" class="row g-3 needs-validation" novalidate>
                     <div class="mb-3">
                       <label class="form-label">用戶名稱</label>
-                      <input type="text" name="username" required="required" placeholder="用戶名稱" />
+                      <input type="text" class="form-control" name="username" required="required" placeholder="用戶名稱" />
                     </div>
                     <div class="mb-3"><label class="form-label">設定密碼</label>
-                      <input type="password" name="password" required="required" placeholder="密碼" />
+                      <input type="password" class="form-control" name="password" required="required" placeholder="密碼" />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">電郵地址</label>
-                      <input type="text" name="email" required="required" placeholder="example@example.com" />
+                      <input type="text" class="form-control" name="email" required="required" placeholder="example@example.com" />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">上載個人頭像</label>
-                      <input type="file" required="required" name="user_icon" />
+                      <input type="file" class="form-control" required="required" name="user_icon" />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">出生日期</label>
-                      <input type="date" id="start" required="required" name="date_of_birth" />
+                      <input type="date" class="form-control" id="start" required="required" name="date_of_birth" />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">性別</label>
@@ -117,10 +120,18 @@
                         </label>
                       </div>
                     </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                      </label>
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
+                      </div>
 
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="註冊">註冊</button>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="註冊">註冊</button>
                   </form>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 </div>
@@ -128,6 +139,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
     <div class="col" id="menubar"></div>
