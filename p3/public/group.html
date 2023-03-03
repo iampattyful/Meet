@@ -13,22 +13,13 @@
   </head>
   <body>
     <div class="container">
-      <div class="roomContainer">
-        <div class="iconContainer">
-          <div class="backBtn"><i class="fa-solid fa-chevron-left"></i></div>
-          <div class="userRow"></div>
-        </div>
-        <div class="messageContainer"></div>
-        <form class="chatBar form">
-          <input name="message" class="send-message" type="text" />
-          <div class="send" id="send">
-            <i class="fa-solid fa-comment-dots"></i>
-          </div>
-        </form>
-      </div>
+      <section class="groupContainer">
+        <div class="title">Chatroom</div>
+        <div class="groupList"></div>
+      </section>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./socket.js"></script>
-    <script src="room.js"></script>
+    <script src="group.js"></script>
   </body>
 </html>

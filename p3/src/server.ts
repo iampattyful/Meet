@@ -9,6 +9,7 @@ import { Server } from "socket.io";
 import http from "http";
 import { knex } from "./db";
 import { EditProfileController } from "./controller/editProfileController";
+import { ChatController } from "./controller/chatController";
 
 const app = express();
 const server = http.createServer(app);
@@ -37,75 +38,97 @@ io.on("connection", async (socket) => {
       }
     });
   });
-  socket.on("join_room", async (data) => {
-    if (req.session.isLogin) {
-      // await db.query(`UPDATE users SET room=$1 WHERE id=$2`,[
-      //   data.room,req.session.userId
-      // ])
-      // await knex("users").update({room:data.room}).where("id",req.session.userId)
-      // socket.join(`${data.room}`)
-    }
-  });
-  // socket.on("matched", async (data) => {
-  //   try {
-  //     console.log("test");
-  //     const matchedUsers = (
-  //       await knex.raw(
-  //         `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = ${req.session.userId} or "group".matched_user_id2 = ${req.session.userId} group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
-  //       )
-  //     ).rows;
 
-  //     console.log(matchedUsers, "matched users");
-  //     io.emit("created matched users list", matchedUsers);
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // });
-  socket.on("update online status", async (data) => {
+  // send message
+  socket.on("sendMessage", async (data) => {
+    console.log(data, "sendMess");
+    await knex("message").insert([
+      {
+        user_id: req.session.userId,
+        group_id: data.groupId,
+        message: data.message,
+      },
+    ]);
+    const rows = await knex("group")
+      .join("message", "message.group_id", "=", "group.id")
+      .join("users", "users.id", "=", "message.user_id")
+      .select(
+        "message.message",
+        "message.created_at",
+        "message.user_id",
+        "message.group_id",
+        "users.username",
+        "users.user_icon"
+      )
+      .where("group.id", data.groupId)
+      .andWhere("group.matched_user_id1", req.session.userId)
+      .orWhere("group.matched_user_id2", req.session.userId)
+      .orderBy("message.created_at", "asc");
+
+    io.emit(`updateSendMessage-${data.groupId}`, rows);
+  });
+
+  //updateRoomGroup
+  socket.on("updateRoomGroup", async () => {
     try {
-      //select group
+      const userId = req.session.userId;
+      const rows = await knex("message")
+        .join(
+          function () {
+            this.join("group", "group_id", "=", "group.id")
+              .select("group_id")
+              .from("message")
+              .where("matched_user_id1", userId)
+              .orWhere("matched_user_id1", userId)
+              .max("message.created_at")
+              .groupBy("group_id")
+              .as("user_message");
+          },
+          "user_message.max",
+          "=",
+          "message.created_at"
+        )
+        .join("group", "group.id", "=", "message.group_id")
+        .join("users", function () {
+          this.on("users.id", "=", "matched_user_id1");
+          // .orOn("users.id","=","matched_user_id2")
+        })
+        .join("users AS u2", function () {
+          this.on("u2.id", "=", "matched_user_id2");
+          // .orOn("users.id","=","matched_user_id2")
+        })
+        .select(
+          "user_message.group_id",
+          "message.message",
+          "user_message.max",
+          "matched_user_id1",
+          "matched_user_id2",
+          "users.username",
+          "u2.username AS username2",
+          "users.user_icon",
+          "u2.user_icon AS user_icon2"
+        )
+        // .where("user_message.group_id","message.group_id")
+        .orderBy("user_message.max", "desc");
+      socket.broadcast.emit("updateRoomGroup", {
+        data: rows,
+        userId: userId,
+        isErr: false,
+        errMess: null,
+      });
     } catch (err) {
-      throw new Error(err.message);
+      console.log(err.message, "updateRoomGroup with error");
+      // socket.broadcast.emit("updateRoomGroup", {
+      //   data: null,
+      //   userId: null,
+      //   isErr: true,
+      //   errMess: err.message,
+      // });
     }
-  });
-  socket.on("logout", () => {
-    // io.emit("onlineUser", get_onlineUsers());
-  });
-
-  socket.on("add-memo", (data) => {
-    socket.broadcast.to("a").emit("new_memo", data);
   });
 
   if (req.session.userId) {
-    try {
-      // select all room
-      const matchedUsers = (
-        await knex.raw(
-          `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = ${req.session.userId} or "group".matched_user_id2 = ${req.session.userId} group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
-        )
-      ).rows;
-      console.log(matchedUsers, "matched users");
-      io.emit("created matched users list", matchedUsers);
-
-      // select all message in an group
-      const rows = await knex("group")
-        .join("message", "message.group_id", "=", "group.id")
-        .join("users", "users.id", "=", "message.user_id")
-        .select(
-          "message.message",
-          "message.created_at",
-          "message.user_id",
-          "group_id",
-          "users.username",
-          "users.user_icon"
-        )
-        .where("matched_user_id1", req.session.userId)
-        .orWhere("matched_user_id2", req.session.userId);
-      const myId = req.session.userId
-      io.emit("created message in room", {rows:rows, myId:myId});
-    } catch (err) {
-      console.log(err.message);
-    }
+    // to do something
   }
 
   socket.on("disconnect", () => {});
@@ -120,13 +143,97 @@ let userController = new UserController();
 let meetController = new MeetController();
 let filterController = new FilterController();
 let editProfileController = new EditProfileController();
-
+let chatController = new ChatController();
 app.use("/user", userController.routes);
 app.use("/meet", meetController.routes);
 app.use("/filter", filterController.routes);
 app.use("/editProfile", editProfileController.routes);
+app.use("/chat", chatController.routes);
 
 app.get("/test", async (req: express.Request, res: express.Response) => {
+  // const matchedUsers = (
+  //     await knex.raw(
+  //       `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max
+  //       from (select group_id, max(message.created_at)
+  //       from message, "group"
+  //       where group_id = "group".id
+  //       and "group".matched_user_id1 = 89
+  //       or "group".matched_user_id2 = 89
+  //       group by group_id) as user_message, message, users
+  //       where user_message.group_id = message.group_id
+  //       and user_message.max = message.created_at
+  //       and users.id = message.user_id
+  //       order by user_message.max desc`
+  //     )
+  //   ).rows;
+
+  const lastMessage = await knex("message")
+    .join(
+      function () {
+        this.join("group", "group_id", "=", "group.id")
+          .select("group_id")
+          .from("message")
+          .where("matched_user_id1", 90)
+          .orWhere("matched_user_id2", 90)
+          .max("message.created_at")
+          .groupBy("group_id")
+          .as("user_message");
+      },
+      "user_message.max",
+      "=",
+      "message.created_at"
+    )
+    .join("group", "group.id", "=", "message.group_id")
+    .join("users", function () {
+      this.on("users.id", "=", "matched_user_id1");
+      // .orOn("users.id","=","matched_user_id2")
+    })
+    .join("users AS u2", function () {
+      this.on("u2.id", "=", "matched_user_id2");
+      // .orOn("users.id","=","matched_user_id2")
+    })
+    .select(
+      "user_message.group_id",
+      "message.message",
+      "user_message.max",
+      "matched_user_id1",
+      "matched_user_id2",
+      "users.username",
+      "u2.username AS username2",
+      "users.user_icon",
+      "u2.user_icon AS user_icon2"
+    )
+    // .where("user_message.group_id","message.group_id")
+    .orderBy("user_message.max", "desc");
+
+  // const matchedUsers = await knex("message")
+  //     .join("users","users.id","=","message.user_id")
+  //     .join("group","group.id","=","message.group_id")
+  //     .select("users.username","users.user_icon","message.group_id")
+  // .whereNot("group.matched_user_id1",89)
+  // .orWhereNot("group.matched_user_id2",89)
+  // .whereIn("message.group_id",function(){
+  //     this
+  //     .join("group","group_id","=","group.id")
+  //     .select("group_id")
+  //     .from("message")
+  //     .where("matched_user_id1",89)
+  //     .orWhere("matched_user_id1",89)
+  //     .max("message.created_at")
+  //     .groupBy("group_id")
+  //     .as("user_message")
+  // })
+
+  // const lastMessageTime = await knex
+  //       .join("message","message.group_id","=","group.id")
+  //       .select("group.id")
+  //       .from("group")
+  //       .where("matched_user_id1",89)
+  //       .orWhere("matched_user_id1",89)
+  //       .max("message.created_at")
+  //       .groupBy("message.group_id")
+
+  // .as("user_message")
   // const subquery = await knex("liked")
   //   .select("liked_to")
   //   .where("liked_from", 1);
@@ -160,11 +267,13 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   // .groupBy("group.id","users.username","users.user_icon","message.message")
   // .max("message.created_at")
 
-  // const subquery = await knex ("message")
-  // .join("group","group_id","=","group.id")
-  // .select("group_id")
-  // .max("message.created_at")
-  // .groupBy("group_id")
+  //   const subquery = await knex ("message")
+  //   .join("group","group_id","=","group.id")
+  //   .select("group_id")
+  //   .where("matched_user_id1",89)
+  //   .orWhere("matched_user_id1",89)
+  //   .max("message.created_at")
+  //   .groupBy("group_id")
 
   // const matchedUsers = await knex("message")
   // .join(function(){
@@ -180,13 +289,13 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   // .where("user_message.max","=","message.created_at")
   // .orderBy("user_message.max","desc")
 
-  const matchedUsers = (
-    await knex.raw(
-      `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = 89 or "group".matched_user_id2 = 89 group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
-    )
-  ).rows;
-
-  res.json(matchedUsers);
+  // const matchedUsers = (
+  //   await knex.raw(
+  //     `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = 89 or "group".matched_user_id2 = 89 group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
+  //   )
+  // ).rows;
+  res.json(lastMessage);
+  //   res.json(matchedUsers);
 });
 
 app.get("*", async (req: express.Request, res: express.Response) => {

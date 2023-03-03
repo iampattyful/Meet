@@ -77,6 +77,11 @@ export class MeetService {
         await this.knex("group").insert({
           matched_user_id1: like.liked_from,
           matched_user_id2: like.liked_to,
+        }).returning("id");
+        await this.knex("message").insert({
+          user_id: like.liked_from,
+          group_id: like.liked_to,
+          message: "You got a new friend!!"
         });
       }
       return like;
