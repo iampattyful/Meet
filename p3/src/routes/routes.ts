@@ -60,3 +60,26 @@ export abstract class EditProfileRouters extends Routes {
     res: express.Response
   ): any;
 }
+
+export abstract class ChatRouters extends Routes {
+  constructor() {
+    super();
+
+    this.routes.get("/getChatRoomGroup", isLoggedInAPI, this.getChatRoomGroup);
+    this.routes.get("/getRoomMess/:groupId", isLoggedInAPI, this.getRoomMess);
+    this.routes.get(
+      "/getFrdUserData/:groupId",
+      isLoggedInAPI,
+      this.getFrdUserData
+    );
+  }
+  public abstract getChatRoomGroup(
+    req: express.Request,
+    res: express.Response
+  ): any;
+  public abstract getRoomMess(req: express.Request, res: express.Response): any;
+  public abstract getFrdUserData(
+    req: express.Request,
+    res: express.Response
+  ): any;
+}
