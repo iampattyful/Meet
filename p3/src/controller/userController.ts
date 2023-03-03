@@ -96,7 +96,7 @@ export class UserController extends UserRoutes {
       // let py_res_json = await py_res.json();
       // console.log(py_res_json, "py_res_json");
 
-      let py_res = await axios.post("http://127.0.0.1:8000/face_detection", {
+      let py_res = await axios.post("https://ai.clsfei.link/face_detection", {
         filename: user.user_icon,
       });
 
