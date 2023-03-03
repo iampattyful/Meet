@@ -1,13 +1,14 @@
 let login_form = document.querySelector(".login_form");
+
 let logout_form = document.querySelector(".logout_form");
-let filterBtn = document.querySelector(".btn");
+
 let userCard = document.querySelector(".slider");
 
 window.addEventListener("DOMContentLoaded", (event) => {
-  main();
+  filter_form_main();
 });
 
-async function main() {
+async function filter_form_main() {
   await getCurrentUser();
   let formatFormData = {
     gender: ["male", "female", "unisex"],
@@ -48,7 +49,7 @@ function reg_logout_click_event() {
     user = res_json.data;
 
     if (!res_json.isErr) {
-      render_all_form();
+      window.location.href = "/";
     } else {
       alert(res_json.errMess);
     }
@@ -56,9 +57,10 @@ function reg_logout_click_event() {
 }
 
 async function render_all_form() {
+  let filterBtn = document.querySelector(".btn");
   if (user.isLogin) {
     login_form.classList.add("isHide");
-    logout_form.classList.remove("isHide");
+
     filterBtn.classList.remove("isHide");
   } else {
     login_form.classList.remove("isHide");

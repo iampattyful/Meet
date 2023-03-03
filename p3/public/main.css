@@ -2,9 +2,7 @@
 .logout_form {
   border: 1px solid #222222;
 }
-.isHide {
-  display: none;
-}
+
 .content {
   grid-area: content;
   height: fit-content;
@@ -23,4 +21,12 @@
 }
 .userImage {
   width: 100%;
+}
+.isHide {
+  display: none;
+}
+#exitEditForm {
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
