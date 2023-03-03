@@ -1,4 +1,4 @@
-let enrollForm = document.querySelector(".enrollForm")
+let enrollForm = document.querySelector("#enrollForm")
 enrollForm.addEventListener("submit",async e=>{
     e.preventDefault()
     const formData = new FormData(enrollment_form)
@@ -8,6 +8,6 @@ enrollForm.addEventListener("submit",async e=>{
       });
     const res_json = await res.json()
     if (res_json.isLogin) {
-        res.status(200).redirect("/main.html")
+       window.location.href = "/main.html";
     }
 })
