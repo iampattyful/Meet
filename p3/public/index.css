@@ -1,11 +1,23 @@
-.isHide {
-  display: none;
+body {
+  background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
 }
 
-/* #login_modal, #signup_modal {
+#login_modal {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%;
-} */
+  padding: 10px;
+}
+
+#signup_modal {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
