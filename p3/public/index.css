@@ -7,35 +7,32 @@ html {
 }
 
 body {
+  font-family: 'Noto Sans HK', sans-serif;
   background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
 }
 
 #index-container {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
 }
 
-.logo-img {
-  width: 100x;
-  height: 100px;
-  object-fit: cover;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-wrap: nowrap;
-  font-size: 100px;
-  background: transparent;
+.bi {
+  letter-spacing: -15px;
+}
+
+#logo-text {
+  margin: 10px;
+  font-weight: 500;
 }
 
 .meet-description {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 300;
   color: #fff;
   text-align: center;
-  margin-top: 20px;
+  margin: 20px;
 }
 
 .meet-logo {
@@ -45,9 +42,18 @@ body {
   display: flex;
   flex-wrap: nowrap;
 }
+
 .meet-text {
-  font-size: 100px;
+  font-size: 80px;
+  font-family: 'Love Ya Like A Sister', cursive;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
 }
+
 #login_modal {
   display: flex;
   flex-direction: column;
@@ -55,7 +61,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding: 20px;
+  margin-top: 10px;
 }
 
 #signup_modal {
@@ -65,5 +72,28 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding: 20px;
+}
+
+.gender-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.form-check-label {
+  margin-right: 10px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #FF69B4 !important;
+    border: 1px solid #fff !important;
+}
+
+.dob-description, .icon-description{
+  font-size: 10px;
+  font-weight: 200;
+  color: red;
+  padding-top: 5px;
+   padding-bottom: 5px;
 }

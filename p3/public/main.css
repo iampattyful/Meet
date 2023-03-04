@@ -3,6 +3,11 @@
   border: 1px solid #222222;
 }
 
+body {
+  font-family: "Noto Sans HK", sans-serif;
+  background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
+}
+
 .content {
   grid-area: content;
   height: fit-content;

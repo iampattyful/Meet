@@ -10,6 +10,11 @@
   user-select: none; /* Standard syntax */
 }
 
+.modal-title {
+    font-weight: 600;
+    font-size: 30px;
+}
+
 .double_slider {
   position: relative;
   height: 10px;
@@ -43,7 +48,7 @@
   left: 0%;
   width: 30px;
   height: 30px;
-  background-color: #ffc800;
+  background-color: #ffc796;
   border-radius: 50%;
   transform: translate(-15px, -10px);
   z-index: 3;
@@ -53,7 +58,7 @@
   right: 0%;
   width: 30px;
   height: 30px;
-  background-color: #333366;
+  background-color: #ff6b95;
   border-radius: 50%;
   transform: translate(15px, -10px);
   z-index: 3;
@@ -67,8 +72,11 @@
 
 #show-me {
   font-size: 18px;
+  padding-bottom: 5px;
+  font-weight: 500;
 }
-/* #filter-form { */
-/* display: none; */
-/* } */
-/* End of double input range slider css */
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #FF69B4 !important;
+    border: 1px solid #fff !important;
+}

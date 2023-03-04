@@ -26,7 +26,7 @@ export class MeetService {
   ): Promise<UserInformation> {
     try {
       let userInformation = await this.knex("users")
-        .distinct()
+        // .distinct()
         .join(
           "personal_information",
           "personal_information.user_id",
@@ -34,7 +34,7 @@ export class MeetService {
           "users.id"
         )
         .join("tag", "tag.user_id", "=", "users.id")
-        .join("image", "image.user_id", "=", "users.id")
+        // .join("image", "image.user_id", "=", "users.id")
         .select(
           "users.username",
           "users.user_icon",
@@ -51,13 +51,13 @@ export class MeetService {
           "personal_information.fitness",
           "personal_information.smoke",
           "personal_information.drink",
-          "tag.tag_name",
-          "image.image"
+          "tag.tag_name"
+          // "image.image"
         )
-        .whereNotIn("users.id", function () {
-          this.select("liked_to").from("liked").where("liked_from", toUserId);
-        });
-      // .where("users.id", toUserId)
+        // .whereNotIn("users.id", function () {
+        //   this.select("liked_to").from("liked").where("liked_from", toUserId)
+        // });
+        .where("users.id", toUserId);
       // .whereNot("users.id", fromUserId)
       // .whereNot("users.id", "in", subquery)
       // .orderByRaw("users.created_at DESC LIMIT 20");
@@ -80,14 +80,16 @@ export class MeetService {
         .where("liked_from", like.liked_to)
         .andWhere("liked_to", like.liked_from);
       if (rows.length > 0) {
-        await this.knex("group").insert({
-          matched_user_id1: like.liked_from,
-          matched_user_id2: like.liked_to,
-        }).returning("id");
+        await this.knex("group")
+          .insert({
+            matched_user_id1: like.liked_from,
+            matched_user_id2: like.liked_to,
+          })
+          .returning("id");
         await this.knex("message").insert({
           user_id: like.liked_from,
           group_id: like.liked_to,
-          message: "You got a new friend!!"
+          message: "You got a new friend!!",
         });
       }
       return like;
