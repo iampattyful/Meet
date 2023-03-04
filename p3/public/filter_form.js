@@ -6,6 +6,7 @@ let userCard = document.querySelector(".slider");
 
 window.addEventListener("DOMContentLoaded", (event) => {
   filter_form_main();
+  
 });
 
 async function filter_form_main() {
