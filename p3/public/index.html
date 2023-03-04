@@ -113,6 +113,7 @@
                     <div class="mb-2">
                       <label class="form-label">上載個人頭像</label>
                       <input type="file" class="form-control" required="required" name="user_icon" />
+                      <div class="icon-description mb-0">請上載含有人面的相片以通過人工智能照片驗證。</div>
                     </div>
                     <div class="invalid-feedback">
                       Please upload photo.
@@ -120,7 +121,9 @@
                     <div class="mb-2">
                       <label class="form-label">出生日期</label>
                       <input type="date" class="form-control" id="start" required="required" name="date_of_birth" />
+                      <div class="dob-description mb-0">您必須年滿 18 歲才能使用 Meet。</div>
                     </div>
+
                     <div class="invalid-feedback">
                       Please enter dob.
                     </div>
@@ -146,13 +149,11 @@
                           <label class="form-check-label" for="exampleRadios3">
                             其他
                           </label>
-
                         </div>
                       </div>
-                      <!-- <div class="invalid-feedback">
-                            Please select a gender.
-                          </div> -->
-
+                      <div class="invalid-feedback">
+                        Please select a gender.
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="註冊">註冊</button>
@@ -170,9 +171,9 @@
   </div>
 
   </div>
-
-  <script src="index.js"></script>
   <script src="enroll.js"></script>
+  <script src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
