@@ -51,14 +51,7 @@ function reg_logout_click_event() {
     if (!res_json.isErr) {
       window.location.href = "/";
     } else {
-      // alert(res_json.errMess);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: res_json.errMess,
-        // "您提交的資料發生錯誤， 請重試。",
-        // footer: '<a href="">Why do I have this issue?</a>',
-      });
+      alert(res_json.errMess);
     }
   });
 }
@@ -119,10 +112,13 @@ async function handleFilterFormHttpRequest(formatFormData) {
       .map(
         (obj) => `
         <div class="slider ">
+        
+          
             <img class="userImage" id="userImage" src="${obj.user_icon}" />
             <div class="userName" id="userName">${obj.username}</div>
             <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
-            <div class="buttonTable" >
+            <div class="about_me" id="about_me">${obj.about_me}</div>
+            <div class="buttonTable">
               <button class="btn btn-outline-danger dislikeBtn">
                 Dis Like
               </button>
@@ -156,7 +152,7 @@ function nextSlider(id) {
 
 let likeUser = document.querySelector("#like");
 
-async function reg_like_btn_event() {
+function reg_like_btn_event() {
   let allLikeBtn = document.querySelectorAll(".likeBtn");
   for (let btn of allLikeBtn) {
     btn.addEventListener("click", async (e) => {
@@ -164,14 +160,13 @@ async function reg_like_btn_event() {
       if (numOfSlider <= pos) {
         return;
       }
-
       nextSlider();
-      /////////////get users.id in handleFilterFormHttpRequest  look at 118////////////////
-      const buttonTable = document.querySelector(".likeBtn");
-      const id = buttonTable.dataset.id;
+      ///////////////////////////////////////
+      const likeUser = e.currentTarget;
+      const id = likeUser.dataset.id;
       console.log(id);
+      //////////////////////////////////////////
 
-      /////////////////////////////////////////////////////////////////////////
       const res = await fetch(`/meet/likeUser/${id}`, {
         method: "PUT",
       });

@@ -34,7 +34,21 @@ export type UserRows = {
   user_icon: string;
   date_of_birth: Date;
   gender: string;
-  // location?: string;
+  //
+  location?: string;
+  about_me?: string;
+  //
+  education_level?: string;
+  job?: string;
+  nationality?: string;
+  height?: number;
+  weight?: number;
+  pet?: boolean;
+  fitness?: boolean;
+  smoke?: boolean;
+  drink?: boolean;
+  //
+  image?: string;
 };
 
 export type EditProfile = {
