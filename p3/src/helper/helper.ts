@@ -4,8 +4,6 @@ import express from "express";
 import formidable from "formidable";
 import { FormResult } from "../model";
 
-
-// Removed unnecessary functions in memo wall by Jim
 const uploadDir = "uploads";
 fs.mkdirSync(uploadDir, { recursive: true });
 

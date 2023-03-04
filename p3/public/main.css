@@ -6,6 +6,10 @@
 body {
   font-family: "Noto Sans HK", sans-serif;
   background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
+  /* prevent text selection */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
 }
 
 .carousel-control-next {

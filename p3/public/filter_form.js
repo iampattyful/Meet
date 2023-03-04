@@ -113,7 +113,7 @@ async function handleFilterFormHttpRequest(formatFormData) {
         (obj) => `
         <div class="slider ">
         <button class="btn btn-outline-danger leftButton">left</button>
-        <button class="btn btn-outline-danger right">right</button>
+        <button class="btn btn-outline-danger rightButton">right</button>
           <div class="imageTable" id="slider_userImage">
             <img class="userImage" id="userImage" src="${obj.user_icon}" />
           </div>
@@ -134,7 +134,8 @@ async function handleFilterFormHttpRequest(formatFormData) {
       `
       )
       .join("");
-    otherImage_btn_event();
+    otherImage_left_btn_event();
+    otherImage_right_btn_event();
     reg_like_btn_event();
     reg_dislike_btn_event();
   } else {
@@ -155,9 +156,9 @@ function nextUserSlider(id) {
   }px, 0px)`;
 }
 
-function otherImage_btn_event() {
-  let allDisLikeBtn = document.querySelectorAll(".leftButton");
-  for (let btn of allDisLikeBtn) {
+function otherImage_left_btn_event() {
+  let leftBtn = document.querySelectorAll(".leftButton");
+  for (let btn of leftBtn) {
     btn.addEventListener("click", (e) => {
       userEveryImage++;
       if (numOfSlider <= userEveryImage) {
@@ -168,11 +169,11 @@ function otherImage_btn_event() {
   }
 }
 
-function otherImage_btn_event() {
-  let allDisLikeBtn = document.querySelectorAll(".leftButton");
-  for (let btn of allDisLikeBtn) {
+function otherImage_right_btn_event() {
+  let rightBtn = document.querySelectorAll(".rightButton");
+  for (let btn of rightBtn) {
     btn.addEventListener("click", (e) => {
-      userEveryImage++;
+      userEveryImage--;
       if (numOfSlider <= userEveryImage) {
         return;
       }

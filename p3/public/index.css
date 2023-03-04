@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans HK', sans-serif;
+  font-family: "Noto Sans HK", sans-serif;
   background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
 }
 
@@ -19,20 +19,12 @@ body {
 }
 
 .bi {
-  letter-spacing: -15px;
+  letter-spacing: -12px;
 }
 
 #logo-text {
-  margin: 10px;
-  font-weight: 500;
-}
-
-.meet-description {
-  font-size: 20px;
-  font-weight: 300;
-  color: #fff;
-  text-align: center;
   margin: 20px;
+  font-weight: 500;
 }
 
 .meet-logo {
@@ -45,13 +37,22 @@ body {
 
 .meet-text {
   font-size: 80px;
-  font-family: 'Love Ya Like A Sister', cursive;
+  font-family: "Love Ya Like A Sister", cursive;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex-direction: row;
+  padding-left: 10px;
+}
+
+.meet-description {
+  font-size: 20px;
+  font-weight: 300;
+  color: #fff;
+  text-align: center;
+  margin: 20px;
 }
 
 #login_modal {
@@ -85,15 +86,39 @@ body {
   margin-right: 10px;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #FF69B4 !important;
-    border: 1px solid #fff !important;
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #ff69b4 !important;
+  border: 1px solid #fff !important;
+  font-size: 20px;
+  font-weight: 300;
 }
 
-.dob-description, .icon-description{
+#login_modal > .btn-primary,
+#signup_modal > .btn-primary {
+  border-radius: 20px;
+}
+
+.btn-secondary {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.modal-footer {
+    justify-content: flex-start !important;
+}
+
+.dob-description,
+.icon-description {
   font-size: 10px;
   font-weight: 200;
   color: red;
   padding-top: 5px;
-   padding-bottom: 5px;
+  padding-bottom: 5px;
+}
+
+.hide {
+  display: none !important;
 }

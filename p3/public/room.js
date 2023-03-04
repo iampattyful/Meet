@@ -11,7 +11,6 @@ async function main() {
 async function getCurrentUser() {
   let res = await fetch("user/getCurrentUser");
   let res_json = await res.json();
-  console.log(res_json);
   if (res_json.isErr) {
     window.location.href = "/";
   } else {
@@ -24,9 +23,8 @@ async function getCurrentUser() {
 async function frdUserIcon() {
   const res = await fetch(`/chat/getFrdUserData/${groupId}`);
   const res_json = await res.json();
-  console.log(res_json);
   if (res_json.isErr) {
-    alert(res_json.errMess);
+    // alert(res_json.errMess);
   } else {
     let obj = res_json.data;
     const userRow = document.querySelector(".userRow");
@@ -41,19 +39,29 @@ async function getRoomMess() {
   const res_json = await res.json();
 
   if (res_json.isErr) {
-    alert(res_json.errMess);
+    // alert(res_json.errMess);
   } else {
     data = res_json.data;
     renderUpdateMessage();
+    onBottom()
   }
 }
+
 async function rej_sendMess_btn_event() {
   let sendBtn = document.querySelector("#send");
+  let message = document.querySelector(".send-message");
   sendBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    let message = document.querySelector(".send-message");
+    // let message = document.querySelector(".send-message");
     socket.emit("sendMessage", { groupId: groupId, message: message.value });
     document.querySelector(".send-message").value = "";
+  });
+  message.addEventListener("keypress", (e) => {
+      if(e.keyCode === 13){
+        e.preventDefault();
+        socket.emit("sendMessage", { groupId: groupId, message: message.value });
+        document.querySelector(".send-message").value = "";
+    }
   });
 }
 
@@ -70,10 +78,10 @@ function renderUpdateMessage() {
           `
     )
     .join("");
+    onBottom()
 }
 
 socket.on(`updateSendMessage-${groupId}`, (res_json) => {
-  console.log(res_json);
   data = res_json;
   renderUpdateMessage();
 });
@@ -112,3 +120,8 @@ socket.on(`updateSendMessage-${groupId}`, (res_json) => {
 //     .join("");
 
 // });
+
+function onBottom(){
+    let messageContainer = document.querySelector(".messageContainer")
+    messageContainer.scrollTop = messageContainer.scrollHeight
+}

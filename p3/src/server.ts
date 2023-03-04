@@ -41,31 +41,35 @@ io.on("connection", async (socket) => {
 
   // send message
   socket.on("sendMessage", async (data) => {
-    console.log(data, "sendMess");
-    await knex("message").insert([
-      {
-        user_id: req.session.userId,
-        group_id: data.groupId,
-        message: data.message,
-      },
-    ]);
-    const rows = await knex("group")
-      .join("message", "message.group_id", "=", "group.id")
-      .join("users", "users.id", "=", "message.user_id")
-      .select(
-        "message.message",
-        "message.created_at",
-        "message.user_id",
-        "message.group_id",
-        "users.username",
-        "users.user_icon"
-      )
-      .where("group.id", data.groupId)
-      .andWhere("group.matched_user_id1", req.session.userId)
-      .orWhere("group.matched_user_id2", req.session.userId)
-      .orderBy("message.created_at", "asc");
-
-    io.emit(`updateSendMessage-${data.groupId}`, rows);
+    try{
+      console.log(data, "sendMess");
+      await knex("message").insert([
+        {
+          user_id: req.session.userId,
+          group_id: data.groupId,
+          message: data.message,
+        },
+      ]);
+      const rows = await knex("group")
+        .join("message", "message.group_id", "=", "group.id")
+        .join("users", "users.id", "=", "message.user_id")
+        .select(
+          "message.message",
+          "message.created_at",
+          "message.user_id",
+          "message.group_id",
+          "users.username",
+          "users.user_icon"
+        )
+        .where("group.id", data.groupId)
+        .andWhere("group.matched_user_id1", req.session.userId)
+        .orWhere("group.matched_user_id2", req.session.userId)
+        .orderBy("message.created_at", "asc");
+  
+      io.emit(`updateSendMessage-${data.groupId}`, rows);
+    }catch(err){
+      console.log(err.message, "sendMessage with error");
+    }
   });
 
   //updateRoomGroup

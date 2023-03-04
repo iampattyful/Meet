@@ -40,7 +40,7 @@ export abstract class MeetRouters extends Routes {
 export abstract class FilterRoutes extends Routes {
   constructor() {
     super();
-    this.routes.post("/users", this.filter); // add isLoggedInAPI later
+    this.routes.post("/users", isLoggedInAPI, this.filter);
   }
   public abstract filter(req: express.Request, res: express.Response): any;
 }
