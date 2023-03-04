@@ -27,14 +27,6 @@ body {
   font-weight: 500;
 }
 
-.meet-description {
-  font-size: 20px;
-  font-weight: 300;
-  color: #fff;
-  text-align: center;
-  margin: 20px;
-}
-
 .meet-logo {
   object-fit: cover;
   justify-content: center;
@@ -52,6 +44,15 @@ body {
   align-items: center;
   text-align: center;
   flex-direction: row;
+  padding-left: 10px;
+}
+
+.meet-description {
+  font-size: 20px;
+  font-weight: 300;
+  color: #fff;
+  text-align: center;
+  margin: 20px;
 }
 
 #login_modal {

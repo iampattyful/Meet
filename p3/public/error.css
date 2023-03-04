@@ -10,9 +10,41 @@ body {
   font-family: "Noto Sans HK", sans-serif;
   background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
   display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    text-align: center;
-    font-weight: 600;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  text-align: center;
+  font-weight: 600;
+  align-items: center;
+  text-align: center;
+}
+
+.bi {
+  letter-spacing: -12px;
+}
+
+#logo-text {
+  margin: 20px;
+  font-weight: 500;
+}
+
+.meet-logo {
+  object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.meet-text {
+  font-size: 80px;
+  font-family: "Love Ya Like A Sister", cursive;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  padding: 10px;
 }
