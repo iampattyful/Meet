@@ -7,7 +7,7 @@ export const isLoggedInAPI = (req:express.Request, res:express.Response, next:ex
             next();
         }else{
             // console.log(req.route.path)
-            throw new Error('No permission to access this API')
+            throw new Error("請先登入!");
         }    
     } catch (err) {
         // res.json({

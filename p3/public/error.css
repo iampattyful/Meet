@@ -1,0 +1,18 @@
+html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+body {
+  font-family: "Noto Sans HK", sans-serif;
+  background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
+  display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+}
