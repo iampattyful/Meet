@@ -17,7 +17,7 @@ export class UserService {
         .where("email", obj.email);
 
       if (!usersRows) {
-        throw new Error("User does not exist");
+        throw new Error("用戶不存在!");
       }
 
       const checked = await checkPassword(obj.password, usersRows.password);
@@ -25,7 +25,7 @@ export class UserService {
       if (checked) {
         return { id: usersRows.id };
       } else {
-        throw new Error("Password not matched");
+        throw new Error("密碼錯誤!");
       }
     } catch (err) {
       throw new Error(`${err.message}`);
@@ -45,6 +45,9 @@ export class UserService {
           is_admin: false,
         })
         .returning("id");
+        //  if (obj.username || obj.password || obj.gender || obj.email || obj.date_of_birth || obj.user_icon == null) {
+        //    throw new Error("cannot be null!");
+        //  }
       return user.id;
     } catch (err) {
       throw new Error(`${err.message}`);

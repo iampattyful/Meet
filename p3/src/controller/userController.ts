@@ -67,7 +67,6 @@ export class UserController extends UserRoutes {
       user.password = await hashPassword(user.password!);
       // console.log(user);
 
-      //fetch python server
       const filename = path.join(
         process.cwd() /*, "..", ".."*/,
         "uploads",
@@ -75,7 +74,7 @@ export class UserController extends UserRoutes {
       );
       const mimeType: string = findMimeType(filename.split(".")[1]);
       const fileContent = fs.readFileSync(filename);
-      console.log(fileContent, "fileContent");
+      // console.log(fileContent, "fileContent");
 
       // s3 logic below
       let BUCKET_NAME = "meet-tecky";
@@ -95,14 +94,15 @@ export class UserController extends UserRoutes {
       // });
       // let py_res_json = await py_res.json();
       // console.log(py_res_json, "py_res_json");
-
+      
+      //fetch to python server via axios
       let py_res = await axios.post("https://ai.clsfei.link/face_detection", {
         filename: user.user_icon,
       });
 
       let py_res_json = py_res.data;
 
-      console.log( py_res_json );
+      console.log(py_res_json);
 
       if (!py_res_json.isFace) {
         throw new Error("AI無法識別相片中是否存在人面,請重新上載個人頭像!");

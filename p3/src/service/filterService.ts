@@ -20,7 +20,7 @@ export class FilterService {
         .format("YYYY-MM-DD");
 
       const usersRows = await this.knex
-        .select("id", "username", "user_icon", "date_of_birth", "gender") // add location later?
+        .select("id", "username", "user_icon", "date_of_birth", "gender") 
         .from("users")
         .whereNotIn("id", function () {
           this.select("liked_to").from("liked").where("liked_from", obj.userId);
