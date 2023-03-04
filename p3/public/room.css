@@ -1,29 +1,38 @@
+body{
+  margin: 0px;
+}
+
+.container{
+  height: 100vh;
+}
+
 .roomContainer {
-  border: 3px solid #eeeeee;
-  width: 360px;
-  height: 667px;
+  /* border: 3px solid #eeeeee; */
+  /* width: 360px; */
+  height: 100%;
   min-width: 360px;
   min-height: 667px;
-  max-height: 700px;
-  overflow: scroll;
+  /* max-height: 700px; */
+  /* overflow: scroll; */
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.matchedUser {
+.userRow {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  width: 100%;
+  width: 90%;
   min-height: calc(10% - 3px);
-  border-bottom: 3px solid #eeeeee;
+  /* border-bottom: 3px solid #eeeeee; */
 }
 
 .backBtn {
   width: 10%;
   height: 100%;
-  border-right: 3px solid #eeeeee;
+  /* border-right: 3px solid #eeeeee; */
+  color: #eeeeee;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,16 +40,22 @@
 
 .iconContainer {
   width: 100%;
-  height: 50px;
-  /* border-right: 3px solid #eeeeee; */
+  height: 60px;
+  border-bottom: 3px solid #eeeeee;
   display: flex;
   justify-content: start;
   align-items: center;
+  color: #eeeeee;
+  background: linear-gradient(135deg, #150d35af 0%, #007ac5b3 100%);
+  position: fixed;
+  z-index: 2;
 }
 
 .userIcon {
   position: relative;
   background-color: white;
+  margin-left: 10px;
+  margin-right: 5px;
   min-height: 40px;
   max-height: 40px;
   min-width: 40px;
@@ -75,26 +90,28 @@
 
 .messageContainer {
   width: 100%;
-  height: calc(82% - 3px);
+  height: 100%;
+  min-height: calc(667px - 60px);
+  margin-top: 60px;
   overflow: scroll;
   padding-top: 3%;
-  background-color: black;
   /* background: url(/p3/public/assets/4170820.jpg);
     background-repeat: no-repeat;
     background-size: cover; */
 }
 
 .chatBar {
-  height: calc(8% - 9px);
+  min-height: 60px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: flex;
   bottom: 0px;
+  background-color: #150d3578;
 }
 
-.textarea {
+.send-message {
   width: calc(83% - 12px);
   height: 50%;
   padding-left: 3%;
@@ -139,7 +156,7 @@
 }
 
 .item-right > div {
-  background-color: #e7ffdd;
+  background-color: #ddf1ff;
 }
 
 .item-left {
@@ -149,3 +166,8 @@
 .item-left > div {
   background-color: white;
 }
+
+
+
+
+
