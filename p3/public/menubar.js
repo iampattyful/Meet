@@ -9,19 +9,21 @@ async function renderMenuBar() {
   let menubar = document.querySelector("#menubar");
 
   menubar.innerHTML = `
-  <div class="menubarTable">
-              
-              <a href="group.html">
-                <button type="button" class="btn btn-outline-secondary">
-                  messageList
-                </button>
+              <a href="main.html" class="menubarBtn">
+                <div type="button" >
+                  <i class="fa-solid fa-house"></i>
+                </div>
+              </a>
+  
+              <a href="group.html" class="menubarBtn">
+                <div type="button" >
+                  <i class="fa-solid fa-comments"></i>
+                </div>
               </a>
               
-              <button type="button" id="editProfile" class="btn btn-outline-secondary">
-                editProfile
-              </button>
-              
-            </div>
+              <div type="button" id="editProfile" class="menubarBtn">
+                <i class="fa-solid fa-user-pen"></i>
+              </div>
   `;
   await reg_open_editProfile_click_event();
 }

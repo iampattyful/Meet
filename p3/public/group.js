@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", (event) => {
+  menu_main();
   main();
 });
 async function main() {

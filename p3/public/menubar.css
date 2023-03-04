@@ -1,14 +1,25 @@
-.menubarTable {
-  /* width: 50px; */
-  margin: 5px;
-  height: 50px;
-  background-color: rgb(206, 206, 241);
-  border-radius: 10px;
+#menubar{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: #00000066;
+  color: white;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.btn {
-  margin: 5px;
+.menubarBtn{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  color: white;
+}
+
+.menubarBtn:hover{
+  background-color: #000000;
 }

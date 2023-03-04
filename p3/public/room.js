@@ -31,12 +31,8 @@ async function frdUserIcon() {
     let obj = res_json.data;
     const userRow = document.querySelector(".userRow");
     userRow.innerHTML = `
-            <div class="iconContainer">
                 <div class="userIcon"><img src ="${obj.user_icon}"/></div>
-            </div>
-            <div class="userBox">
                 <div class="username">${obj.username}</div>
-            </div>
             `;
   }
 }
@@ -69,7 +65,6 @@ function renderUpdateMessage() {
                <div class="messageBox ${
                  obj.user_id == userId ? "item-right" : "item-left"
                }">
-                  <span class="messageFrom">${obj.username}</span>
                   <div class="message">${obj.message}</div>
               </div>
           `

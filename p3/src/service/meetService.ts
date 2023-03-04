@@ -34,7 +34,7 @@ export class MeetService {
           "users.id"
         )
         .join("tag", "tag.user_id", "=", "users.id")
-        .join("image", "image.user_id", "=", "users.id")
+        // .join("image", "image.user_id", "=", "users.id")
         .select(
           "users.username",
           "users.user_icon",
@@ -51,16 +51,13 @@ export class MeetService {
           "personal_information.fitness",
           "personal_information.smoke",
           "personal_information.drink",
-          "tag.tag_name",
-          "image.image"
+          "tag.tag_name"
+          // "image.image"
         )
-        .whereNotIn("users.id", function () {
-          this.select("liked_to")
-            .from("liked")
-            .where("liked_from", toUserId)
-            .where("users.id", toUserId);
-        });
-
+        // .whereNotIn("users.id", function () {
+        //   this.select("liked_to").from("liked").where("liked_from", toUserId)
+        // });
+        .where("users.id", toUserId);
       // .whereNot("users.id", fromUserId)
       // .whereNot("users.id", "in", subquery)
       // .orderByRaw("users.created_at DESC LIMIT 20");
