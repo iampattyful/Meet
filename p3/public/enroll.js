@@ -20,7 +20,7 @@ window.onload = function () {
 
   var min = minYear + "-" + mm + "-" + dd;
   var max = maxYear + "-" + mm + "-" + dd;
-  console.log("dob");
+
   document.getElementById("start").setAttribute("min", min);
   document.getElementById("start").setAttribute("max", max);
 };

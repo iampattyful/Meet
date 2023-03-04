@@ -4,19 +4,16 @@ let login_form = document.querySelector(".login_form");
 
 window.addEventListener("DOMContentLoaded", (event) => {
   main();
+  checkLogin();
 });
 
-window.onload = async function () {
-  let res = await checkLogin();
-};
-
 const checkLogin = async () => {
-  const res = await fetch("/getCurrentUser", {
+  const res = await fetch("/user/getCurrentUser", {
     method: "GET",
   });
   const json = await res.json();
-  console.log(json.result);
-  if (json.result) {
+  console.log(json.data.isLogin);
+  if (json.data.isLogin) {
     mainBtn.classList.remove("hide");
     btnsRow.classList.add("hide");
     window.location.href = "/main.html";
