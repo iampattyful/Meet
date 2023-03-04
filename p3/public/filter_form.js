@@ -51,7 +51,14 @@ function reg_logout_click_event() {
     if (!res_json.isErr) {
       window.location.href = "/";
     } else {
-      alert(res_json.errMess);
+      // alert(res_json.errMess);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: res_json.errMess,
+        // "您提交的資料發生錯誤， 請重試。",
+        // footer: '<a href="">Why do I have this issue?</a>',
+      });
     }
   });
 }

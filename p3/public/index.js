@@ -24,9 +24,40 @@ async function reg_login_click_event() {
     if (!res_json.isErr) {
       user = res_json.data;
       console.log(user);
+
+      // Sweet alert for login success
+      let timerInterval;
+      await Swal.fire({
+        title: "成功登入!",
+        html: "即將轉到您的主頁...",
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft();
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
       render_all_form();
     } else {
-      alert(res_json.errMess);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: res_json.errMess,
+            // "您提交的資料發生錯誤， 請重試。",
+            // footer: '<a href="">Why do I have this issue?</a>',
+          });
+      // alert(res_json.errMess);
       user = { isLogin: false };
     }
   });

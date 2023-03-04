@@ -1,5 +1,5 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
+const invalidValidation =  async function () {
   "use strict";
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -20,7 +20,9 @@
       false
     );
   });
-})();
+}
+
+invalidValidation()
 
 // Submit the form data to the server
 let enrollForm = document.querySelector("#enroll_form");
@@ -36,9 +38,38 @@ enrollForm.addEventListener("submit", async (event) => {
 
   console.log(res_json);
   if (!res_json.isErr) {
-    window.location.href = "/main.html";
+    // Sweet alert for enroll success
+    let timerInterval;
+    await Swal.fire({
+      title: "成功註冊!",
+      html: "恭喜您!您已通過人工智能照片驗證!",
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer().querySelector("b");
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft();
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+      }
+    });
+    // window.location.href = "/main.html";
   } else {
-    alert(res_json.errMess);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: res_json.errMess
+      // "您提交的資料發生錯誤， 請重試。",
+      // footer: '<a href="">Why do I have this issue?</a>',
+    });
   }
 });
 
