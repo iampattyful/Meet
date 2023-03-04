@@ -18,6 +18,13 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="menubar.css" />
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="filter_form.css" />
@@ -43,7 +50,7 @@
     </div> -->
     <div class="container">
       <div class="row">
-        <div class="col">
+        <div class="col edit">
           <form class="login_form isHide">
             <h2>Login</h2>
             <input type="text" name="email" />
@@ -60,55 +67,77 @@
             <button id="exitEditFormBtn">X</button>
             <div>icon</div>
             <div class="image">
-              <img
-                src=""
-                class="object-fit-none border rounded"
-                id="icon_add1"
-              />
+              <img src="" class="img-thumbnail img-thumbnail" id="icon_add1" />
               <input
                 type="file"
                 id="icon_input1"
                 class="Icon"
                 name="user_icon"
               />
-              <img
-                src=""
-                class="object-fit-none border rounded"
-                id="icon_add2"
-              />
-              <input type="file" id="icon_input2" class="Icon" name="image1" />
-              <img
-                src=""
-                class="object-fit-none border rounded"
-                id="icon_add3"
-              />
-              <input type="file" id="icon_input3" class="Icon" name="image2" />
-              <img
-                src=""
-                class="object-fit-none border rounded"
-                id="icon_add4"
-              />
-              <input type="file" id="icon_input4" class="Icon" name="image3" />
-              <img
-                src=""
-                class="object-fit-none border rounded"
-                id="icon_add5"
-              />
-              <input type="file" id="icon_input5" class="Icon" name="image4" />
-              <img
-                src=""
-                class="object-fit-none border rounded"
-                id="icon_add5"
-              />
-              <input type="file" id="icon_input5" class="Icon" name="image4" />
+              <div class="imageTable">
+                <img
+                  src=""
+                  class="img-thumbnail img-thumbnail"
+                  id="icon_add2"
+                />
+                <input
+                  type="file"
+                  id="icon_input2"
+                  class="Icon"
+                  name="image1"
+                />
+                <img
+                  src=""
+                  class="img-thumbnail img-thumbnail"
+                  id="icon_add3"
+                />
+                <input
+                  type="file"
+                  id="icon_input3"
+                  class="Icon"
+                  name="image2"
+                />
+                <img
+                  src=""
+                  class="img-thumbnail img-thumbnail"
+                  id="icon_add4"
+                />
+                <input
+                  type="file"
+                  id="icon_input4"
+                  class="Icon"
+                  name="image3"
+                />
+                <img
+                  src=""
+                  class="img-thumbnail img-thumbnail"
+                  id="icon_add5"
+                />
+                <input
+                  type="file"
+                  id="icon_input5"
+                  class="Icon"
+                  name="image4"
+                />
+                <img
+                  src=""
+                  class="img-thumbnail img-thumbnail"
+                  id="icon_add6"
+                />
+                <input
+                  type="file"
+                  id="icon_input6"
+                  class="Icon"
+                  name="image5"
+                />
+              </div>
             </div>
-
             <!-- user name -->
             <div>
               <div>名稱</div>
               <input
                 type="text"
-                class="writeBoxName"
+                class="writeBox"
                 name="username"
                 placeholder="User name"
               />
@@ -118,7 +147,7 @@
               <div>密碼</div>
               <input
                 type="password"
-                class="writeBoxPassword"
+                class="writeBox"
                 name="password"
                 placeholder="password"
               />
@@ -155,6 +184,8 @@
                 class="writeBoxAboutMe"
                 name="about_me"
                 rows="3"
+                contenteditable="true"
+                placeholder="content"
                 placeholder="Hello! Nice to meet you!"
               ></textarea>
             </div>
@@ -175,7 +206,7 @@
               <div>行業</div>
               <input
                 type="text"
-                class="writeBoxJob"
+                class="writeBox"
                 name="job"
                 placeholder="industry"
               />
@@ -185,7 +216,7 @@
               <div>國籍</div>
               <input
                 type="text"
-                class="writeBoxNationality"
+                class="writeBox"
                 name="nationality"
                 placeholder="火星"
               />
@@ -262,7 +293,7 @@
                 </label>
               </div>
             </div>
-            <div class="card">
+            <!-- <div class="card">
               <div>Tag</div>
               <div class="tagContainer"></div>
               <input
@@ -271,7 +302,7 @@
                 name="tag_name"
                 placeholder="..."
               />
-            </div>
+            </div> -->
             <button class="submit_edit_form_button">提交</button>
           </form>
           <!-- fei slider container-->

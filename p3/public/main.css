@@ -8,6 +8,34 @@ body {
   background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
 }
 
+.carousel-control-next {
+  left: 30% !important;
+}
+
+.edit {
+  margin-bottom: 70px;
+}
+
+/* input[type="file"] {
+    display: none;
+} */
+.img-thumbnail {
+  display: block;
+  max-width: 230px;
+  max-height: 95px;
+  width: auto;
+  height: auto;
+}
+.writeBox {
+  width: 100%;
+  border-radius: 10px;
+}
+.writeBoxAboutMe {
+  resize: none;
+  width: 100%;
+  border-radius: 10px;
+}
+
 .content {
   grid-area: content;
   height: fit-content;
@@ -30,6 +58,7 @@ body {
 .isHide {
   display: none;
 }
+
 #exitEditForm {
   position: absolute;
   top: 0px;
