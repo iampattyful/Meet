@@ -2,10 +2,10 @@
   border: 5px solid #222222;
 }
 .hightBar {
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
 }
 .weightBar {
-  background-color: midnightblue;
+  /* background-color: midnightblue; */
 }
 /* toggle */
 .switch {
@@ -69,3 +69,25 @@ input:checked + .slider:before {
 }
 
 /* ~~~~~toggle~~~~~d */
+
+
+
+/*ting code*/
+.image > div{
+  display: flex;
+}
+
+.image > div > div{
+  width: 33%;
+  position: relative;
+}
+.img-thumbnail{
+  min-width: 95px;
+  min-height: 95px;
+}
+
+.Icon{
+  position: absolute;
+  top:0px
+}
+

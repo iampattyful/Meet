@@ -6,7 +6,6 @@ let userCard = document.querySelector(".slider");
 
 window.addEventListener("DOMContentLoaded", (event) => {
   filter_form_main();
-  
 });
 
 async function filter_form_main() {
@@ -113,9 +112,11 @@ async function handleFilterFormHttpRequest(formatFormData) {
       .map(
         (obj) => `
         <div class="slider ">
-        
-          
+        <button class="btn btn-outline-danger leftButton">left</button>
+        <button class="btn btn-outline-danger rightButton">right</button>
+          <div class="imageTable" id="slider_userImage">
             <img class="userImage" id="userImage" src="${obj.user_icon}" />
+          </div>
             <div class="userName" id="userName">${obj.username}</div>
             <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
             <div class="about_me" id="about_me">${obj.about_me}</div>
@@ -133,13 +134,55 @@ async function handleFilterFormHttpRequest(formatFormData) {
       `
       )
       .join("");
-
+    otherImage_left_btn_event();
+    otherImage_right_btn_event();
     reg_like_btn_event();
     reg_dislike_btn_event();
   } else {
     alert(json.errMess);
   }
 }
+/////////////////////////////////////////////////////////////////////
+//when user every image slider
+let userEveryImage = 0;
+function nextUserSlider(id) {
+  const slider_userImage = document.querySelector("#slider_userImage");
+  userEveryImage = parseInt(userEveryImage);
+  let slider_width =
+    document.querySelectorAll(".slider")[`${userEveryImage}`].clientWidth;
+  slider_userImage.style.transition = "transform 0.5s ease-in-out 0s";
+  slider_userImage.style.transform = `translate(-${
+    slider_width * userEveryImage
+  }px, 0px)`;
+}
+
+function otherImage_left_btn_event() {
+  let leftBtn = document.querySelectorAll(".leftButton");
+  for (let btn of leftBtn) {
+    btn.addEventListener("click", (e) => {
+      userEveryImage++;
+      if (numOfSlider <= userEveryImage) {
+        return;
+      }
+      nextUserSlider();
+    });
+  }
+}
+
+function otherImage_right_btn_event() {
+  let rightBtn = document.querySelectorAll(".rightButton");
+  for (let btn of rightBtn) {
+    btn.addEventListener("click", (e) => {
+      userEveryImage--;
+      if (numOfSlider <= userEveryImage) {
+        return;
+      }
+      nextUserSlider();
+    });
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////
 
 // when click filter submit button, redirect to slider page
 let pos = 0;

@@ -49,7 +49,13 @@ export class EditProfileService {
 
       let userUpload4 = await this.knex("image")
         .where("user_id", userId)
-        .update({ image: obj.image })
+        .update({
+          image1: obj.image1,
+          image2: obj.image2,
+          image3: obj.image3,
+          image4: obj.image4,
+          image5: obj.image5,
+        })
         .returning("*");
       arr.push(userUpload4);
 

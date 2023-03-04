@@ -44,18 +44,23 @@ document.querySelector("#weight").addEventListener("mouseup", () => {
 
 //Display icon
 window.addEventListener("DOMContentLoaded", (event) => {
+  //icon
   button_add_event1();
+
   button_add_event2();
   button_add_event3();
   button_add_event4();
   button_add_event5();
+  button_add_event6();
 });
 let edit_form_image1 = document.querySelector("#editForm");
 let edit_form_image2 = document.querySelector("#editForm");
 let edit_form_image3 = document.querySelector("#editForm");
 let edit_form_image4 = document.querySelector("#editForm");
 let edit_form_image5 = document.querySelector("#editForm");
+let edit_form_image6 = document.querySelector("#editForm");
 
+//icon
 async function button_add_event1() {
   let file_add_input = document.querySelector("#icon_input1");
   file_add_input.addEventListener("change", (event) => {
@@ -101,6 +106,16 @@ async function button_add_event5() {
   file_add_input.addEventListener("change", (event) => {
     if (event.target.files[0]) {
       document.querySelector("#icon_add5").src = URL.createObjectURL(
+        event.target.files[0]
+      );
+    }
+  });
+}
+async function button_add_event6() {
+  let file_add_input = document.querySelector("#icon_input6");
+  file_add_input.addEventListener("change", (event) => {
+    if (event.target.files[0]) {
+      document.querySelector("#icon_add6").src = URL.createObjectURL(
         event.target.files[0]
       );
     }
