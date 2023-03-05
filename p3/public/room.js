@@ -63,6 +63,14 @@ async function rej_sendMess_btn_event() {
         document.querySelector(".send-message").value = "";
     }
   });
+  
+  let chatBar = document.querySelector(".chatBar")
+  message.addEventListener("focus", (e) => {
+    chatBar.classList.add("active")
+  });
+  message.addEventListener("blur", (e) => {
+    chatBar.classList.remove("active")
+  });
 }
 
 function renderUpdateMessage() {

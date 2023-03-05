@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Kodchasan:700");
 html,
 body {
+  /* background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-position: left top; */
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -23,7 +26,7 @@ svg {
 }
 
 svg.hide {
-  diplay: none;
+  display: none;
 }
 
 svg * {
