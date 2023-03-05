@@ -15,7 +15,6 @@ async function filter_form_main() {
   await handleFilterFormHttpRequest(formatFormData);
 }
 
-
 //////////////////////////////////////////////////
 let login_form = document.querySelector(".login_form");
 let logout_form = document.querySelector(".logout_form");
@@ -119,9 +118,6 @@ async function handleFilterFormHttpRequest(formatFormData) {
   const json = await res.json();
 
   if (!json.isErr) {
-    console.log(json.data[0].date_of_birth);
-
-
     // const age = await moment()
     //   .subtract(obj.date_of_birth, "years")
     //   .format("YYYY-MM-DD");
@@ -148,7 +144,10 @@ async function handleFilterFormHttpRequest(formatFormData) {
             </div>
           
             <div class="userName" id="userName">${obj.username}</div>
-            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
+            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth.substring(
+              0,
+              10
+            )}</div>
             <div class="buttonTable">
               <button class="btn btn-outline-danger dislikeBtn">
                 <i class="bi bi-x-circle-fill"></i>

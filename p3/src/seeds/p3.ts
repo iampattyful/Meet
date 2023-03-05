@@ -72,10 +72,10 @@ export async function seed(knex: Knex): Promise<void> {
         is_admin: "false",
       },
       {
-        username: "Mandy Chan",
+        username: "Summer Chan",
         password: hash_password,
         email: "demo4@gmail.com",
-        user_icon: "photo-1616325629936-99a9013c29c6.jpeg",
+        user_icon: "631522e4133a410197e14f700.jpeg",
         date_of_birth: "1979-02-12",
         gender: "female",
         is_public: "true",
