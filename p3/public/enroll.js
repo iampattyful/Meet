@@ -91,12 +91,15 @@ enrollForm.addEventListener("submit", async (event) => {
       }
     });
     window.location.href = "/main.html";
-  } else if (res_json.data === null) {
-    // Sweet alert for null data
+  } else if (
+    res_json.errMess ===
+    "AI無法識別相片中是否存在人面,請重新上載個人頭像!"
+  ) {
+    // Sweet alert for no face detected
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "請填寫所有欄位!",
+      text: "AI無法識別相片中是否存在人面,請重新上載個人頭像! - /enroll",
       confirmButtonColor: "#ff69b4",
     });
   } else if (
@@ -110,12 +113,21 @@ enrollForm.addEventListener("submit", async (event) => {
       text: "此電郵地址已被註冊",
       confirmButtonColor: "#ff69b4",
     });
+  } else if (res_json.data === null) {
+    // console.log(res_json.data+ "null");
+    // Sweet alert for null data
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "您提交的資料格式發生錯誤, 請重試!",
+      confirmButtonColor: "#ff69b4",
+    });
   } else {
     // Sweet alert for other error
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "您提交的資料發生錯誤,請重試!",
+      text: "請填寫所有欄位!",
       confirmButtonColor: "#ff69b4",
     });
   }

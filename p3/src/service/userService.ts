@@ -45,31 +45,28 @@ export class UserService {
           is_admin: false,
         })
         .returning("id");
-        //  if (obj.username || obj.password || obj.gender || obj.email || obj.date_of_birth || obj.user_icon == null) {
-        //    throw new Error("cannot be null!");
-        //  }
+
       await this.knex("personal_information")
         .insert({
           user_id: user.id,
           education_level:"others",
-          job:"",
-          nationality:"",
-          height:"",
-          weight:"",
+          job:" ",
+          nationality:" ",
+          height:0,
+          weight:0,
           pet:false,
           fitness:false,
           smoke:false,
           drink:false
         })
-      await this.knex("image")
-        .insert({
-          user_id: user.id,
-          image1:"",
-          image2:"",
-          image3:"",
-          image4:"",
-          image5:""
-        })
+      await this.knex("image").insert({
+        user_id: user.id,
+        image1: "profile_image_placeholder.jpg",
+        image2: "profile_image_placeholder.jpg",
+        image3: "profile_image_placeholder.jpg",
+        image4: "profile_image_placeholder.jpg",
+        image5: "profile_image_placeholder.jpg",
+      });
       return user.id;
     } catch (err) {
       throw new Error(`${err.message}`);
