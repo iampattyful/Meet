@@ -145,7 +145,7 @@ async function handleFilterFormHttpRequest(formatFormData) {
               0,
               10
             )}</div>
-            <div >${obj.height}cm</div>
+            <div >身高${obj.height}</div>
               <div >${obj.weight}噸~你信唔信?</div>
             <div class="buttonTable">
               <button class="btn btn-outline-danger dislikeBtn">

@@ -1,6 +1,8 @@
 .login_form,
 .logout_form {
-  border: 1px solid #222222;
+  /* border: 1px solid #222222; */
+  display: flex;
+  justify-content: end;
 }
 
 body {
@@ -38,11 +40,10 @@ body {
   padding-left: 10px;
 }
 
-#filterBtn{
+#filterBtn {
   display: flex;
-justify-content: flex-end;
+  justify-content: flex-end;
 }
-
 
 .carousel-control-next {
   left: 30% !important;
