@@ -48,6 +48,19 @@ export class UserService {
         //  if (obj.username || obj.password || obj.gender || obj.email || obj.date_of_birth || obj.user_icon == null) {
         //    throw new Error("cannot be null!");
         //  }
+      await this.knex("personal_information")
+        .insert({
+          user_id: user.id,
+          education_level:"others",
+          job:"",
+          nationality:"",
+          height:"",
+          weight:"",
+          pet:false,
+          fitness:false,
+          smoke:false,
+          drink:false
+        })
       return user.id;
     } catch (err) {
       throw new Error(`${err.message}`);
