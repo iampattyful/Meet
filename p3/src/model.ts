@@ -1,22 +1,23 @@
+// removed all unnecessary ? in the type
 export type FormResult = {
   fields?: any;
   files?: any;
 };
 
 export type User = {
-  username?: string;
-  password?: string;
-  email?: string;
-  user_icon?: string;
-  date_of_birth?: Date;
-  gender?: string;
+  username: string;
+  password: string;
+  email: string;
+  user_icon: string;
+  date_of_birth: Date;
+  gender: string;
 };
 
 export type UserInformation = {
-  username?: string;
-  user_icon?: string;
-  date_of_birth?: Date;
-  gender?: string;
+  username: string;
+  user_icon: string;
+  date_of_birth: Date;
+  gender: string;
 };
 
 // FilterForm type is used in filterController.ts
@@ -57,11 +58,11 @@ export type UserRows = {
 
 export type EditProfile = {
   //user
-  username?: string;
+  username: string;
   about_me?: string;
-  password?: string;
+  password: string;
   //////user icon maybe s3///////
-  user_icon?: string;
+  user_icon: string;
   ///////////////////////////
   location?: string;
 

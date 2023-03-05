@@ -13,6 +13,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
     integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+  <link rel="stylesheet" href="sweetalert2.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
@@ -35,11 +36,13 @@
           <h1>人工智能照片驗證、<br>交友、聊天、
             一次到位</h1>
         </div>
-
       </div>
     </div>
+    <div id="mainBtn" class="hide row">
+      <button type="button" class="btn btn-primary"><a href="main.html">開始使用Meet</a></button>
+    </div>
     <div class="row" id="btnsRow">
-      <div id="login_modal">
+      <div id="login_modal" class="login_signup_modal">
         <!-- Login Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
           id="loginBtn">
@@ -47,7 +50,7 @@
         </button>
 
         <!-- Login Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exam尋找對象pleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -75,7 +78,7 @@
           </div>
         </div>
 
-        <div id="signup_modal">
+        <div id="signup_modal" class="login_signup_modal">
           <!-- Sign up Button trigger modal -->
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
             id="signupBtn">建立新帳號</button>
@@ -106,7 +109,7 @@
                     <div class="mb-2">
                       <label class="form-label">電郵地址</label>
                       <input type="email" class="form-control" name="email" id="validationCustomEmail"
-                        aria-describedby="inputGroupPrepend" required placeholder="example@example.com" />
+                        aria-describedby="inputGroupPrepend" required placeholder="meet@clsfei.link" />
                     </div>
                     <div class="invalid-feedback">
                       Please enter email.
@@ -167,9 +170,7 @@
         </div>
       </div>
     </div>
-    <div id="mainBtn" class="hide row">
-      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">main</button>
-    </div>
+    
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

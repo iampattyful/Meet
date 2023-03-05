@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="menubar.css" />
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="filter_form.css" />
+    <link rel="stylesheet" href="edit_personal_info.css" />
     <link rel="icon" href="./assets/favicon-32x32.png" type="image/icon type" />
     <title>Meet - 尋找對象</title>
   </head>
@@ -81,71 +82,74 @@
 
           <form class="editForm isHide">
             <button id="exitEditFormBtn">X</button>
-            <div>icon</div>
             <div class="image">
-              <img src="" class="img-thumbnail img-thumbnail" id="icon_add1" />
-              <input
-                type="file"
-                id="icon_input1"
-                class="Icon"
-                name="user_icon"
-              />
-              <div class="imageTable">
-                <img
-                  src=""
-                  class="img-thumbnail img-thumbnail"
-                  id="icon_add2"
-                />
+              <div class="firstLineImage">
+                <label class="icon"><img src="" class="img-thumbnail img-thumbnail" id="icon_add1" />
                 <input
                   type="file"
-                  id="icon_input2"
+                  id="icon_input1"
                   class="Icon"
-                  name="image1"
+                  name="user_icon"
                 />
-                <img
-                  src=""
-                  class="img-thumbnail img-thumbnail"
-                  id="icon_add3"
-                />
-                <input
-                  type="file"
-                  id="icon_input3"
-                  class="Icon"
-                  name="image2"
-                />
-                <img
-                  src=""
-                  class="img-thumbnail img-thumbnail"
-                  id="icon_add4"
-                />
-                <input
-                  type="file"
-                  id="icon_input4"
-                  class="Icon"
-                  name="image3"
-                />
-                <img
-                  src=""
-                  class="img-thumbnail img-thumbnail"
-                  id="icon_add5"
-                />
-                <input
-                  type="file"
-                  id="icon_input5"
-                  class="Icon"
-                  name="image4"
-                />
-                <img
-                  src=""
-                  class="img-thumbnail img-thumbnail"
-                  id="icon_add6"
-                />
-                <input
-                  type="file"
-                  id="icon_input6"
-                  class="Icon"
-                  name="image5"
-                />
+                <i class="fa-regular fa-square-plus"></i>
+                </label>
+                <label class="image1"><img
+                    src=""
+                    class="img-thumbnail img-thumbnail"
+                    id="icon_add2"
+                  />
+                  <input
+                    type="file"
+                    id="icon_input2"
+                    class="Icon"
+                    name="image1"
+                  /><i class="fa-regular fa-square-plus"></i></label>
+                <label class="image2"><img
+                    src=""
+                    class="img-thumbnail img-thumbnail"
+                    id="icon_add3"
+                  />
+                  <input
+                    type="file"
+                    id="icon_input3"
+                    class="Icon"
+                    name="image2"
+                  /><i class="fa-regular fa-square-plus"></i></label>
+              </div>
+              <div class="secondLineImage">
+                <label class="image3"><img
+                    src=""
+                    class="img-thumbnail img-thumbnail"
+                    id="icon_add4"
+                  />
+                  <input
+                    type="file"
+                    id="icon_input4"
+                    class="Icon"
+                    name="image3"
+                  /><i class="fa-regular fa-square-plus"></i></label>
+                <label class="image4"><img
+                    src=""
+                    class="img-thumbnail img-thumbnail"
+                    id="icon_add5"
+                  />
+                  <input
+                    type="file"
+                    id="icon_input5"
+                    class="Icon"
+                    name="image4"
+                  /><i class="fa-regular fa-square-plus"></i></label>
+                <label class="image5"><img
+                    src=""
+                    class="img-thumbnail img-thumbnail"
+                    id="icon_add6"
+                  />
+                  <input
+                    type="file"
+                    id="icon_input6"
+                    class="Icon"
+                    name="image5"
+                  /><i class="fa-regular fa-square-plus"></i></label>
               </div>
             </div>
             <!-- user name -->
@@ -155,7 +159,7 @@
                 type="text"
                 class="writeBox"
                 name="username"
-                placeholder="User name"
+                placeholder="Username"
               />
             </div>
             <!-- Password maybe not-->

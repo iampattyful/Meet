@@ -1,4 +1,6 @@
+// This file is used to handle the enroll front-end logic
 // Function to calculate the minimum date for the date input to prevent user to register with age < 18
+// not support on mobile safari
 window.onload = function () {
   var date = new Date();
   var dd = date.getDate();
@@ -72,6 +74,7 @@ enrollForm.addEventListener("submit", async (event) => {
       html: "恭喜您!您已通過人工智能照片驗證!",
       timer: 1000,
       timerProgressBar: true,
+      confirmButtonColor: "#ff69b4",
       didOpen: () => {
         Swal.showLoading();
         const b = Swal.getHtmlContainer().querySelector("b");
@@ -83,19 +86,37 @@ enrollForm.addEventListener("submit", async (event) => {
         clearInterval(timerInterval);
       },
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
         console.log("I was closed by the timer");
       }
     });
     window.location.href = "/main.html";
-  } else {
+  } else if (res_json.data === null) {
+    // Sweet alert for null data
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: res_json.errMess,
-      // "您提交的資料發生錯誤， 請重試。",
-      // footer: '<a href="">Why do I have this issue?</a>',
+      text: "請填寫所有欄位!",
+      confirmButtonColor: "#ff69b4",
+    });
+  } else if (
+    res_json.errMess ===
+    'insert into "users" ("date_of_birth", "email", "gender", "is_admin", "is_public", "password", "user_icon", "username") values ($1, $2, $3, $4, $5, $6, $7, $8) returning "id" - duplicate key value violates unique constraint "users_email_unique" - /enroll'
+  ) {
+    // Sweet alert for duplicate email
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "此電郵地址已被註冊",
+      confirmButtonColor: "#ff69b4",
+    });
+  } else {
+    // Sweet alert for other error
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "您提交的資料發生錯誤,請重試!",
+      confirmButtonColor: "#ff69b4",
     });
   }
 });

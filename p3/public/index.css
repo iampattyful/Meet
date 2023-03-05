@@ -7,6 +7,9 @@ html {
 }
 
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: "Noto Sans HK", sans-serif;
   background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
 }
@@ -55,6 +58,11 @@ body {
   margin: 20px;
 }
 
+.modal-title {
+  font-weight: 600;
+  font-size: 40px;
+}
+
 #login_modal {
   display: flex;
   flex-direction: column;
@@ -62,8 +70,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px;
-  margin-top: 10px;
+  padding: 10px 20px 10px 20px;
 }
 
 #signup_modal {
@@ -74,6 +81,18 @@ body {
   align-items: center;
   width: 100%;
   padding: 20px;
+}
+
+#mainBtn {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+  margin: auto;
+  width: 200px; 
 }
 
 .gender-options {
@@ -89,7 +108,8 @@ body {
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:active,
-.btn-primary:visited {
+.btn-primary:visited,
+.confirmButtonColor {
   background-color: #ff69b4 !important;
   border: 1px solid #fff !important;
   font-size: 20px;
@@ -97,7 +117,8 @@ body {
 }
 
 #login_modal > .btn-primary,
-#signup_modal > .btn-primary {
+#signup_modal > .btn-primary,
+#mainBtn > .btn-primary {
   border-radius: 20px;
 }
 
@@ -107,7 +128,7 @@ body {
 }
 
 .modal-footer {
-    justify-content: flex-start !important;
+  justify-content: flex-start !important;
 }
 
 .dob-description,
@@ -121,4 +142,9 @@ body {
 
 .hide {
   display: none !important;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+  text-decoration: none;
 }
