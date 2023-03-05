@@ -33,7 +33,13 @@ export class UserController extends UserRoutes {
   async login(req: express.Request, res: express.Response) {
     try {
       let formResult = (await formidablePromise(req)) as User;
+
+      // submit empty login form cannot throw error
+      // if (formResult.email || formResult.password === "") {
+      //   throw new Error("請填寫所有欄位!");
+      // }
       let usersRows = await userService.login(formResult);
+
       req.session.isLogin = true;
       req.session.userId = usersRows.id;
 
@@ -66,6 +72,17 @@ export class UserController extends UserRoutes {
       let user = (await formidablePromise(req)) as User;
       user.password = await hashPassword(user.password!);
       // console.log(user);
+      // below code will throw new error even if user submit valid form
+      // if (
+      //   user.username ||
+      //   user.password ||
+      //   user.email ||
+      //   user.user_icon ||
+      //   user.date_of_birth ||
+      //   user.gender === undefined
+      // ) {
+      //   throw new Error("請填寫所有欄位!");
+      // }
 
       const filename = path.join(
         process.cwd() /*, "..", ".."*/,
@@ -94,7 +111,7 @@ export class UserController extends UserRoutes {
       // });
       // let py_res_json = await py_res.json();
       // console.log(py_res_json, "py_res_json");
-      
+
       //fetch to python server via axios
       let py_res = await axios.post("https://ai.clsfei.link/face_detection", {
         filename: user.user_icon,

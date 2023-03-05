@@ -16,7 +16,7 @@ const checkLogin = async () => {
   if (json.data.isLogin) {
     mainBtn.classList.remove("hide");
     btnsRow.classList.add("hide");
-    window.location.href = "/main.html";
+    // window.location.href = "/main.html";
     return json;
   }
 };
@@ -52,6 +52,7 @@ async function reg_login_click_event() {
         html: "即將轉到您的主頁...",
         timer: 1000,
         timerProgressBar: true,
+        confirmButtonColor: "#ff69b4",
         // didOpen: () => {
         //   Swal.showLoading();
         //   const b = Swal.getHtmlContainer().querySelector("b");
@@ -75,6 +76,7 @@ async function reg_login_click_event() {
         icon: "error",
         title: "Oops...",
         text: res_json.errMess,
+        confirmButtonColor: "#ff69b4",
         // "您提交的資料發生錯誤， 請重試。",
         // footer: '<a href="">Why do I have this issue?</a>',
       });

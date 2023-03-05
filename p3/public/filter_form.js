@@ -80,8 +80,6 @@ async function render_all_form() {
 // };
 // init();
 
-// update filter users settings
-
 function formatData(formData) {
   var object = {};
   formData.forEach(function (value, key) {
@@ -242,6 +240,7 @@ updateFilter.addEventListener("submit", async (event) => {
   formData.append("maxAge", maxAge);
   let formatFormData = JSON.parse(formatData(formData));
 
+  // covert gender value to array
   if (formatFormData.gender === "ALL") {
     formatFormData.gender = ["male", "female", "unisex"];
   } else if (formatFormData.gender === "male") {
