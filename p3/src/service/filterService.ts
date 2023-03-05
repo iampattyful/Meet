@@ -48,7 +48,7 @@ export class FilterService {
         .whereNotIn("users.id", function () {
           this.select("liked_to").from("liked").where("liked_from", userId);
         })
-        .where("gender", obj.gender)
+        .whereIn("gender", obj.gender)
         .whereBetween("date_of_birth",[min_year,max_year])
         // .andWhere("date_of_birth", ">=", min_year)
         // .andWhere("date_of_birth", "<=", max_year)
