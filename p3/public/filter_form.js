@@ -118,8 +118,6 @@ async function handleFilterFormHttpRequest(formatFormData) {
   const json = await res.json();
 
   if (!json.isErr) {
-    console.log(json.data[0].date_of_birth);
-
     // const age = await moment()
     //   .subtract(obj.date_of_birth, "years")
     //   .format("YYYY-MM-DD");
@@ -141,20 +139,25 @@ async function handleFilterFormHttpRequest(formatFormData) {
               <img class="userImage" id="userImage" src="${obj.image4}" />
               <img class="userImage" id="userImage" src="${obj.image5}" />
             </div>
-          </div>        
-          <div class="userName" id="userName">Hi!我叫<h4>${obj.username}</h4></div>
-            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
-              <div >${obj.height}cm</div>
+          
+            <div class="userName" id="userName">${obj.username}</div>
+            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth.substring(
+              0,
+              10
+            )}</div>
+            <div >${obj.height}cm</div>
               <div >${obj.weight}噸~你信唔信?</div>
-              <div class="buttonTable">
-                <button class="btn btn-outline-danger dislikeBtn">
-                  <i class="bi bi-x-circle-fill"></i>
-                </button>
-                <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
-                  <i class="bi bi-arrow-through-heart-fill"></i>
-                </button>
-              </div>
-           </div>
+            <div class="buttonTable">
+              <button class="btn btn-outline-danger dislikeBtn">
+                <i class="bi bi-x-circle-fill"></i>
+              </button>
+              <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
+                <i class="bi bi-arrow-through-heart-fill"></i>
+              </button>
+            </div>
+          
+      
+      </div>
       `
       )
       .join("");
