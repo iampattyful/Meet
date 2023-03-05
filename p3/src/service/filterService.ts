@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-// import moment from "moment";
+import moment from "moment";
 import { knex } from "../db";
 import { FilterForm, UserRows } from "../model";
 
@@ -12,12 +12,12 @@ export class FilterService {
       //   const endDate = new Date();
       //   endDate.setFullYear(new Date().getFullYear() - obj.minAge);
       // Method 2: moment.js
-    //   const min_year = moment()
-    //     .subtract(obj.maxAge, "years")
-    //     .format("YYYY-MM-DD");
-    //   const max_year = moment()
-    //     .subtract(obj.minAge, "years")
-    //     .format("YYYY-MM-DD");
+      const min_year = moment()
+        .subtract(obj.maxAge, "years")
+        .format("YYYY-MM-DD");
+      const max_year = moment()
+        .subtract(obj.minAge, "years")
+        .format("YYYY-MM-DD");
         
       const usersRows = await this.knex
         .select(
@@ -45,12 +45,13 @@ export class FilterService {
         .from("users")
         .join("personal_information","users.id","=","personal_information.user_id")
         .join("image","users.id","=","image.user_id")
-        // .whereNotIn("users.id", function () {
-        //   this.select("liked_to").from("liked").where("liked_from", userId);
-        // })
+        .whereNotIn("users.id", function () {
+          this.select("liked_to").from("liked").where("liked_from", userId);
+        })
         .where("gender", obj.gender)
-    //   .andWhere("date_of_birth", ">=", min_year)
-    //   .andWhere("date_of_birth", "<=", max_year)
+        .whereBetween("date_of_birth",[min_year,max_year])
+        .andWhere("date_of_birth", ">=", min_year)
+        .andWhere("date_of_birth", "<=", max_year)
         .whereNot("users.id", userId)
         .orderByRaw("random()")
         .limit(20); // limit more users when there are more users in the database

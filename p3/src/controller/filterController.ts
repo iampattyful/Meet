@@ -14,7 +14,6 @@ export class FilterController extends FilterRoutes {
       let obj: FilterForm = req.body;
       let userId = Number(req.session.userId!);
       // obj = { ...obj, userId: user_id };
-      // console.log(obj);
       
       // obj = { ...obj, userId: user_id };
       let result = await filterService.filter(obj, userId);
