@@ -98,7 +98,11 @@ export class EditProfileService {
           "personal_information.smoke",
           "personal_information.drink",
           "tag.tag_name",
-          "image.image"
+          "image.image1",
+          "image.image2",
+          "image.image3",
+          "image.image4",
+          "image.image5"
         )
         .where("users.id", userId);
       console.log(rows);

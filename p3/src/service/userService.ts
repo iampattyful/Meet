@@ -61,6 +61,15 @@ export class UserService {
           smoke:false,
           drink:false
         })
+      await this.knex("image")
+        .insert({
+          user_id: user.id,
+          image1:"",
+          image2:"",
+          image3:"",
+          image4:"",
+          image5:""
+        })
       return user.id;
     } catch (err) {
       throw new Error(`${err.message}`);
