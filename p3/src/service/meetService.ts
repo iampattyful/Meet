@@ -62,7 +62,7 @@ export class MeetService {
       // .whereNot("users.id", "in", subquery)
       // .orderByRaw("users.created_at DESC LIMIT 20");
       // ;
-      console.log(userInformation);
+      console.log(userInformation + "userInformation");
 
       return [userInformation] as any;
     } catch (err) {

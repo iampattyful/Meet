@@ -1,7 +1,3 @@
-let login_form = document.querySelector(".login_form");
-
-let logout_form = document.querySelector(".logout_form");
-
 let userCard = document.querySelector(".slider");
 
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -16,7 +12,6 @@ async function filter_form_main() {
     minAge: "18",
   };
   await handleFilterFormHttpRequest(formatFormData);
-  reg_logout_click_event();
 }
 
 async function getCurrentUser() {
@@ -32,39 +27,11 @@ async function getCurrentUser() {
   render_all_form();
 }
 
-function reg_logout_click_event() {
-  logout_form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    let res = await fetch("user/logout", {
-      headers: {
-        "Content-type": "Application/json",
-      },
-      method: "POST",
-      body: "",
-    });
-
-    let res_json = await res.json();
-
-    user = res_json.data;
-
-    if (!res_json.isErr) {
-      window.location.href = "/";
-    } else {
-      alert(res_json.errMess);
-    }
-  });
-}
-
 async function render_all_form() {
   let filterBtn = document.querySelector(".btn");
   if (user.isLogin) {
-    login_form.classList.add("isHide");
-
     filterBtn.classList.remove("isHide");
   } else {
-    login_form.classList.remove("isHide");
-    logout_form.classList.add("isHide");
     filterBtn.classList.add("isHide");
   }
 }
@@ -103,8 +70,12 @@ async function handleFilterFormHttpRequest(formatFormData) {
   const json = await res.json();
 
   if (!json.isErr) {
-    console.log(json.data);
-    numOfSlider = json.data.length;
+    console.log(json.data[0].date_of_birth);
+
+
+    // const age = await moment()
+    //   .subtract(obj.date_of_birth, "years")
+    //   .format("YYYY-MM-DD");
     // create filtered users result here
     document.querySelector("#slider_container").innerHTML = json.data
       .map(
@@ -129,8 +100,6 @@ async function handleFilterFormHttpRequest(formatFormData) {
           
             <div class="userName" id="userName">${obj.username}</div>
             <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
-            <div >關於我</div>
-            <div class="about_me" id="about_me">${obj.about_me}</div>
             <div class="buttonTable">
               <button class="btn btn-outline-danger dislikeBtn">
                 <i class="bi bi-x-circle-fill"></i>
