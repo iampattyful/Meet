@@ -93,13 +93,13 @@ enrollForm.addEventListener("submit", async (event) => {
     window.location.href = "/main.html";
   } else if (
     res_json.errMess ===
-    "AI無法識別相片中是否存在人面,請重新上載個人頭像!"
+    "AI無法識別相片中是否存在人面,請重新上載個人頭像! - /enroll"
   ) {
     // Sweet alert for no face detected
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "AI無法識別相片中是否存在人面,請重新上載個人頭像! - /enroll",
+      text: "AI無法識別相片中是否存在人面,請重新上載個人頭像!",
       confirmButtonColor: "#ff69b4",
     });
   } else if (
