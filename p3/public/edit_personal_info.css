@@ -21,7 +21,7 @@
   height: 0;
 }
 
-.slider {
+.round {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -33,7 +33,7 @@
   transition: 0.4s;
 }
 
-.slider:before {
+.round:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -70,14 +70,12 @@ input:checked + .slider:before {
 
 /* ~~~~~toggle~~~~~d */
 
-
-
 /*ting code*/
-.image > div{
+.image > div {
   display: flex;
 }
 
-.image > div > label{
+.image > div > label {
   width: 33%;
   position: relative;
   display: flex;
@@ -85,27 +83,23 @@ input:checked + .slider:before {
   align-items: center;
 }
 
-.image > div > label > i{
+.image > div > label > i {
   position: absolute;
   font-size: 25px;
 }
 
-.img-thumbnail{
+.img-thumbnail {
   min-width: 70px;
   min-height: 100px;
   width: auto;
   height: auto;
   max-width: 140px;
   max-height: 200px;
- 
 }
 
-.Icon{
+.Icon {
   position: absolute;
-  top:0px;
-  left:0px;
+  top: 0px;
+  left: 0px;
   display: none;
 }
-
-
-

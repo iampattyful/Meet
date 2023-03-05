@@ -12,10 +12,12 @@ export class FilterController extends FilterRoutes {
   async filter(req: express.Request, res: express.Response) {
     try {
       let obj: FilterForm = req.body;
-      let user_id = Number(req.session.userId!);
-      obj = { ...obj, userId: user_id };
+      let userId = Number(req.session.userId!);
       // obj = { ...obj, userId: user_id };
-      let result = await filterService.filter(obj);
+      // console.log(obj);
+      
+      // obj = { ...obj, userId: user_id };
+      let result = await filterService.filter(obj, userId);
       res.json({
         data: result,
         isErr: false,
