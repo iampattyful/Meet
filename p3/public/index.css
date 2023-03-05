@@ -116,11 +116,11 @@ body {
   font-weight: 300;
 }
 
-#login_modal > .btn-primary,
+/* #login_modal > .btn-primary,
 #signup_modal > .btn-primary,
 #mainBtn > .btn-primary {
   border-radius: 20px;
-}
+} */
 
 .btn-secondary {
   font-size: 20px;
