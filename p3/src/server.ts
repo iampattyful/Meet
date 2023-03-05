@@ -155,6 +155,7 @@ app.use("/editProfile", editProfileController.routes);
 app.use("/chat", chatController.routes);
 
 app.get("/test", async (req: express.Request, res: express.Response) => {
+  
   // const matchedUsers = (
   //     await knex.raw(
   //       `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max
@@ -171,44 +172,44 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //     )
   //   ).rows;
 
-  const lastMessage = await knex("message")
-    .join(
-      function () {
-        this.join("group", "group_id", "=", "group.id")
-          .select("group_id")
-          .from("message")
-          .where("matched_user_id1", 90)
-          .orWhere("matched_user_id2", 90)
-          .max("message.created_at")
-          .groupBy("group_id")
-          .as("user_message");
-      },
-      "user_message.max",
-      "=",
-      "message.created_at"
-    )
-    .join("group", "group.id", "=", "message.group_id")
-    .join("users", function () {
-      this.on("users.id", "=", "matched_user_id1");
-      // .orOn("users.id","=","matched_user_id2")
-    })
-    .join("users AS u2", function () {
-      this.on("u2.id", "=", "matched_user_id2");
-      // .orOn("users.id","=","matched_user_id2")
-    })
-    .select(
-      "user_message.group_id",
-      "message.message",
-      "user_message.max",
-      "matched_user_id1",
-      "matched_user_id2",
-      "users.username",
-      "u2.username AS username2",
-      "users.user_icon",
-      "u2.user_icon AS user_icon2"
-    )
-    // .where("user_message.group_id","message.group_id")
-    .orderBy("user_message.max", "desc");
+  // const lastMessage = await knex("message")
+  //   .join(
+  //     function () {
+  //       this.join("group", "group_id", "=", "group.id")
+  //         .select("group_id")
+  //         .from("message")
+  //         .where("matched_user_id1", 90)
+  //         .orWhere("matched_user_id2", 90)
+  //         .max("message.created_at")
+  //         .groupBy("group_id")
+  //         .as("user_message");
+  //     },
+  //     "user_message.max",
+  //     "=",
+  //     "message.created_at"
+  //   )
+  //   .join("group", "group.id", "=", "message.group_id")
+  //   .join("users", function () {
+  //     this.on("users.id", "=", "matched_user_id1");
+  //     // .orOn("users.id","=","matched_user_id2")
+  //   })
+  //   .join("users AS u2", function () {
+  //     this.on("u2.id", "=", "matched_user_id2");
+  //     // .orOn("users.id","=","matched_user_id2")
+  //   })
+  //   .select(
+  //     "user_message.group_id",
+  //     "message.message",
+  //     "user_message.max",
+  //     "matched_user_id1",
+  //     "matched_user_id2",
+  //     "users.username",
+  //     "u2.username AS username2",
+  //     "users.user_icon",
+  //     "u2.user_icon AS user_icon2"
+  //   )
+  //   // .where("user_message.group_id","message.group_id")
+  //   .orderBy("user_message.max", "desc");
 
   // const matchedUsers = await knex("message")
   //     .join("users","users.id","=","message.user_id")
@@ -298,7 +299,7 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //     `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = 89 or "group".matched_user_id2 = 89 group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`
   //   )
   // ).rows;
-  res.json(lastMessage);
+  // res.json(lastMessage);
   //   res.json(matchedUsers);
 });
 

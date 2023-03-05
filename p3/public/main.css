@@ -74,11 +74,13 @@ body {
 }
 #slider_container {
   display: flex;
-  width: 2000%;
+  width: 100%;
+  min-width: 360px;
 }
 .slider {
   position: relative;
-  min-width: 100%;
+  width: 100%;
+  min-width: 360px;
 }
 .userImage {
   width: 100%;
