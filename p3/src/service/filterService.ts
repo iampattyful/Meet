@@ -27,8 +27,24 @@ export class FilterService {
           "date_of_birth",
           "gender",
           "about_me"
+          // "education_level",
+          // "job",
+          // "nationality",
+          // "height",
+          // "weight",
+          // "pet",
+          // "fitness",
+          // "smoke",
+          // "drink",
+          // "image1",
+          // "image2",
+          // "image3",
+          // "image4",
+          // "image5"
         ) // add location later?
         .from("users")
+        // .join("personal_information","users.id","=","personal_information.user_id")
+        // .join("image","users.id","=","image.user_id")
         .whereNotIn("id", function () {
           this.select("liked_to").from("liked").where("liked_from", obj.userId);
         })

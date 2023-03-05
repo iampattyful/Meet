@@ -10,6 +10,7 @@ body {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
+  font-family: "Noto Sans HK", sans-serif;
 }
 
 .carousel-control-next {
@@ -23,6 +24,29 @@ body {
 /* input[type="file"] {
     display: none;
 } */
+.image_group {
+  display: flex;
+}
+
+.userImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 230px;
+  max-height: 230px;
+  min-width: 230px;
+  min-height: 230px;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+.informationTable {
+  margin-top: 50px;
+}
+
+.userName {
+  margin: 5px;
+}
+
 .img-thumbnail {
   display: block;
   max-width: 230px;

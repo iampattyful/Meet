@@ -112,20 +112,33 @@ async function handleFilterFormHttpRequest(formatFormData) {
       .map(
         (obj) => `
         <div class="slider ">
-        <button class="btn btn-outline-danger leftButton">left</button>
-        <button class="btn btn-outline-danger rightButton">right</button>
-          <div class="imageTable" id="slider_userImage">
-            <img class="userImage" id="userImage" src="${obj.user_icon}" />
-          </div>
+        
+       
+            <div class="ImageTable">
+              <div class="image_group">
+                <img class="userImage" id="userImage" src="${obj.user_icon}" />
+                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
+              </div>
+              <div class="image_group">
+                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
+                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
+              </div>
+              <div class="image_group">
+                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
+                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
+              </div>
+            </div>
+          
             <div class="userName" id="userName">${obj.username}</div>
             <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
+            <div >關於我</div>
             <div class="about_me" id="about_me">${obj.about_me}</div>
             <div class="buttonTable">
               <button class="btn btn-outline-danger dislikeBtn">
-                Dis Like
+                <i class="bi bi-x-circle-fill"></i>
               </button>
               <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
-                Like
+                <i class="bi bi-arrow-through-heart-fill"></i>
               </button>
             </div>
           
@@ -134,8 +147,8 @@ async function handleFilterFormHttpRequest(formatFormData) {
       `
       )
       .join("");
-    otherImage_left_btn_event();
-    otherImage_right_btn_event();
+    // otherImage_left_btn_event();
+    // otherImage_right_btn_event();
     reg_like_btn_event();
     reg_dislike_btn_event();
   } else {
@@ -144,6 +157,10 @@ async function handleFilterFormHttpRequest(formatFormData) {
 }
 /////////////////////////////////////////////////////////////////////
 //when user every image slider
+
+/*   <button class="btn btn-outline-danger leftButton">left</button>
+     <button class="btn btn-outline-danger rightButton">right</button>*/
+
 let userEveryImage = 0;
 function nextUserSlider(id) {
   const slider_userImage = document.querySelector("#slider_userImage");
