@@ -56,7 +56,7 @@ export class FilterService {
         .orderByRaw("random()")
         .limit(20); // limit more users when there are more users in the database
       if (usersRows.length == 0) {
-        throw new Error("No users found");
+        throw new Error("找不到用戶!");
       }
       return usersRows;
     } catch (err) {
