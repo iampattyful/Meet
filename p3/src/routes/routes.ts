@@ -48,7 +48,7 @@ export abstract class FilterRoutes extends Routes {
 export abstract class EditProfileRouters extends Routes {
   constructor() {
     super();
-    this.routes.get("/editProfile", this.loadProfileOfUser);
+    this.routes.get("/loadProfile", this.loadProfileOfUser);
     this.routes.put("/editProfile", this.editProfileOfUser);
   }
   public abstract loadProfileOfUser(

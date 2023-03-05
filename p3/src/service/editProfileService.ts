@@ -73,14 +73,14 @@ export class EditProfileService {
     userId: number
   ): Promise<EditProfile[]> {
     try {
-      let rows = await this.knex("users")
+      let [rows] = await this.knex("users")
         .join(
           "personal_information",
           "personal_information.user_id",
           "=",
           "users.id"
         )
-        .join("tag", "tag.user_id", "=", "users.id")
+        // .join("tag", "tag.user_id", "=", "users.id")
         .join("image", "image.user_id", "=", "users.id")
         .select(
           "users.username",
@@ -97,7 +97,7 @@ export class EditProfileService {
           "personal_information.fitness",
           "personal_information.smoke",
           "personal_information.drink",
-          "tag.tag_name",
+          // "tag.tag_name",
           "image.image1",
           "image.image2",
           "image.image3",
@@ -105,7 +105,7 @@ export class EditProfileService {
           "image.image5"
         )
         .where("users.id", userId);
-      console.log(rows);
+     
 
       return rows;
     } catch (err) {
