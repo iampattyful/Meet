@@ -60,23 +60,9 @@ body {
   display: flex;
 }
 
-.userImage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 230px;
-  max-height: 230px;
-  min-width: 230px;
-  min-height: 230px;
-}
-
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 .informationTable {
   margin-top: 50px;
-}
-
-.userName {
-  margin: 5px;
 }
 
 .img-thumbnail {
@@ -111,10 +97,19 @@ body {
 }
 .slider {
   position: relative;
-  width: 100%;
-  min-width: 360px;
+  min-width: 100%;
+}
+.ImageTable {
+  display: flex;
+  flex-wrap: wrap;
 }
 .userImage {
+  width: 50%;
+}
+.ImageTable > section {
+  padding: 10px;
+}
+.ImageTable > section > div {
   width: 100%;
 }
 .isHide {

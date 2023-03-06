@@ -61,7 +61,7 @@ async function render_all_form1() {
     filterBtn.classList.add("isHide");
   }
 }
-///////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////
 async function getCurrentUser() {
   let res = await fetch("user/getCurrentUser");
   let res_json = await res.json();
@@ -127,35 +127,36 @@ async function handleFilterFormHttpRequest(formatFormData) {
         (obj) => `
         <div class="slider ">
           <div class="ImageTable">
-            <div class="image_group">
+            
               <img class="userImage" id="userImage" src="${obj.user_icon}" />
               <img class="userImage" id="userImage" src="${obj.image1}" />
-            </div>
-            <div class="image_group">
+            
               <img class="userImage" id="userImage" src="${obj.image2}" />
               <img class="userImage" id="userImage" src="${obj.image3}" />
-            </div>
-            <div class="image_group">
+            
               <img class="userImage" id="userImage" src="${obj.image4}" />
               <img class="userImage" id="userImage" src="${obj.image5}" />
-            </div>
-          
-            <div class="userName" id="userName">${obj.username}</div>
-            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth.substring(
-              0,
-              10
-            )}</div>
-            <div >身高${obj.height}</div>
+            
+            <section>          
+              <div class="userName" id="userName">${obj.username}</div>
+              <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth.substring(
+                0,
+                10
+              )}</div>
+              <div >身高${obj.height}</div>
               <div >${obj.weight}噸~你信唔信?</div>
-            <div class="buttonTable">
-              <button class="btn btn-outline-danger dislikeBtn">
-                <i class="bi bi-x-circle-fill"></i>
-              </button>
-              <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
-                <i class="bi bi-arrow-through-heart-fill"></i>
-              </button>
-            </div>
-          
+              <div class="buttonTable">
+                <button class="btn btn-outline-danger dislikeBtn">
+                  <i class="bi bi-x-circle-fill"></i>
+                </button>
+                <button class="btn btn-outline-success likeBtn" data-id=${
+                  obj.id
+                }>
+                  <i class="bi bi-arrow-through-heart-fill"></i>
+                </button>
+              </div>
+            </section>
+          </div>
       
       </div>
       `
@@ -163,6 +164,8 @@ async function handleFilterFormHttpRequest(formatFormData) {
       .join("");
     // otherImage_left_btn_event();
     // otherImage_right_btn_event();
+    numOfSlider = document.querySelectorAll(".slider").length;
+    console.log(numOfSlider);
     reg_like_btn_event();
     reg_dislike_btn_event();
   } else {
@@ -220,7 +223,9 @@ let pos = 0;
 function nextSlider(id) {
   const slider_container = document.querySelector("#slider_container");
   pos = parseInt(pos);
+
   let slider_width = document.querySelectorAll(".slider")[`${pos}`].clientWidth;
+  console.log(document.querySelectorAll(".slider")[`${pos}`], "slider width");
   slider_container.style.transition = "transform 0.5s ease-in-out 0s";
   slider_container.style.transform = `translate(-${slider_width * pos}px, 0px)`;
 }
