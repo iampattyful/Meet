@@ -13,6 +13,10 @@ body {
   font-family: "Noto Sans HK", sans-serif;
 }
 
+.meet-text > .bi {
+  letter-spacing: -12px;
+}
+
 #logo-text {
   margin: 20px;
   font-weight: 500;

@@ -46,6 +46,7 @@ function reg_logout_click_event() {
       window.location.href = "/";
     } else {
       alert(res_json.errMess);
+      window.location.href = "/";
     }
   });
 }

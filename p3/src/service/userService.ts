@@ -33,6 +33,10 @@ export class UserService {
   }
   async enroll(obj: User): Promise<{ id: number }> {
     try {
+      // let today = new Date().toISOString().slice(0, 10)
+      // if (obj.date_of_birth.toISOString().slice(0, 10) < today) {
+      //   throw new Error("您必須年滿 18 歲才能使用 Meet。");
+      // }
       let [user] = await this.knex("users")
         .insert({
           username: obj.username,

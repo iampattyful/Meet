@@ -2,6 +2,7 @@
 // Function to calculate the minimum date for the date input to prevent user to register with age < 18
 // not support on mobile safari
 window.onload = function () {
+  
   var date = new Date();
   var dd = date.getDate();
   var mm = date.getMonth() + 1;
@@ -17,7 +18,7 @@ window.onload = function () {
     mm = "0" + mm;
   }
 
-  minYear = yyyy - 80; //Calculate Minimun Age (<80)
+  minYear = yyyy - 100; //Calculate Minimun Age (<80)
   maxYear = yyyy - 18; //Calculate Maximum Age (>18)
 
   var min = minYear + "-" + mm + "-" + dd;
@@ -93,13 +94,13 @@ enrollForm.addEventListener("submit", async (event) => {
     window.location.href = "/main.html";
   } else if (
     res_json.errMess ===
-    "AI無法識別相片中是否存在人面,請重新上載個人頭像! - /enroll"
+    "AI無法識別相片中是否存在面孔,請上載其他相片! - /enroll"
   ) {
     // Sweet alert for no face detected
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "AI無法識別相片中是否存在人面,請重新上載個人頭像!",
+      text: "AI無法識別相片中是否存在面孔,請上載其他相片!",
       confirmButtonColor: "#ff69b4",
     });
   } else if (
@@ -119,7 +120,7 @@ enrollForm.addEventListener("submit", async (event) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "您提交的資料格式發生錯誤, 請重試!",
+      text: "請正確填寫所有欄位!",
       confirmButtonColor: "#ff69b4",
     });
   } else {
@@ -127,7 +128,7 @@ enrollForm.addEventListener("submit", async (event) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "請填寫所有欄位!",
+      text: "請重試!",
       confirmButtonColor: "#ff69b4",
     });
   }
