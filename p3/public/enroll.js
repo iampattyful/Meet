@@ -17,7 +17,7 @@ window.onload = function () {
     mm = "0" + mm;
   }
 
-  minYear = yyyy - 80; //Calculate Minimun Age (<80)
+  minYear = yyyy - 100; //Calculate Minimun Age (<80)
   maxYear = yyyy - 18; //Calculate Maximum Age (>18)
 
   var min = minYear + "-" + mm + "-" + dd;
@@ -93,17 +93,6 @@ enrollForm.addEventListener("submit", async (event) => {
     window.location.href = "/main.html";
   } else if (
     res_json.errMess ===
-    "AI無法識別相片中是否存在人面,請重新上載個人頭像! - /enroll"
-  ) {
-    // Sweet alert for no face detected
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "AI無法識別相片中是否存在人面,請重新上載個人頭像!",
-      confirmButtonColor: "#ff69b4",
-    });
-  } else if (
-    res_json.errMess ===
     'insert into "users" ("date_of_birth", "email", "gender", "is_admin", "is_public", "password", "user_icon", "username") values ($1, $2, $3, $4, $5, $6, $7, $8) returning "id" - duplicate key value violates unique constraint "users_email_unique" - /enroll'
   ) {
     // Sweet alert for duplicate email
@@ -113,13 +102,24 @@ enrollForm.addEventListener("submit", async (event) => {
       text: "此電郵地址已被註冊",
       confirmButtonColor: "#ff69b4",
     });
+  } else if (
+    res_json.errMess ===
+    "AI無法識別相片中是否存在面孔,請上載其他相片! - /enroll"
+  ) {
+    // Sweet alert for no face detected
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "AI無法識別相片中是否存在面孔,請上載其他相片!",
+      confirmButtonColor: "#ff69b4",
+    });
   } else if (res_json.data === null) {
     // console.log(res_json.data+ "null");
     // Sweet alert for null data
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "您提交的資料格式發生錯誤, 請重試!",
+      text: "請正確填寫所有欄位!",
       confirmButtonColor: "#ff69b4",
     });
   } else {
@@ -127,7 +127,7 @@ enrollForm.addEventListener("submit", async (event) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "請填寫所有欄位!",
+      text: "請重試!",
       confirmButtonColor: "#ff69b4",
     });
   }
