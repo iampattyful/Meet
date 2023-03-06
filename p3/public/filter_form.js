@@ -181,8 +181,8 @@ async function handleFilterFormHttpRequest(formatFormData) {
         <div class="slider">
           
           <section class="image_content">
-          <button class="btn btn-outline-danger leftButton">left</button>
-          <button class="btn btn-outline-danger rightButton">right</button>
+          <button class="btn  leftButton"><i class="bi bi-chevron-left"></i></button>
+          <button class="btn  rightButton"><i class="bi bi-chevron-right"></i></button>
             <div id="image_container_${index}" class="image_container">
               <img class="userImage" id="userImage" src="${obj.user_icon}"/>
               <img class="userImage" id="userImage" src="${obj.image1}" />
