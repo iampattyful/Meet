@@ -17,10 +17,12 @@ body {
 
 .meet-text > .bi {
   letter-spacing: -12px;
+  margin-top: 20px;
 }
 
 #logo-text {
   margin: 20px;
+  margin-bottom: 0px;
   font-weight: 500;
 }
 
@@ -44,9 +46,11 @@ body {
   padding-left: 10px;
 }
 
+
 #filterBtn {
   display: flex;
   justify-content: flex-end;
+  margin-top: -10px;
 }
 
 .carousel-control-next {
@@ -67,6 +71,22 @@ body {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 .informationTable {
   margin-top: 50px;
+}
+h1{
+  padding-left: 3px;
+}
+
+.information{
+  margin: 10px;
+}
+
+.information > div > i {
+  padding-right:15px;
+  padding-left:10px;
+}
+
+.userCard{
+  font-size: 15px;
 }
 
 .img-thumbnail {
@@ -92,12 +112,42 @@ body {
   display: flex;
   border: 1px solid;
   overflow: hidden;
+  border-radius: 20px;
+  
 }
 #slider_container {
   display: flex;
   width: 100%;
   min-width: 360px;
+
+  position: absolute;
 }
+.theEndTable{
+ display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  padding-top: 150px;
+  /* margin-left: 80%;
+  margin-right: -80%; */
+}
+
+.theEnd{
+  /* margin-left: -160%; */
+margin-bottom: 200px;
+/* margin-left: 40%; */
+/* margin-right: 40%; */
+}
+
+.easter_egg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 50%;
+  font-size: 1px;
+  
+}
+
 .slider {
   position: relative;
   min-width: 100%;
@@ -133,6 +183,40 @@ body {
   right: 0px;
   z-index: 1;
 }
+.buttonTable{
+  display: flex;
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  right: 50%;
+}
+.dislikeBtn{
+  position: absolute;
+  left: 40px;
+  z-index: 1;
+  background-color: rgb(179, 10, 10) ;
+  color: #fcb1b1;
+  border: 0px;
+
+}
+.dislikeBtn:hover{
+background-color: rgb(245, 23, 23);
+
+}
+.likeBtn{
+  position: absolute;
+  right: 40px;
+  z-index: 1;
+  background-color: rgb(15, 168, 23);
+  color:rgb(6, 255, 18);
+  border: 0px;
+}
+
+.likeBtn:hover{
+  background-color: rgb(11, 207, 21);
+
+}
+
 .ImageTable > section {
   padding: 10px;
 }

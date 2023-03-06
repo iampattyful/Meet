@@ -130,56 +130,15 @@ async function handleFilterFormHttpRequest(formatFormData) {
         });
         return json.data.length - 1 == index
           ? `
-        <div >bye</div>
-        <div class="slider">
-         <button class="btn btn-outline-danger leftButton">left</button>
-         <button class="btn btn-outline-danger rightButton">right</button>
-          <div class="ImageTable">
-            
-              <img class="userImage" id="userImage" src="${obj.user_icon}" />
-              <img class="userImage" id="userImage" src="${obj.image1}" />
-            
-              <img class="userImage" id="userImage" src="${obj.image2}" />
-              <img class="userImage" id="userImage" src="${obj.image3}" />
-            
-              <img class="userImage" id="userImage" src="${obj.image4}" />
-              <img class="userImage" id="userImage" src="${obj.image5}" />
-            
-            <section> 
-              <div class="buttonTable">
+          <div class="slider">
+          <div class="buttonTable">
                 <button class="btn btn-outline-danger dislikeBtn">
                   <i class="bi bi-x-circle-fill"></i>
                 </button>
-                <button class="btn btn-outline-success likeBtn" data-id=${
-                  obj.id
-                }>
+                <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
                   <i class="bi bi-arrow-through-heart-fill"></i>
                 </button>
               </div>     
-              <div class="userName" id="userName">${obj.username}</div>
-              <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
-                0,
-                10
-              )}</div>
-              <div >身高${obj.height}</div>
-              <div >${obj.weight}噸~你信唔信?</div>
-              <div class="about_me">${obj.about_me}</div>
-              <div >基本資料</div>
-                <div ><i class="bi bi-gender-ambiguous"></i>${
-                  obj.gender
-                }  <i class="bi bi-mortarboard-fill"></i>${
-              obj.education_level
-            }</div>
-
-              
-            </section>
-          </div>
-      
-      </div>
-        `
-          : `
-        <div class="slider">
-          
           <section class="image_content">
           <button class="btn  leftButton"><i class="bi bi-chevron-left"></i></button>
           <button class="btn  rightButton"><i class="bi bi-chevron-right"></i></button>
@@ -194,31 +153,70 @@ async function handleFilterFormHttpRequest(formatFormData) {
               <img class="userImage" id="userImage" src="${obj.image5}" />
             </div>
           </section>  
-          <section> 
-              <div class="buttonTable">
-                <button class="btn btn-outline-danger dislikeBtn">
-                  <i class="bi bi-x-circle-fill"></i>
-                </button>
-                <button class="btn btn-outline-success likeBtn" data-id=${
-                  obj.id
-                }>
-                  <i class="bi bi-arrow-through-heart-fill"></i>
-                </button>
-              </div>     
-              <div class="userName" id="userName">${obj.username}</div>
+          <section class="information"> 
+          
+              
+              <div class="userName" id="userName"><h1>${obj.username}</h1></div>
               <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
                 0,
                 10
               )}</div>
+              <div >基本資料</div>
               <div >身高${obj.height}</div>
               <div >${obj.weight}噸~你信唔信?</div>
-              <div class="about_me">${obj.about_me}</div>
-              <div >基本資料</div>
-                <div ><i class="bi bi-gender-ambiguous"></i>${
-                  obj.gender
-                }  <i class="bi bi-mortarboard-fill"></i>${
-              obj.education_level
-            }</div>
+              <div ><i class="bi bi-gender-ambiguous"></i>${obj.gender}  <i class="bi bi-mortarboard-fill"></i>${obj.education_level}</div>
+              <div class="about_me"><i class="bi bi-info-circle"></i>${obj.about_me}</div>
+            
+                  
+                
+
+              
+          </section>
+          
+      
+      </div>
+        `
+          : `
+        <div class="slider">
+          <div class="buttonTable">
+                <button class="btn btn-outline-danger dislikeBtn">
+                  <i class="bi bi-x-circle-fill"></i>
+                </button>
+                <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
+                  <i class="bi bi-arrow-through-heart-fill"></i>
+                </button>
+              </div>     
+          <section class="image_content">
+          <button class="btn  leftButton"><i class="bi bi-chevron-left"></i></button>
+          <button class="btn  rightButton"><i class="bi bi-chevron-right"></i></button>
+            <div id="image_container_${index}" class="image_container">
+              <img class="userImage" id="userImage" src="${obj.user_icon}"/>
+              <img class="userImage" id="userImage" src="${obj.image1}" />
+          
+              <img class="userImage" id="userImage" src="${obj.image2}" />
+              <img class="userImage" id="userImage" src="${obj.image3}" />
+            
+              <img class="userImage" id="userImage" src="${obj.image4}" />
+              <img class="userImage" id="userImage" src="${obj.image5}" />
+            </div>
+          </section>  
+          <section class="information"> 
+          
+              
+              <div class="userName" id="userName"><h1> ${obj.username}</h1></div>
+              <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
+                0,
+                10
+              )}</div>
+              <div  class="userCard" ><i class="bi bi-ui-checks"></i>基本資料</div>
+              <div ><i class="fa-solid fa-ruler"></i>${obj.height}cm</div>
+              <div ><i class="fa-solid fa-weight-hanging"></i>${obj.weight}kg</div>
+              <div ><i class="bi bi-gender-ambiguous"></i>${obj.gender}</div>
+              <div ><i class="bi bi-mortarboard-fill"></i>${obj.education_level}</div>
+              <div class="about_me"><i class="bi bi-info-circle"></i>${obj.about_me}</div>
+            
+                  
+                
 
               
           </section>
