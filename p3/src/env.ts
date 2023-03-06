@@ -6,7 +6,7 @@ let p = path.join(__dirname, "..", ".env");
 config({ path: p });
 
 export const env_config = {
-  PORT:8964,
+  PORT:8080,
 
   POSTGRES_DB: "",
   POSTGRES_USER: "",
