@@ -80,15 +80,16 @@ export class MeetService {
         .where("liked_from", like.liked_to)
         .andWhere("liked_to", like.liked_from);
       if (rows.length > 0) {
-        await this.knex("group")
+        let [group] = await this.knex("group")
           .insert({
             matched_user_id1: like.liked_from,
             matched_user_id2: like.liked_to,
           })
           .returning("id");
-        await this.knex("message").insert({
+        await this.knex("message")
+        .insert({
           user_id: like.liked_from,
-          group_id: like.liked_to,
+          group_id: group.id,
           message: "You got a new friend!!",
         });
       }

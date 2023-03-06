@@ -5,10 +5,6 @@ import { formidablePromise } from "../helper/helper";
 import { User } from "../model";
 import { UserRoutes } from "../routes/routes";
 import { userService } from "../service/userService";
-
-
-
-// import fetch from "node-fetch";
 import axios from "axios";
 import fs from "fs";
 import path from "path";
@@ -68,7 +64,21 @@ export class UserController extends UserRoutes {
     try {
       let user = (await formidablePromise(req)) as User;
       user.password = await hashPassword(user.password!);
+      if (
+        new Date(user.date_of_birth).getTime() >=
+        new Date().getTime() - 568025136000
+      ) {
+        throw new Error("你輸入的資料似乎有誤,請務必使用真實的出生日期。");
+      }
+
+      // if (user.email || user.date_of_birth || user.user_icon || user.gender || user.username == null) {
+      //   throw new Error("你輸入的資料似乎有誤,請填寫所有資料。");
+      // }
       // console.log(user);
+      // console.log(
+      //   new Date().getUTCFullYear() -
+      //     new Date(user.date_of_birth).getUTCFullYear()
+      // );
 
       const filename = path.join(
         process.cwd() /*, "..", ".."*/,
@@ -108,7 +118,7 @@ export class UserController extends UserRoutes {
       console.log(py_res_json);
 
       if (!py_res_json.isFace) {
-        throw new Error("AI無法識別相片中是否存在人面,請重新上載個人頭像!");
+        throw new Error("AI無法識別相片中是否存在面孔,請上載其他相片!");
       }
 
       let userId = await userService.enroll(user);

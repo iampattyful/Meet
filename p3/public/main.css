@@ -15,6 +15,10 @@ body {
   font-family: "Noto Sans HK", sans-serif;
 }
 
+.meet-text > .bi {
+  letter-spacing: -12px;
+}
+
 #logo-text {
   margin: 20px;
   font-weight: 500;
@@ -129,4 +133,12 @@ body {
   position: absolute;
   top: 0px;
   right: 0px;
+}
+
+.submit_edit_form_button{
+  margin:20px
+}
+
+.editForm{
+  margin-bottom: 200px;
 }
