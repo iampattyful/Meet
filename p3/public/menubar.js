@@ -67,7 +67,7 @@ async function submitEditFormButton() {
   let submit_edit_form_button = document.querySelector(
     ".submit_edit_form_button"
   );
-  submit_edit_form_button.addEventListener("submit", async function (event) {
+  submit_edit_form_button.addEventListener("click", async function (event) {
     event.preventDefault();
     let edit_form = document.querySelector(".editForm");
     const formData = new FormData(edit_form);
