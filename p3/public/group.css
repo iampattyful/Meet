@@ -5,6 +5,7 @@ body{
 
 .container{
     height: 100vh;
+    position: relative;
 }
 
 .groupContainer{
@@ -20,6 +21,7 @@ body{
     /* background: #81a6e0; */
     /* background: linear-gradient(135deg, #a6e0 0%, #007bc5 100%); */
     position: relative;
+    /* display:none; */
 }
 
 .title{

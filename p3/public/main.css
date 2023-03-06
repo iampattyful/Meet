@@ -76,7 +76,7 @@ body {
   width: auto;
   height: auto;
 }
-.writeBox {
+/* .writeBox {
   width: 100%;
   border-radius: 10px;
 }
@@ -84,7 +84,7 @@ body {
   resize: none;
   width: 100%;
   border-radius: 10px;
-}
+} */
 
 .content {
   height: 80vh;
@@ -120,6 +120,18 @@ body {
 
 .userImage {
   min-width: 100%;
+}
+.leftButton{
+  position: absolute;
+  left: 0px;
+  z-index: 1;
+
+}
+
+.rightButton{
+  position: absolute;
+  right: 0px;
+  z-index: 1;
 }
 .ImageTable > section {
   padding: 10px;

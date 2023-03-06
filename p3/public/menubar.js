@@ -64,8 +64,10 @@ function reg_exitEditForm_click_event() {
 // });
 
 async function submitEditFormButton() {
-  let submit_edit_form_button = document.querySelector(".submit_edit_form_button");
-  submit_edit_form_button.addEventListener("submit", async function (event) {
+  let submit_edit_form_button = document.querySelector(
+    ".submit_edit_form_button"
+  );
+  submit_edit_form_button.addEventListener("click", async function (event) {
     event.preventDefault();
     let edit_form = document.querySelector(".editForm");
     const formData = new FormData(edit_form);
@@ -88,10 +90,10 @@ async function loadProfile() {
   const obj = result.data;
   let editForm = document.querySelector(".editForm");
   editForm.innerHTML = `
-  <form class="container">
+  <div class="container">
       <div class="row">
-          <div class="col">
-              <button id="exitEditFormBtn">X</button>
+          <div class="col editBox">
+              <i class="fa-solid fa-circle-xmark" id="exitEditFormBtn"></i>
               <div class="image">
                 <div class="firstLineImage">
                   <label class="icon">
@@ -251,10 +253,11 @@ async function loadProfile() {
                   </label>
                 </div>
               </div>
+
               <button class="submit_edit_form_button">提交</button>
           </div>
       </div>
-  </form>
+  </div>
   `;
   height();
   weight();
