@@ -87,8 +87,7 @@ body {
 }
 
 .content {
-  grid-area: content;
-  height: fit-content;
+  height: 80vh;
   position: relative;
   display: flex;
   border: 1px solid;
@@ -102,13 +101,23 @@ body {
 .slider {
   position: relative;
   min-width: 100%;
+  overflow-y: auto;
 }
-.ImageTable {
+.image_content {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
+  border: 1px solid;
+  overflow: hidden;
+  height: 360px;
+  align-items: center;
+}
+.image_container {
+  display: flex;
+  width: 100%;
+  min-width: 360px;
 }
 .userImage {
-  width: 50%;
+  min-width: 100%;
 }
 .ImageTable > section {
   padding: 10px;

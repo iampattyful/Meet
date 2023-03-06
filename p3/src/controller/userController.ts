@@ -64,6 +64,16 @@ export class UserController extends UserRoutes {
     try {
       let user = (await formidablePromise(req)) as User;
       user.password = await hashPassword(user.password!);
+      if (
+        new Date(user.date_of_birth).getTime() >=
+        new Date().getTime() - 568025136000
+      ) {
+        throw new Error("你輸入的資料似乎有誤,請務必使用真實的出生日期。");
+      }
+
+      // if (user.email || user.date_of_birth || user.user_icon || user.gender || user.username == null) {
+      //   throw new Error("你輸入的資料似乎有誤,請填寫所有資料。");
+      // }
       // console.log(user);
       // console.log(
       //   new Date().getUTCFullYear() -

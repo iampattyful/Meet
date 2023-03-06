@@ -25,7 +25,6 @@ async function main() {
   reg_logout_click_event();
 }
 function reg_logout_click_event() {
-  console.log(123);
   logout_form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -123,10 +122,18 @@ async function handleFilterFormHttpRequest(formatFormData) {
     //   .subtract(obj.date_of_birth, "years")
     //   .format("YYYY-MM-DD");
     // create filtered users result here
+
     document.querySelector("#slider_container").innerHTML = json.data
-      .map(
-        (obj) => `
-        <div class="slider ">
+      .map((obj, index) => {
+        img_arr.push({
+          numOfImg: 6,
+        });
+        return json.data.length - 1 == index
+          ? `
+        <div >bye</div>
+        <div class="slider">
+         <button class="btn btn-outline-danger leftButton">left</button>
+         <button class="btn btn-outline-danger rightButton">right</button>
           <div class="ImageTable">
             
               <img class="userImage" id="userImage" src="${obj.user_icon}" />
@@ -138,14 +145,7 @@ async function handleFilterFormHttpRequest(formatFormData) {
               <img class="userImage" id="userImage" src="${obj.image4}" />
               <img class="userImage" id="userImage" src="${obj.image5}" />
             
-            <section>          
-              <div class="userName" id="userName">${obj.username}</div>
-              <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth.substring(
-                0,
-                10
-              )}</div>
-              <div >身高${obj.height}</div>
-              <div >${obj.weight}噸~你信唔信?</div>
+            <section> 
               <div class="buttonTable">
                 <button class="btn btn-outline-danger dislikeBtn">
                   <i class="bi bi-x-circle-fill"></i>
@@ -155,78 +155,159 @@ async function handleFilterFormHttpRequest(formatFormData) {
                 }>
                   <i class="bi bi-arrow-through-heart-fill"></i>
                 </button>
-              </div>
+              </div>     
+              <div class="userName" id="userName">${obj.username}</div>
+              <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
+                0,
+                10
+              )}</div>
+              <div >身高${obj.height}</div>
+              <div >${obj.weight}噸~你信唔信?</div>
+              <div class="about_me">${obj.about_me}</div>
+              <div >基本資料</div>
+                <div ><i class="bi bi-gender-ambiguous"></i>${
+                  obj.gender
+                }  <i class="bi bi-mortarboard-fill"></i>${
+              obj.education_level
+            }</div>
+
+              
             </section>
           </div>
       
       </div>
-      `
-      )
+        `
+          : `
+        <div class="slider">
+          
+          <section class="image_content">
+          <button class="btn btn-outline-danger leftButton">left</button>
+          <button class="btn btn-outline-danger rightButton">right</button>
+            <div id="image_container_${index}" class="image_container">
+              <img class="userImage" id="userImage" src="${obj.user_icon}"/>
+              <img class="userImage" id="userImage" src="${obj.image1}" />
+          
+              <img class="userImage" id="userImage" src="${obj.image2}" />
+              <img class="userImage" id="userImage" src="${obj.image3}" />
+            
+              <img class="userImage" id="userImage" src="${obj.image4}" />
+              <img class="userImage" id="userImage" src="${obj.image5}" />
+            </div>
+          </section>  
+          <section> 
+              <div class="buttonTable">
+                <button class="btn btn-outline-danger dislikeBtn">
+                  <i class="bi bi-x-circle-fill"></i>
+                </button>
+                <button class="btn btn-outline-success likeBtn" data-id=${
+                  obj.id
+                }>
+                  <i class="bi bi-arrow-through-heart-fill"></i>
+                </button>
+              </div>     
+              <div class="userName" id="userName">${obj.username}</div>
+              <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
+                0,
+                10
+              )}</div>
+              <div >身高${obj.height}</div>
+              <div >${obj.weight}噸~你信唔信?</div>
+              <div class="about_me">${obj.about_me}</div>
+              <div >基本資料</div>
+                <div ><i class="bi bi-gender-ambiguous"></i>${
+                  obj.gender
+                }  <i class="bi bi-mortarboard-fill"></i>${
+              obj.education_level
+            }</div>
+
+              
+          </section>
+          
+      
+      </div>
+      `;
+      })
       .join("");
-    // otherImage_left_btn_event();
-    // otherImage_right_btn_event();
+    /////////////////////////////////////
+
+    otherImage_left_btn_event();
+    otherImage_right_btn_event();
+    ///////////////////////////////////////////
+
     numOfSlider = document.querySelectorAll(".slider").length;
-    console.log(numOfSlider);
+
     reg_like_btn_event();
     reg_dislike_btn_event();
   } else {
     alert(json.errMess);
   }
 }
-/////////////////////////////////////////////////////////////////////
-//when user every image slider
+let img_arr = [];
+let img_pos = 0;
+function otherImage_left_btn_event() {
+  // numOfImg = document.querySelectorAll("#image_container_0").length;
+  let leftBtn = document.querySelectorAll(".leftButton");
+  for (let btn of leftBtn) {
+    btn.addEventListener("click", (e) => {
+      if (img_pos <= 0) {
+        return;
+      }
 
-/*   <button class="btn btn-outline-danger leftButton">left</button>
-     <button class="btn btn-outline-danger rightButton">right</button>*/
+      img_pos--;
+      prev_img_slider();
+    });
+  }
+}
 
-// let userEveryImage = 0;
-// function nextUserSlider(id) {
-//   const slider_userImage = document.querySelector("#slider_userImage");
-//   userEveryImage = parseInt(userEveryImage);
-//   let slider_width =
-//     document.querySelectorAll(".slider")[`${userEveryImage}`].clientWidth;
-//   slider_userImage.style.transition = "transform 0.5s ease-in-out 0s";
-//   slider_userImage.style.transform = `translate(-${
-//     slider_width * userEveryImage
-//   }px, 0px)`;
-// }
+function otherImage_right_btn_event() {
+  let rightBtn = document.querySelectorAll(".rightButton");
+  for (let btn of rightBtn) {
+    btn.addEventListener("click", (e) => {
+      if (6 <= img_pos + 1) {
+        return;
+      }
 
-// function otherImage_left_btn_event() {
-//   let leftBtn = document.querySelectorAll(".leftButton");
-//   for (let btn of leftBtn) {
-//     btn.addEventListener("click", (e) => {
-//       userEveryImage++;
-//       if (numOfSlider <= userEveryImage) {
-//         return;
-//       }
-//       nextUserSlider();
-//     });
-//   }
-// }
+      img_pos++;
+      next_img_slider();
+    });
+  }
+}
+function prev_img_slider() {
+  img_pos = parseInt(img_pos);
 
-// function otherImage_right_btn_event() {
-//   let rightBtn = document.querySelectorAll(".rightButton");
-//   for (let btn of rightBtn) {
-//     btn.addEventListener("click", (e) => {
-//       userEveryImage--;
-//       if (numOfSlider <= userEveryImage) {
-//         return;
-//       }
-//       nextUserSlider();
-//     });
-//   }
-// }
+  const img_container = document.querySelector(`#image_container_${pos}`);
+  let img_width = img_container.children[img_pos].clientWidth;
 
+  img_container.style.transition = "transform 0.5s ease-in-out 0s";
+  img_container.style.transform = `translate(-${img_width * img_pos}px, 0px)`;
+}
+function next_img_slider() {
+  img_pos = parseInt(img_pos);
+
+  const img_container = document.querySelector(`#image_container_${pos}`);
+  let img_width = img_container.children[img_pos - 1].clientWidth;
+
+  img_container.style.transition = "transform 0.5s ease-in-out 0s";
+  img_container.style.transform = `translate(-${img_width * img_pos}px, 0px)`;
+}
 //////////////////////////////////////////////////////////////////////////
 
 // when click filter submit button, redirect to slider page
 let pos = 0;
-function nextSlider(id) {
+
+function nextSlider() {
   const slider_container = document.querySelector("#slider_container");
+
   pos = parseInt(pos);
 
-  let slider_width = document.querySelectorAll(".slider")[`${pos}`].clientWidth;
-  console.log(document.querySelectorAll(".slider")[`${pos}`], "slider width");
+  let slider_width;
+  if (pos <= 0) {
+    slider_width = document.querySelectorAll(".slider")[`${pos}`].clientWidth;
+  } else {
+    slider_width =
+      document.querySelectorAll(".slider")[`${pos - 1}`].clientWidth;
+  }
+
   slider_container.style.transition = "transform 0.5s ease-in-out 0s";
   slider_container.style.transform = `translate(-${slider_width * pos}px, 0px)`;
 }
@@ -242,6 +323,7 @@ function reg_like_btn_event() {
         return;
       }
       nextSlider();
+      img_pos = 0;
       ///////////////////////////////////////
       const likeUser = e.currentTarget;
       const id = likeUser.dataset.id;
@@ -267,6 +349,7 @@ function reg_dislike_btn_event() {
         return;
       }
       nextSlider();
+      img_pos = 0;
     });
   }
 }
@@ -427,3 +510,19 @@ function display_age() {
 }
 
 /* End of double input range slider */
+
+// window.onload = function (){
+//   nextImage()
+
+// }
+// let imageIdx = 0
+// function nextImage(){
+//   let ImageMenu = document.querySelectorAll("div.ImageTable > img");
+//   for(let x = 0; x < ImageMenu.length ; x++){
+//     ImageMenu[x].addEventListener("click",function(event){
+//       ImageMenu[i].classList.add("isHide");
+//       ImageMenu[imageIdx].classList.remove("isGide");
+//       imageIdx = x ;
+//     })
+//   }
+// }

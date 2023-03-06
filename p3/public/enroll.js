@@ -64,9 +64,54 @@ enrollForm.addEventListener("submit", async (event) => {
     body: formData,
   });
   const res_json = await res.json();
-
   console.log(res_json);
-  if (!res_json.isErr) {
+
+  if (
+    res_json.errMess ===
+    'insert into "users" ("date_of_birth", "email", "gender", "is_admin", "is_public", "password", "user_icon", "username") values ($1, $2, $3, $4, $5, $6, $7, $8) returning "id" - duplicate key value violates unique constraint "users_email_unique" - /enroll'
+  ) {
+    // Sweet alert for duplicate email
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "此電郵地址已被註冊",
+      confirmButtonColor: "#ff69b4",
+    });
+  } else if (
+    res_json.errMess ===
+    "AI無法識別相片中是否存在面孔,請上載其他相片! - /enroll"
+  ) {
+    // Sweet alert for no face detected
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "AI無法識別相片中是否存在面孔,請上載其他相片!",
+      confirmButtonColor: "#ff69b4",
+    });
+  } else if (
+    res_json.errMess ===
+    "你輸入的資料似乎有誤,請務必使用真實的出生日期。 - /enroll"
+  ) {
+    // console.log(res_json.data+ "null");
+    // Sweet alert for null data
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "你輸入的資料似乎有誤,請務必使用真實的出生日期。",
+      confirmButtonColor: "#ff69b4",
+    });
+  // } else if (
+  //   res_json.errMess === "你輸入的資料似乎有誤,請填寫所有資料。 - /enroll"
+  // ) {
+  //   // console.log(res_json.data+ "null");
+  //   // Sweet alert for null data
+  //   Swal.fire({
+  //     icon: "error",
+  //     title: "Oops...",
+  //     text: "你輸入的資料似乎有誤,請填寫所有資料。",
+  //     confirmButtonColor: "#ff69b4",
+  //   });
+  } else if (!res_json.isErr) {
     // Sweet alert for enroll success
     let timerInterval;
     await Swal.fire({
@@ -91,43 +136,12 @@ enrollForm.addEventListener("submit", async (event) => {
       }
     });
     window.location.href = "/main.html";
-  } else if (
-    res_json.errMess ===
-    'insert into "users" ("date_of_birth", "email", "gender", "is_admin", "is_public", "password", "user_icon", "username") values ($1, $2, $3, $4, $5, $6, $7, $8) returning "id" - duplicate key value violates unique constraint "users_email_unique" - /enroll'
-  ) {
-    // Sweet alert for duplicate email
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "此電郵地址已被註冊",
-      confirmButtonColor: "#ff69b4",
-    });
-  } else if (
-    res_json.errMess ===
-    "AI無法識別相片中是否存在面孔,請上載其他相片! - /enroll"
-  ) {
-    // Sweet alert for no face detected
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "AI無法識別相片中是否存在面孔,請上載其他相片!",
-      confirmButtonColor: "#ff69b4",
-    });
-  } else if (res_json.data === null) {
-    // console.log(res_json.data+ "null");
-    // Sweet alert for null data
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "請正確填寫所有欄位!",
-      confirmButtonColor: "#ff69b4",
-    });
   } else {
     // Sweet alert for other error
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "請重試!",
+      text: "發生錯誤,請重試!",
       confirmButtonColor: "#ff69b4",
     });
   }
