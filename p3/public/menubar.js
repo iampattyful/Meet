@@ -88,10 +88,9 @@ async function loadProfile() {
   });
   const result = await res.json();
   const obj = result.data;
-  console.log(result);
   let editForm = document.querySelector(".editForm");
   editForm.innerHTML = `
-  <form class="container">
+  <div class="container">
       <div class="row">
           <div class="col">
               <button id="exitEditFormBtn">X</button>
@@ -258,7 +257,7 @@ async function loadProfile() {
               <button class="submit_edit_form_button">提交</button>
           </div>
       </div>
-  </form>
+  </div>
   `;
   height();
   weight();
