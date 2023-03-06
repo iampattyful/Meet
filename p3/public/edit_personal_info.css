@@ -46,11 +46,11 @@
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: #444444;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px #444444;
 }
 
 input:checked + .slider:before {
@@ -86,15 +86,21 @@ input:checked + .slider:before {
 .image > div > label > i {
   position: absolute;
   font-size: 25px;
+  color: black!important;
 }
 
 .img-thumbnail {
+  display: block;
   min-width: 70px;
   min-height: 100px;
   width: auto;
   height: auto;
   max-width: 140px;
   max-height: 200px;
+  padding: 0.25rem;
+  background-color:#fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
 }
 
 .Icon {
@@ -102,4 +108,80 @@ input:checked + .slider:before {
   top: 0px;
   left: 0px;
   display: none;
+}
+
+.editForm{
+  position: absolute;
+  background-color: #0000006e;
+  top:0px;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  overflow: scroll;
+  padding:20px
+}
+
+.isHide{
+  display: none;
+}
+
+.writeBox {
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px;
+  padding-left: 10px;
+}
+.writeBoxAboutMe {
+  resize: none;
+  width: 100%;
+  border-radius: 10px;
+}
+
+#exitEditFormBtn{
+  background-color: #ffffff;
+  border-radius: 50%;
+  font-size: 25px;
+  margin: 15px;
+}
+
+.logout_form{
+  position: absolute;
+  z-index: 5;
+  bottom:80px;
+  right:40px;
+  color: #ffffff;
+  /* display: flex;
+  justify-content: end */
+}
+
+.logout_form > button{
+  color: white;
+}
+
+#location{
+  border-radius: 10px;
+  padding: 5px;
+}
+
+#education_level{
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.editBox > div > div{
+  color:#ffffff;
+  margin:5px;
+}
+
+.form-range::-webkit-scrollbar-button{
+  color: #222222;
+}
+
+.submit_edit_form_button{
+  background-color: white;
+  font-size: 15px;
+  padding:5px 10px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  border-radius: 10px;
 }

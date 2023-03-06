@@ -92,8 +92,8 @@ async function loadProfile() {
   editForm.innerHTML = `
   <div class="container">
       <div class="row">
-          <div class="col">
-              <button id="exitEditFormBtn">X</button>
+          <div class="col editBox">
+              <i class="fa-solid fa-circle-xmark" id="exitEditFormBtn"></i>
               <div class="image">
                 <div class="firstLineImage">
                       <label class="icon">

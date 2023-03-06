@@ -76,7 +76,7 @@ body {
   width: auto;
   height: auto;
 }
-.writeBox {
+/* .writeBox {
   width: 100%;
   border-radius: 10px;
 }
@@ -84,7 +84,7 @@ body {
   resize: none;
   width: 100%;
   border-radius: 10px;
-}
+} */
 
 .content {
   height: 80vh;
@@ -116,6 +116,8 @@ body {
   width: 100%;
   min-width: 360px;
 }
+
+
 .userImage {
   min-width: 100%;
 }
