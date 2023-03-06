@@ -125,3 +125,11 @@ body {
   top: 0px;
   right: 0px;
 }
+
+.submit_edit_form_button{
+  margin:20px
+}
+
+.editForm{
+  margin-bottom: 200px;
+}

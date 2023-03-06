@@ -25,7 +25,7 @@ async function renderMenuBar() {
                 <i class="fa-solid fa-user-pen"></i>
               </div>
   `;
-  await loadProfile()
+  await loadProfile();
   await reg_open_editProfile_click_event();
 }
 
@@ -63,9 +63,11 @@ function reg_exitEditForm_click_event() {
 // window.addEventListener("DOMContentLoaded", (event) => {
 // });
 
-async function submitEditFormButton(){
-  let submit_edit_form_button = document.querySelector(".submit_edit_form_button");
-  submit_edit_form_button.addEventListener("click", async function (event) {
+async function submitEditFormButton() {
+  let submit_edit_form_button = document.querySelector(
+    ".submit_edit_form_button"
+  );
+  submit_edit_form_button.addEventListener("submit", async function (event) {
     event.preventDefault();
     let edit_form = document.querySelector(".editForm");
     const formData = new FormData(edit_form);
@@ -73,23 +75,23 @@ async function submitEditFormButton(){
       method: "PUT",
       body: formData,
     });
-  
+
     const result = await res.json();
     console.log(result);
-    afterSubmit()
+    afterSubmit();
   });
 }
 
-async function loadProfile(){
-  const res = await fetch ("/editProfile/loadProfile",{
-      method:"GET"
+async function loadProfile() {
+  const res = await fetch("/editProfile/loadProfile", {
+    method: "GET",
   });
-  const result = await res.json()
-  const obj =result.data
-  console.log(result)
-  let editForm = document.querySelector(".editForm")
+  const result = await res.json();
+  const obj = result.data;
+  console.log(result);
+  let editForm = document.querySelector(".editForm");
   editForm.innerHTML = `
-  <div class="container">
+  <form class="container">
       <div class="row">
           <div class="col">
               <button id="exitEditFormBtn">X</button>
@@ -256,10 +258,10 @@ async function loadProfile(){
               <button class="submit_edit_form_button">提交</button>
           </div>
       </div>
-  </div>
-  `
-  height()
-  weight()
+  </form>
+  `;
+  height();
+  weight();
   //icon
   button_add_event1();
   button_add_event2();
@@ -267,14 +269,12 @@ async function loadProfile(){
   button_add_event4();
   button_add_event5();
   button_add_event6();
-  
-  submitEditFormButton()
+
+  submitEditFormButton();
 }
 
-
-
 //hight
-function height(){
+function height() {
   let height = 160;
   let newHeight = document.querySelector("#numOfHeight");
   document.querySelector("#height").addEventListener("mouseup", () => {
@@ -284,7 +284,7 @@ function height(){
 }
 
 //weight
-function weight(){
+function weight() {
   let weight = 50;
   let newWeight = document.querySelector("#numOfWeight");
   document.querySelector("#weight").addEventListener("mouseup", () => {
@@ -318,68 +318,70 @@ let edit_form_image6 = document.querySelector("#editForm");
 async function button_add_event1() {
   let file_add_input = document.querySelector("#icon_input1");
   file_add_input.addEventListener("change", (event) => {
-      if (event.target.files[0]) {
+    if (event.target.files[0]) {
       console.log(2);
-    document.querySelector("#icon_add1").src = URL.createObjectURL(
-      event.target.files[0]
-    );
-  }
-});
+      document.querySelector("#icon_add1").src = URL.createObjectURL(
+        event.target.files[0]
+      );
+    }
+  });
 }
 async function button_add_event2() {
-let file_add_input = document.querySelector("#icon_input2");
-file_add_input.addEventListener("change", (event) => {
-  if (event.target.files[0]) {
-    document.querySelector("#icon_add2").src = URL.createObjectURL(
-      event.target.files[0]
-    );
-  }
-});
+  let file_add_input = document.querySelector("#icon_input2");
+  file_add_input.addEventListener("change", (event) => {
+    if (event.target.files[0]) {
+      document.querySelector("#icon_add2").src = URL.createObjectURL(
+        event.target.files[0]
+      );
+    }
+  });
 }
 async function button_add_event3() {
-let file_add_input = document.querySelector("#icon_input3");
-file_add_input.addEventListener("change", (event) => {
-  if (event.target.files[0]) {
-    document.querySelector("#icon_add3").src = URL.createObjectURL(
-      event.target.files[0]
-    );
-  }
-});
+  let file_add_input = document.querySelector("#icon_input3");
+  file_add_input.addEventListener("change", (event) => {
+    if (event.target.files[0]) {
+      document.querySelector("#icon_add3").src = URL.createObjectURL(
+        event.target.files[0]
+      );
+    }
+  });
 }
 async function button_add_event4() {
-let file_add_input = document.querySelector("#icon_input4");
-file_add_input.addEventListener("change", (event) => {
-  if (event.target.files[0]) {
-    document.querySelector("#icon_add4").src = URL.createObjectURL(
-      event.target.files[0]
-    );
-  }
-});
+  let file_add_input = document.querySelector("#icon_input4");
+  file_add_input.addEventListener("change", (event) => {
+    if (event.target.files[0]) {
+      document.querySelector("#icon_add4").src = URL.createObjectURL(
+        event.target.files[0]
+      );
+    }
+  });
 }
 async function button_add_event5() {
-let file_add_input = document.querySelector("#icon_input5");
-file_add_input.addEventListener("change", (event) => {
-  if (event.target.files[0]) {
-    document.querySelector("#icon_add5").src = URL.createObjectURL(
-      event.target.files[0]
-    );
-  }
-});
+  let file_add_input = document.querySelector("#icon_input5");
+  file_add_input.addEventListener("change", (event) => {
+    if (event.target.files[0]) {
+      document.querySelector("#icon_add5").src = URL.createObjectURL(
+        event.target.files[0]
+      );
+    }
+  });
 }
 async function button_add_event6() {
-let file_add_input = document.querySelector("#icon_input6");
-file_add_input.addEventListener("change", (event) => {
-  if (event.target.files[0]) {
-    document.querySelector("#icon_add6").src = URL.createObjectURL(
-      event.target.files[0]
-    );
-  }
-});
+  let file_add_input = document.querySelector("#icon_input6");
+  file_add_input.addEventListener("change", (event) => {
+    if (event.target.files[0]) {
+      document.querySelector("#icon_add6").src = URL.createObjectURL(
+        event.target.files[0]
+      );
+    }
+  });
 }
 ////////////////////////////////////////////////////////////////////////
 
 function afterSubmit() {
-  let submit_edit_form_button = document.querySelector(".submit_edit_form_button");
+  let submit_edit_form_button = document.querySelector(
+    ".submit_edit_form_button"
+  );
   submit_edit_form_button.addEventListener("click", (e) => {
     e.preventDefault();
     let edit_form = document.querySelector(".editForm");
