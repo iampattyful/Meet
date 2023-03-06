@@ -371,7 +371,7 @@ updateFilter.addEventListener("submit", async (event) => {
   }
   console.log(formatFormData);
   await handleFilterFormHttpRequest(formatFormData);
-  //window.location = "/main.html";
+  window.location = "/main.html";
 });
 
 /* Start of double input range slider */
