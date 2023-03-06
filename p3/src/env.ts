@@ -7,6 +7,7 @@ config({ path: p });
 
 export const env_config = {
   PORT:8080,
+
   POSTGRES_DB: "",
   POSTGRES_USER: "",
   POSTGRES_PASSWORD: "",

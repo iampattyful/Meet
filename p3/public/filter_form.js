@@ -354,6 +354,7 @@ function reg_dislike_btn_event() {
 
 const updateFilter = document.querySelector("#filter-form");
 updateFilter.addEventListener("submit", async (event) => {
+  
   event.preventDefault(); // To prevent the form from submitting synchronously
   let formData = new FormData(updateFilter);
   formData.append("minAge", minAge);
