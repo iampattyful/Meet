@@ -1,13 +1,21 @@
 body{
   margin: 0px;
   background-repeat:repeat-x;
-    background-attachment:fixed;
-    background-position: left top;
-    position:absolute;
-    
-    /* height:610px;
-    width: 300px; */
-    margin:0;
+  background-attachment:fixed;
+  background-position: left top;
+  position:absolute;
+  
+  /* overflow-y: hidden;
+  height: 100%;
+  left:0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  touch-action: none; */
+
+  /* height:610px;
+  width: 300px; */
+  /* margin:0; */
 }
 
 
