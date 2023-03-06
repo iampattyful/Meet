@@ -15,8 +15,7 @@ async function filter_form_main() {
   await handleFilterFormHttpRequest(formatFormData);
 }
 
-
-//////////////////////////////////////////////////
+//////////////////////////////////////////////////log out
 let login_form = document.querySelector(".login_form");
 let logout_form = document.querySelector(".logout_form");
 let filterBtn = document.querySelector(".btn");
@@ -43,7 +42,7 @@ function reg_logout_click_event() {
     user = res_json.data;
 
     if (!res_json.isErr) {
-      render_all_form();
+      render_all_form1();
       window.location.href = "/";
     } else {
       alert(res_json.errMess);
@@ -51,7 +50,7 @@ function reg_logout_click_event() {
   });
 }
 
-async function render_all_form() {
+async function render_all_form1() {
   if (user.isLogin) {
     login_form.classList.add("isHide");
     logout_form.classList.remove("isHide");
@@ -62,7 +61,7 @@ async function render_all_form() {
     filterBtn.classList.add("isHide");
   }
 }
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////// 
 async function getCurrentUser() {
   let res = await fetch("user/getCurrentUser");
   let res_json = await res.json();
@@ -73,10 +72,10 @@ async function getCurrentUser() {
   } else {
     user = res_json.data;
   }
-  render_all_form();
+  render_all_form2();
 }
 
-async function render_all_form() {
+async function render_all_form2() {
   let filterBtn = document.querySelector(".btn");
   if (user.isLogin) {
     filterBtn.classList.remove("isHide");
@@ -119,9 +118,6 @@ async function handleFilterFormHttpRequest(formatFormData) {
   const json = await res.json();
 
   if (!json.isErr) {
-    console.log(json.data[0].date_of_birth);
-
-
     // const age = await moment()
     //   .subtract(obj.date_of_birth, "years")
     //   .format("YYYY-MM-DD");
@@ -130,25 +126,27 @@ async function handleFilterFormHttpRequest(formatFormData) {
       .map(
         (obj) => `
         <div class="slider ">
-        
-       
-            <div class="ImageTable">
-              <div class="image_group">
-                <img class="userImage" id="userImage" src="${obj.user_icon}" />
-                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
-              </div>
-              <div class="image_group">
-                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
-                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
-              </div>
-              <div class="image_group">
-                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
-                <img class="userImage" id="userImage" src="assets/bugCat5.gif" />
-              </div>
+          <div class="ImageTable">
+            <div class="image_group">
+              <img class="userImage" id="userImage" src="${obj.user_icon}" />
+              <img class="userImage" id="userImage" src="${obj.image1}" />
+            </div>
+            <div class="image_group">
+              <img class="userImage" id="userImage" src="${obj.image2}" />
+              <img class="userImage" id="userImage" src="${obj.image3}" />
+            </div>
+            <div class="image_group">
+              <img class="userImage" id="userImage" src="${obj.image4}" />
+              <img class="userImage" id="userImage" src="${obj.image5}" />
             </div>
           
             <div class="userName" id="userName">${obj.username}</div>
-            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
+            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth.substring(
+              0,
+              10
+            )}</div>
+            <div >身高${obj.height}</div>
+              <div >${obj.weight}噸~你信唔信?</div>
             <div class="buttonTable">
               <button class="btn btn-outline-danger dislikeBtn">
                 <i class="bi bi-x-circle-fill"></i>
@@ -177,43 +175,43 @@ async function handleFilterFormHttpRequest(formatFormData) {
 /*   <button class="btn btn-outline-danger leftButton">left</button>
      <button class="btn btn-outline-danger rightButton">right</button>*/
 
-let userEveryImage = 0;
-function nextUserSlider(id) {
-  const slider_userImage = document.querySelector("#slider_userImage");
-  userEveryImage = parseInt(userEveryImage);
-  let slider_width =
-    document.querySelectorAll(".slider")[`${userEveryImage}`].clientWidth;
-  slider_userImage.style.transition = "transform 0.5s ease-in-out 0s";
-  slider_userImage.style.transform = `translate(-${
-    slider_width * userEveryImage
-  }px, 0px)`;
-}
+// let userEveryImage = 0;
+// function nextUserSlider(id) {
+//   const slider_userImage = document.querySelector("#slider_userImage");
+//   userEveryImage = parseInt(userEveryImage);
+//   let slider_width =
+//     document.querySelectorAll(".slider")[`${userEveryImage}`].clientWidth;
+//   slider_userImage.style.transition = "transform 0.5s ease-in-out 0s";
+//   slider_userImage.style.transform = `translate(-${
+//     slider_width * userEveryImage
+//   }px, 0px)`;
+// }
 
-function otherImage_left_btn_event() {
-  let leftBtn = document.querySelectorAll(".leftButton");
-  for (let btn of leftBtn) {
-    btn.addEventListener("click", (e) => {
-      userEveryImage++;
-      if (numOfSlider <= userEveryImage) {
-        return;
-      }
-      nextUserSlider();
-    });
-  }
-}
+// function otherImage_left_btn_event() {
+//   let leftBtn = document.querySelectorAll(".leftButton");
+//   for (let btn of leftBtn) {
+//     btn.addEventListener("click", (e) => {
+//       userEveryImage++;
+//       if (numOfSlider <= userEveryImage) {
+//         return;
+//       }
+//       nextUserSlider();
+//     });
+//   }
+// }
 
-function otherImage_right_btn_event() {
-  let rightBtn = document.querySelectorAll(".rightButton");
-  for (let btn of rightBtn) {
-    btn.addEventListener("click", (e) => {
-      userEveryImage--;
-      if (numOfSlider <= userEveryImage) {
-        return;
-      }
-      nextUserSlider();
-    });
-  }
-}
+// function otherImage_right_btn_event() {
+//   let rightBtn = document.querySelectorAll(".rightButton");
+//   for (let btn of rightBtn) {
+//     btn.addEventListener("click", (e) => {
+//       userEveryImage--;
+//       if (numOfSlider <= userEveryImage) {
+//         return;
+//       }
+//       nextUserSlider();
+//     });
+//   }
+// }
 
 //////////////////////////////////////////////////////////////////////////
 

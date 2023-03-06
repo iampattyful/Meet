@@ -1,6 +1,8 @@
 .login_form,
 .logout_form {
-  border: 1px solid #222222;
+  /* border: 1px solid #222222; */
+  display: flex;
+  justify-content: end;
 }
 
 body {
@@ -11,6 +13,36 @@ body {
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
   font-family: "Noto Sans HK", sans-serif;
+}
+
+#logo-text {
+  margin: 20px;
+  font-weight: 500;
+}
+
+.meet-logo {
+  object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.meet-text {
+  font-size: 40px;
+  font-family: "Love Ya Like A Sister", cursive;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  padding-left: 10px;
+}
+
+#filterBtn {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .carousel-control-next {
