@@ -96,35 +96,35 @@ async function loadProfile() {
               <i class="fa-solid fa-circle-xmark" id="exitEditFormBtn"></i>
               <div class="image">
                 <div class="firstLineImage">
-                  <label class="icon">
-                      <img src="" class="img-thumbnail img-thumbnail" id="icon_add1"/>
+                      <label class="icon">
+                      <img src="${obj.user_icon}" class="img-thumbnail img-thumbnail" id="icon_add1"/>                
                       <input type="file" id="icon_input1" class="Icon" name="user_icon"/>
                       <i class="fa-regular fa-square-plus"></i>
                   </label>
                   <label class="image1">
-                      <img src="" class="img-thumbnail img-thumbnail" id="icon_add2" />
+                      <img src="${obj.image1}" class="img-thumbnail img-thumbnail" id="icon_add2" />
                       <input type="file" id="icon_input2" class="Icon" name="image1" />
                       <i class="fa-regular fa-square-plus"></i>
                   </label>
                   <label class="image2">
-                      <img src="" class="img-thumbnail img-thumbnail" id="icon_add3" />
+                      <img src="${obj.image2}" class="img-thumbnail img-thumbnail" id="icon_add3" />
                       <input type="file" id="icon_input3" class="Icon" name="image2" />
                       <i class="fa-regular fa-square-plus"></i>
                   </label>
               </div>
                 <div class="secondLineImage">
                   <label class="image3">
-                      <img src="" class="img-thumbnail img-thumbnail" id="icon_add4" />
+                      <img src="${obj.image3}" class="img-thumbnail img-thumbnail" id="icon_add4" />
                       <input type="file" id="icon_input4" class="Icon" name="image3" />
                       <i class="fa-regular fa-square-plus"></i>
                   </label>
                   <label class="image4">
-                      <img src="" class="img-thumbnail img-thumbnail" id="icon_add5" />
+                      <img src="${obj.image4}" class="img-thumbnail img-thumbnail" id="icon_add5" />
                       <input type="file" id="icon_input5" class="Icon" name="image4" />
                       <i class="fa-regular fa-square-plus"></i>
                   </label>
                   <label class="image5">
-                      <img src="" class="img-thumbnail img-thumbnail" id="icon_add6" />
+                      <img src="${obj.image5}" class="img-thumbnail img-thumbnail" id="icon_add6" />
                        <input type="file" id="icon_input6" class="Icon" name="image5" />
                       <i class="fa-regular fa-square-plus"></i>
                   </label>
