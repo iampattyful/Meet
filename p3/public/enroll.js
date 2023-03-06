@@ -2,7 +2,6 @@
 // Function to calculate the minimum date for the date input to prevent user to register with age < 18
 // not support on mobile safari
 window.onload = function () {
-  
   var date = new Date();
   var dd = date.getDate();
   var mm = date.getMonth() + 1;
@@ -94,17 +93,6 @@ enrollForm.addEventListener("submit", async (event) => {
     window.location.href = "/main.html";
   } else if (
     res_json.errMess ===
-    "AI無法識別相片中是否存在面孔,請上載其他相片! - /enroll"
-  ) {
-    // Sweet alert for no face detected
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "AI無法識別相片中是否存在面孔,請上載其他相片!",
-      confirmButtonColor: "#ff69b4",
-    });
-  } else if (
-    res_json.errMess ===
     'insert into "users" ("date_of_birth", "email", "gender", "is_admin", "is_public", "password", "user_icon", "username") values ($1, $2, $3, $4, $5, $6, $7, $8) returning "id" - duplicate key value violates unique constraint "users_email_unique" - /enroll'
   ) {
     // Sweet alert for duplicate email
@@ -112,6 +100,17 @@ enrollForm.addEventListener("submit", async (event) => {
       icon: "error",
       title: "Oops...",
       text: "此電郵地址已被註冊",
+      confirmButtonColor: "#ff69b4",
+    });
+  } else if (
+    res_json.errMess ===
+    "AI無法識別相片中是否存在面孔,請上載其他相片! - /enroll"
+  ) {
+    // Sweet alert for no face detected
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "AI無法識別相片中是否存在面孔,請上載其他相片!",
       confirmButtonColor: "#ff69b4",
     });
   } else if (res_json.data === null) {

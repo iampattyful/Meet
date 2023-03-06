@@ -65,6 +65,10 @@ export class UserController extends UserRoutes {
       let user = (await formidablePromise(req)) as User;
       user.password = await hashPassword(user.password!);
       // console.log(user);
+      // console.log(
+      //   new Date().getUTCFullYear() -
+      //     new Date(user.date_of_birth).getUTCFullYear()
+      // );
 
       const filename = path.join(
         process.cwd() /*, "..", ".."*/,
