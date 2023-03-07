@@ -1,11 +1,8 @@
-let login_form = document.querySelector(".login_form");
-
-let logout_form = document.querySelector(".logout_form");
-
 let userCard = document.querySelector(".slider");
 
 window.addEventListener("DOMContentLoaded", (event) => {
   filter_form_main();
+  main();
 });
 
 async function filter_form_main() {
@@ -16,22 +13,17 @@ async function filter_form_main() {
     minAge: "18",
   };
   await handleFilterFormHttpRequest(formatFormData);
+}
+
+//////////////////////////////////////////////////log out
+let login_form = document.querySelector(".login_form");
+let logout_form = document.querySelector(".logout_form");
+let filterBtn = document.querySelector(".btn");
+
+async function main() {
+  await getCurrentUser();
   reg_logout_click_event();
 }
-
-async function getCurrentUser() {
-  let res = await fetch("user/getCurrentUser");
-  let res_json = await res.json();
-  console.log(res_json);
-  if (res_json.isErr) {
-    console.log(res_json.errMess);
-    user = { isLogin: false };
-  } else {
-    user = res_json.data;
-  }
-  render_all_form();
-}
-
 function reg_logout_click_event() {
   logout_form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -49,21 +41,45 @@ function reg_logout_click_event() {
     user = res_json.data;
 
     if (!res_json.isErr) {
+      render_all_form1();
       window.location.href = "/";
     } else {
       alert(res_json.errMess);
+      window.location.href = "/";
     }
   });
 }
 
-async function render_all_form() {
-  let filterBtn = document.querySelector(".btn");
+async function render_all_form1() {
   if (user.isLogin) {
     login_form.classList.add("isHide");
+    logout_form.classList.remove("isHide");
     filterBtn.classList.remove("isHide");
   } else {
     login_form.classList.remove("isHide");
     logout_form.classList.add("isHide");
+    filterBtn.classList.add("isHide");
+  }
+}
+/////////////////////////////////////////////////////
+async function getCurrentUser() {
+  let res = await fetch("user/getCurrentUser");
+  let res_json = await res.json();
+  console.log(res_json);
+  if (res_json.isErr) {
+    console.log(res_json.errMess);
+    user = { isLogin: false };
+  } else {
+    user = res_json.data;
+  }
+  render_all_form2();
+}
+
+async function render_all_form2() {
+  let filterBtn = document.querySelector(".btn");
+  if (user.isLogin) {
+    filterBtn.classList.remove("isHide");
+  } else {
     filterBtn.classList.add("isHide");
   }
 }
@@ -107,6 +123,7 @@ async function handleFilterFormHttpRequest(formatFormData) {
     //   .subtract(obj.date_of_birth, "years")
     //   .format("YYYY-MM-DD");
     // create filtered users result here
+
     document.querySelector("#slider_container").innerHTML = json.data
       .map((obj, index) => {
         img_arr.push({
@@ -228,37 +245,33 @@ async function handleFilterFormHttpRequest(formatFormData) {
       `;
       })
       .join("");
+    /////////////////////////////////////
+
     otherImage_left_btn_event();
     otherImage_right_btn_event();
+    ///////////////////////////////////////////
+
+    numOfSlider = document.querySelectorAll(".slider").length;
+
     reg_like_btn_event();
     reg_dislike_btn_event();
   } else {
     alert(json.errMess);
   }
 }
-/////////////////////////////////////////////////////////////////////
-//when user every image slider
-let userEveryImage = 0;
-function nextUserSlider(id) {
-  const slider_userImage = document.querySelector("#slider_userImage");
-  userEveryImage = parseInt(userEveryImage);
-  let slider_width =
-    document.querySelectorAll(".slider")[`${userEveryImage}`].clientWidth;
-  slider_userImage.style.transition = "transform 0.5s ease-in-out 0s";
-  slider_userImage.style.transform = `translate(-${
-    slider_width * userEveryImage
-  }px, 0px)`;
-}
-
+let img_arr = [];
+let img_pos = 0;
 function otherImage_left_btn_event() {
+  // numOfImg = document.querySelectorAll("#image_container_0").length;
   let leftBtn = document.querySelectorAll(".leftButton");
   for (let btn of leftBtn) {
     btn.addEventListener("click", (e) => {
-      userEveryImage++;
-      if (numOfSlider <= userEveryImage) {
+      if (img_pos <= 0) {
         return;
       }
-      nextUserSlider();
+
+      img_pos--;
+      prev_img_slider();
     });
   }
 }
@@ -267,23 +280,51 @@ function otherImage_right_btn_event() {
   let rightBtn = document.querySelectorAll(".rightButton");
   for (let btn of rightBtn) {
     btn.addEventListener("click", (e) => {
-      userEveryImage--;
-      if (numOfSlider <= userEveryImage) {
+      if (6 <= img_pos + 1) {
         return;
       }
-      nextUserSlider();
+
+      img_pos++;
+      next_img_slider();
     });
   }
 }
+function prev_img_slider() {
+  img_pos = parseInt(img_pos);
 
+  const img_container = document.querySelector(`#image_container_${pos}`);
+  let img_width = img_container.children[img_pos].clientWidth;
+
+  img_container.style.transition = "transform 0.5s ease-in-out 0s";
+  img_container.style.transform = `translate(-${img_width * img_pos}px, 0px)`;
+}
+function next_img_slider() {
+  img_pos = parseInt(img_pos);
+
+  const img_container = document.querySelector(`#image_container_${pos}`);
+  let img_width = img_container.children[img_pos - 1].clientWidth;
+
+  img_container.style.transition = "transform 0.5s ease-in-out 0s";
+  img_container.style.transform = `translate(-${img_width * img_pos}px, 0px)`;
+}
 //////////////////////////////////////////////////////////////////////////
 
 // when click filter submit button, redirect to slider page
 let pos = 0;
-function nextSlider(id) {
+
+function nextSlider() {
   const slider_container = document.querySelector("#slider_container");
+
   pos = parseInt(pos);
-  let slider_width = document.querySelectorAll(".slider")[`${pos}`].clientWidth;
+
+  let slider_width;
+  if (pos <= 0) {
+    slider_width = document.querySelectorAll(".slider")[`${pos}`].clientWidth;
+  } else {
+    slider_width =
+      document.querySelectorAll(".slider")[`${pos - 1}`].clientWidth;
+  }
+
   slider_container.style.transition = "transform 0.5s ease-in-out 0s";
   slider_container.style.transform = `translate(-${slider_width * pos}px, 0px)`;
 }
@@ -299,6 +340,7 @@ function reg_like_btn_event() {
         return;
       }
       nextSlider();
+      img_pos = 0;
       ///////////////////////////////////////
       const likeUser = e.currentTarget;
       const id = likeUser.dataset.id;
@@ -324,6 +366,7 @@ function reg_dislike_btn_event() {
         return;
       }
       nextSlider();
+      img_pos = 0;
     });
   }
 }
@@ -484,3 +527,19 @@ function display_age() {
 }
 
 /* End of double input range slider */
+
+// 0---0.onload = function (){
+//   nextImage()
+
+// }
+// let imageIdx = 0
+// function nextImage(){
+//   let ImageMenu = document.querySelectorAll("div.ImageTable > img");
+//   for(let x = 0; x < ImageMenu.length ; x++){
+//     ImageMenu[x].addEventListener("click",function(event){
+//       ImageMenu[i].classList.add("isHide");
+//       ImageMenu[imageIdx].classList.remove("isGide");
+//       imageIdx = x ;
+//     })
+//   }
+// }
