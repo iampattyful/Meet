@@ -103,33 +103,130 @@ async function handleFilterFormHttpRequest(formatFormData) {
 
   if (!json.isErr) {
     console.log(json.data);
-    numOfSlider = json.data.length;
+    // const age = await moment()
+    //   .subtract(obj.date_of_birth, "years")
+    //   .format("YYYY-MM-DD");
     // create filtered users result here
     document.querySelector("#slider_container").innerHTML = json.data
-      .map(
-        (obj) => `
-        <div class="slider ">
-        <button class="btn btn-outline-danger leftButton">left</button>
-        <button class="btn btn-outline-danger rightButton">right</button>
-          <div class="imageTable" id="slider_userImage">
-            <img class="userImage" id="userImage" src="${obj.user_icon}" />
-          </div>
-            <div class="userName" id="userName">${obj.username}</div>
-            <div class="date_of_birth" id="date_of_birth">${obj.date_of_birth}</div>
-            <div class="about_me" id="about_me">${obj.about_me}</div>
-            <div class="buttonTable">
-              <button class="btn btn-outline-danger dislikeBtn">
-                Dis Like
-              </button>
-              <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
-                Like
-              </button>
+      .map((obj, index) => {
+        img_arr.push({
+          numOfImg: 6,
+        });
+        return json.data.length - 1 == index
+          ? `
+          <div class="slider">
+          <div class="buttonTable">
+                <button class="btn btn-outline-danger dislikeBtn">
+                  <i class="bi bi-x-circle-fill"></i>
+                </button>
+                <button class="btn btn-outline-success likeBtn" data-id=${
+                  obj.id
+                }>
+                  <i class="bi bi-arrow-through-heart-fill"></i>
+                </button>
+              </div>     
+          <section class="image_content">
+          <button class="btn  leftButton"><i class="bi bi-chevron-left"></i></button>
+          <button class="btn  rightButton"><i class="bi bi-chevron-right"></i></button>
+            <div id="image_container_${index}" class="image_container">
+              <img class="userImage" id="userImage" src="${obj.user_icon}"/>
+              <img class="userImage" id="userImage" src="${obj.image1}" />
+          
+              <img class="userImage" id="userImage" src="${obj.image2}" />
+              <img class="userImage" id="userImage" src="${obj.image3}" />
+            
+              <img class="userImage" id="userImage" src="${obj.image4}" />
+              <img class="userImage" id="userImage" src="${obj.image5}" />
             </div>
+          </section>  
+          <section class="information"> 
+          
+              
+              <div class="userName" id="userName"><h1>${obj.username}</h1></div>
+              <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
+                0,
+                10
+              )}</div>
+              <div >基本資料</div>
+              <div >身高${obj.height}</div>
+              <div >${obj.weight}噸~你信唔信?</div>
+              <div ><i class="bi bi-gender-ambiguous"></i>${
+                obj.gender
+              }  <i class="bi bi-mortarboard-fill"></i>${
+              obj.education_level
+            }</div>
+              <div class="about_me"><i class="bi bi-info-circle"></i>${
+                obj.about_me
+              }</div>
+            
+                  
+                
+
+              
+          </section>
           
       
       </div>
-      `
-      )
+        `
+          : `
+        <div class="slider">
+          <div class="buttonTable">
+                <button class="btn btn-outline-danger dislikeBtn">
+                  <i class="bi bi-x-circle-fill"></i>
+                </button>
+                <button class="btn btn-outline-success likeBtn" data-id=${
+                  obj.id
+                }>
+                  <i class="bi bi-arrow-through-heart-fill"></i>
+                </button>
+              </div>     
+          <section class="image_content">
+          <button class="btn  leftButton"><i class="bi bi-chevron-left"></i></button>
+          <button class="btn  rightButton"><i class="bi bi-chevron-right"></i></button>
+            <div id="image_container_${index}" class="image_container">
+              <img class="userImage" id="userImage" src="${obj.user_icon}"/>
+              <img class="userImage" id="userImage" src="${obj.image1}" />
+          
+              <img class="userImage" id="userImage" src="${obj.image2}" />
+              <img class="userImage" id="userImage" src="${obj.image3}" />
+            
+              <img class="userImage" id="userImage" src="${obj.image4}" />
+              <img class="userImage" id="userImage" src="${obj.image5}" />
+            </div>
+          </section>  
+          <section class="information"> 
+          
+              
+              <div class="userName" id="userName"><h1> ${
+                obj.username
+              }</h1></div>
+              <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
+                0,
+                10
+              )}</div>
+              <div  class="userCard" ><i class="bi bi-ui-checks"></i>基本資料</div>
+              <div ><i class="fa-solid fa-ruler"></i>${obj.height}cm</div>
+              <div ><i class="fa-solid fa-weight-hanging"></i>${
+                obj.weight
+              }kg</div>
+              <div ><i class="bi bi-gender-ambiguous"></i>${obj.gender}</div>
+              <div ><i class="bi bi-mortarboard-fill"></i>${
+                obj.education_level
+              }</div>
+              <div class="about_me"><i class="bi bi-info-circle"></i>${
+                obj.about_me
+              }</div>
+            
+                  
+                
+
+              
+          </section>
+          
+      
+      </div>
+      `;
+      })
       .join("");
     otherImage_left_btn_event();
     otherImage_right_btn_event();
@@ -232,6 +329,7 @@ function reg_dislike_btn_event() {
 }
 
 const updateFilter = document.querySelector("#filter-form");
+
 updateFilter.addEventListener("submit", async (event) => {
   event.preventDefault(); // To prevent the form from submitting synchronously
   let formData = new FormData(updateFilter);
@@ -249,7 +347,6 @@ updateFilter.addEventListener("submit", async (event) => {
   }
   console.log(formatFormData);
   await handleFilterFormHttpRequest(formatFormData);
-  //window.location = "/main.html";
 });
 
 /* Start of double input range slider */

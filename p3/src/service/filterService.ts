@@ -50,8 +50,7 @@ export class FilterService {
         })
         .whereIn("gender", obj.gender)
         .whereBetween("date_of_birth",[min_year,max_year])
-        // .andWhere("date_of_birth", ">=", min_year)
-        // .andWhere("date_of_birth", "<=", max_year)
+        // .andWhere("date_of_birth", ">=", 
         .whereNot("users.id", userId)
         .orderByRaw("random()")
         .limit(20); // limit more users when there are more users in the database
