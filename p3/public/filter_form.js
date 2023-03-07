@@ -118,6 +118,7 @@ async function handleFilterFormHttpRequest(formatFormData) {
   const json = await res.json();
 
   if (!json.isErr) {
+    console.log(json.data);
     // const age = await moment()
     //   .subtract(obj.date_of_birth, "years")
     //   .format("YYYY-MM-DD");
@@ -135,7 +136,9 @@ async function handleFilterFormHttpRequest(formatFormData) {
                 <button class="btn btn-outline-danger dislikeBtn">
                   <i class="bi bi-x-circle-fill"></i>
                 </button>
-                <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
+                <button class="btn btn-outline-success likeBtn" data-id=${
+                  obj.id
+                }>
                   <i class="bi bi-arrow-through-heart-fill"></i>
                 </button>
               </div>     
@@ -164,8 +167,14 @@ async function handleFilterFormHttpRequest(formatFormData) {
               <div >基本資料</div>
               <div >身高${obj.height}</div>
               <div >${obj.weight}噸~你信唔信?</div>
-              <div ><i class="bi bi-gender-ambiguous"></i>${obj.gender}  <i class="bi bi-mortarboard-fill"></i>${obj.education_level}</div>
-              <div class="about_me"><i class="bi bi-info-circle"></i>${obj.about_me}</div>
+              <div ><i class="bi bi-gender-ambiguous"></i>${
+                obj.gender
+              }  <i class="bi bi-mortarboard-fill"></i>${
+              obj.education_level
+            }</div>
+              <div class="about_me"><i class="bi bi-info-circle"></i>${
+                obj.about_me
+              }</div>
             
                   
                 
@@ -182,7 +191,9 @@ async function handleFilterFormHttpRequest(formatFormData) {
                 <button class="btn btn-outline-danger dislikeBtn">
                   <i class="bi bi-x-circle-fill"></i>
                 </button>
-                <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
+                <button class="btn btn-outline-success likeBtn" data-id=${
+                  obj.id
+                }>
                   <i class="bi bi-arrow-through-heart-fill"></i>
                 </button>
               </div>     
@@ -203,17 +214,25 @@ async function handleFilterFormHttpRequest(formatFormData) {
           <section class="information"> 
           
               
-              <div class="userName" id="userName"><h1> ${obj.username}</h1></div>
+              <div class="userName" id="userName"><h1> ${
+                obj.username
+              }</h1></div>
               <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
                 0,
                 10
               )}</div>
               <div  class="userCard" ><i class="bi bi-ui-checks"></i>基本資料</div>
               <div ><i class="fa-solid fa-ruler"></i>${obj.height}cm</div>
-              <div ><i class="fa-solid fa-weight-hanging"></i>${obj.weight}kg</div>
+              <div ><i class="fa-solid fa-weight-hanging"></i>${
+                obj.weight
+              }kg</div>
               <div ><i class="bi bi-gender-ambiguous"></i>${obj.gender}</div>
-              <div ><i class="bi bi-mortarboard-fill"></i>${obj.education_level}</div>
-              <div class="about_me"><i class="bi bi-info-circle"></i>${obj.about_me}</div>
+              <div ><i class="bi bi-mortarboard-fill"></i>${
+                obj.education_level
+              }</div>
+              <div class="about_me"><i class="bi bi-info-circle"></i>${
+                obj.about_me
+              }</div>
             
                   
                 
@@ -353,8 +372,8 @@ function reg_dislike_btn_event() {
 }
 
 const updateFilter = document.querySelector("#filter-form");
+
 updateFilter.addEventListener("submit", async (event) => {
-  
   event.preventDefault(); // To prevent the form from submitting synchronously
   let formData = new FormData(updateFilter);
   formData.append("minAge", minAge);
@@ -371,7 +390,6 @@ updateFilter.addEventListener("submit", async (event) => {
   }
   console.log(formatFormData);
   await handleFilterFormHttpRequest(formatFormData);
-  window.location = "/main.html";
 });
 
 /* Start of double input range slider */
