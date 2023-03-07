@@ -7,7 +7,7 @@
 
 body {
   font-family: "Noto Sans HK", sans-serif;
-  background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
+  background: linear-gradient(-45deg, #d9abe2 0%, #f17151 100%);
   /* prevent text selection */
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ and Edge */

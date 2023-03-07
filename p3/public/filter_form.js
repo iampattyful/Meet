@@ -510,7 +510,7 @@ function display_age() {
 
 /* End of double input range slider */
 
-// window.onload = function (){
+// 0---0.onload = function (){
 //   nextImage()
 
 // }
