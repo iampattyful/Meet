@@ -191,9 +191,7 @@ async function handleFilterFormHttpRequest(formatFormData) {
                 <button class="btn btn-outline-danger dislikeBtn">
                   <i class="bi bi-x-circle-fill"></i>
                 </button>
-                <button class="btn btn-outline-success likeBtn" data-id=${
-                  obj.id
-                }>
+                <button class="btn btn-outline-success likeBtn" data-id=${obj.id}>
                   <i class="bi bi-arrow-through-heart-fill"></i>
                 </button>
               </div>     
@@ -214,13 +212,9 @@ async function handleFilterFormHttpRequest(formatFormData) {
           <section class="information"> 
           
               
-              <div class="userName" id="userName"><h1> ${
-                obj.username
-              }</h1></div>
-              <div class="date_of_birth" id="date_of_birth"><i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring(
-                0,
-                10
-              )}</div>
+              <div class="userName" id="userName"><h1> ${obj.username}</h1></div>
+              <div class="date_of_birth" id="date_of_birth">
+                <i class="fa-solid fa-cake-candles"></i>${obj.date_of_birth.substring( 0,10)}</div>
               <div  class="userCard" ><i class="bi bi-ui-checks"></i>基本資料</div>
               <div ><i class="fa-solid fa-ruler"></i>${obj.height}cm</div>
               <div ><i class="fa-solid fa-weight-hanging"></i>${
@@ -245,11 +239,11 @@ async function handleFilterFormHttpRequest(formatFormData) {
       `;
       })
       .join("");
-    /////////////////////////////////////
+ 
 
     otherImage_left_btn_event();
     otherImage_right_btn_event();
-    ///////////////////////////////////////////
+
 
     numOfSlider = document.querySelectorAll(".slider").length;
 
@@ -299,7 +293,7 @@ function prev_img_slider() {
   img_container.style.transform = `translate(-${img_width * img_pos}px, 0px)`;
 }
 function next_img_slider() {
-  img_pos = parseInt(img_pos);
+  img_pos = parseInt(img_pos);/*點解要用parseInt */
 
   const img_container = document.querySelector(`#image_container_${pos}`);
   let img_width = img_container.children[img_pos - 1].clientWidth;
@@ -341,11 +335,11 @@ function reg_like_btn_event() {
       }
       nextSlider();
       img_pos = 0;
-      ///////////////////////////////////////
+
       const likeUser = e.currentTarget;
       const id = likeUser.dataset.id;
       console.log(id);
-      //////////////////////////////////////////
+
 
       const res = await fetch(`/meet/likeUser/${id}`, {
         method: "PUT",

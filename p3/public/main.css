@@ -1,277 +1,241 @@
 .login_form,
 .logout_form {
-  /* border: 1px solid #222222; */
-  display: flex;
-  justify-content: end;
+/* border: 1px solid #222222; */
+display: flex;
+justify-content: end;
 }
 
 body {
-  font-family: "Noto Sans HK", sans-serif;
-  background: linear-gradient(-45deg, #d9abe2 0%, #f17151 100%);
-  /* prevent text selection */
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10+ and Edge */
-  user-select: none; /* Standard syntax */
-  font-family: "Noto Sans HK", sans-serif;
+font-family: "Noto Sans HK", sans-serif;
+background: linear-gradient(-45deg, #ffc796 0%, #ff6b95 100%);
+/* prevent text selection */
+-webkit-user-select: none; /* Safari */
+-ms-user-select: none; /* IE 10+ and Edge */
+user-select: none; /* Standard syntax */
+font-family: "Noto Sans HK", sans-serif;
 }
 
 .meet-text > .bi {
-  letter-spacing: -12px;
-  margin-top: 20px;
+letter-spacing: -12px;
+margin-top: 20px;
 }
 
 #logo-text {
-  margin: 20px;
-  margin-bottom: 0px;
-  font-weight: 500;
+margin: 20px;
+margin-bottom: 0px;
+font-weight: 500;
 }
 
 .meet-logo {
-  object-fit: cover;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-wrap: nowrap;
+object-fit: cover;
+justify-content: center;
+align-items: center;
+display: flex;
+flex-wrap: nowrap;
 }
 
 .meet-text {
-  font-size: 40px;
-  font-family: "Love Ya Like A Sister", cursive;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex-direction: row;
-  padding-left: 10px;
+font-size: 40px;
+font-family: "Love Ya Like A Sister", cursive;
+display: flex;
+flex-wrap: nowrap;
+justify-content: center;
+align-items: center;
+text-align: center;
+flex-direction: row;
+padding-left: 10px;
 }
 
-
 #filterBtn {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: -10px!important;
-  background-color: #00000000!important;
-  border:0px;cc
+display: flex;
+justify-content: flex-end;
+margin-top: -10px;
 }
 
 .carousel-control-next {
-  left: 30% !important;
+left: 30% !important;
 }
 
 .edit {
-  margin-bottom: 70px;
+margin-bottom: 70px;
 }
 
 /* input[type="file"] {
-    display: none;
+display: none;
 } */
 .image_group {
-  display: flex;
+display: flex;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 .informationTable {
-  margin-top: 50px;
+margin-top: 50px;
 }
 h1{
-  padding-left: 3px;
+padding-left: 3px;
 }
 
 .information{
-  margin: 10px;
+margin: 10px;
 }
 
 .information > div > i {
-  padding-right:15px;
-  padding-left:10px;
+padding-right:15px;
+padding-left:10px;
 }
 
 .userCard{
-  font-size: 15px;
+font-size: 15px;
 }
 
 .img-thumbnail {
-  display: block;
-  max-width: 230px;
-  max-height: 95px;
-  width: auto;
-  height: auto;
+display: block;
+max-width: 230px;
+max-height: 95px;
+width: auto;
+height: auto;
 }
 /* .writeBox {
-  width: 100%;
-  border-radius: 10px;
+width: 100%;
+border-radius: 10px;
 }
 .writeBoxAboutMe {
-  resize: none;
-  width: 100%;
-  border-radius: 10px;
+resize: none;
+width: 100%;
+border-radius: 10px;
 } */
 
 .content {
-  height: 80vh;
-  position: relative;
-  display: flex;
-  border: 1px solid;
-  overflow: scroll;
-  border-radius: 20px;
-  background-color: #f23c3c69;
-  color: white;
+height: 80vh;
+position: relative;
+display: flex;
+border: 1px solid;
+overflow: hidden;
+border-radius: 20px;
+
 }
 #slider_container {
-  display: flex;
-  width: 100%;
-  min-width: 360px;
+display: flex;
+width: 100%;
+min-width: 360px;
 
-  position: absolute;
+position: absolute;
 }
 .theEndTable{
- display: flex;
-  justify-content: center;
-  align-items: start;
-  width: 100%;
-  padding-top: 150px;
-  /* margin-left: 80%;
-  margin-right: -80%; */
+display: flex;
+justify-content: center;
+align-items: start;
+width: 100%;
+padding-top: 150px;
+/* margin-left: 80%;
+margin-right: -80%; */
 }
 
 .theEnd{
-  /* margin-left: -160%; */
+/* margin-left: -160%; */
 margin-bottom: 200px;
 /* margin-left: 40%; */
 /* margin-right: 40%; */
 }
 
 .easter_egg{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 50%;
-  font-size: 1px;
-  
+display: flex;
+justify-content: center;
+align-items: center;
+bottom: 50%;
+font-size: 1px;
+
 }
 
 .slider {
-  position: relative;
-  min-width: 100%;
-  overflow-y: auto;
-
-  /* overflow: scroll; */
+position: relative;
+min-width: 100%;
+overflow-y: auto;
 }
-
 .image_content {
-  position: relative;
-  display: flex;
-  /* border: 1px solid; */
-  overflow: hidden;
-  /* height: 600px; */
-  align-items: center;
-
-  width: 100%;
-  height: auto;
-  min-height: 570px;
-
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
+position: relative;
+display: flex;
+border: 1px solid;
+overflow: hidden;
+height: 360px;
+align-items: center;
 }
 .image_container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  /* min-width: 360px; */
-
-  /* min-width: 100%; */
-  /* max-width: 100%; */
-  /* min-height: 100%; */
-  
-  /* width:auto; */
-  /* height: auto; */
-  top:0px;
-  object-fit: cover;
-  position: absolute;
-  vertical-align: middle;
-  /* max-height: 100%; */
+display: flex;
+width: 100%;
+min-width: 360px;
 }
-
 
 .userImage {
-  min-width: 100%;
+min-width: 100%;
 }
 .leftButton{
-  position: absolute;
-  left: 0px;
-  z-index: 1;
+position: absolute;
+left: 0px;
+z-index: 1;
 
 }
 
 .rightButton{
-  position: absolute;
-  right: 0px;
-  z-index: 1;
+position: absolute;
+right: 0px;
+z-index: 1;
 }
 .buttonTable{
-  display: flex;
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  right: 50%;
+display: flex;
+position: absolute;
+top: 53%;
+left: 50%;
+right: 50%;
 }
 .dislikeBtn{
-  position: absolute;
-  left: 40px;
-  z-index: 1;
-  background-color: rgba(179, 10, 10, 0.906) ;
-  color: #fcb1b1;
-  border: 0px;
-  width: 90px;
-  height: 70px;
-  font-size: 30px;
-  border-radius: 20px;
+position: absolute;
+left: 40px;
+z-index: 1;
+background-color: rgb(179, 10, 10) ;
+color: #fcb1b1;
+border: 0px;
+
 }
 .dislikeBtn:hover{
 background-color: rgb(245, 23, 23);
 
 }
 .likeBtn{
-  position: absolute;
-  right: 40px;
-  z-index: 1;
-  background-color: rgba(15, 168, 23, 0.892);
-  color:rgb(6, 255, 18);
-  border: 0px;
-  width: 90px;
-  height: 70px;
-  font-size: 30px;
-  border-radius: 20px;
+position: absolute;
+right: 40px;
+z-index: 1;
+background-color: rgb(15, 168, 23);
+color:rgb(6, 255, 18);
+border: 0px;
 }
 
 .likeBtn:hover{
-  background-color: rgb(11, 207, 21);
+background-color: rgb(11, 207, 21);
 
 }
 
 .ImageTable > section {
-  padding: 10px;
+padding: 10px;
 }
 .ImageTable > section > div {
-  width: 100%;
+width: 100%;
 }
 .isHide {
-  display: none;
+display: none;
 }
 
 #exitEditForm {
-  position: absolute;
-  top: 0px;
-  right: 0px;
+position: absolute;
+top: 0px;
+right: 0px;
 }
 
 .submit_edit_form_button{
-  margin:20px
+margin:20px
 }
 
 .editForm{
-  margin-bottom: 200px;
+margin-bottom: 200px;
 }
+
