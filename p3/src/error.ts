@@ -10,6 +10,8 @@ export function errorHandler(error:any, req:express.Request,res:express.Response
         data:null,
         
     }    
+
+    console.error({ result })
     
     res.status(500).json(result)
     // res.json(result)

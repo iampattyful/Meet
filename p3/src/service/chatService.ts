@@ -45,6 +45,18 @@ export class ChatService {
     return rows;
   }
 
+  async validUserIdWithGroupId(userId: number, groupId: number) {
+    const rows = await knex("group").select("*")
+      .where("group.id", groupId)
+      .andWhere(
+        function() {
+          this.where("group.matched_user_id1", userId).orWhere("group.matched_user_id2", userId)
+        }
+      )
+
+    return rows.length > 0
+  }
+
   async getRoomMess(userId: number, groupId: number) {
     const rows = await knex("group")
       .join("message", "message.group_id", "=", "group.id")

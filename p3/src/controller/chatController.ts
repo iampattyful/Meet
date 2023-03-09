@@ -37,6 +37,11 @@ export class ChatController extends ChatRouters {
     try {
       let userId = req.session.userId!;
       let groupId = Number(req.params.groupId);
+
+      if (! await chatService.validUserIdWithGroupId(userId, groupId)) {
+        throw Error("userID validation error!")
+      }
+
       let result = await chatService.getRoomMess(userId, groupId);
       res.json({
         data: result,

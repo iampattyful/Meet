@@ -111,10 +111,9 @@ h1{
   position: relative;
   display: flex;
   border: 1px solid;
-  overflow: scroll;
+  overflow: hidden;
   border-radius: 20px;
-  background-color: #f23c3c69;
-  color: white;
+  
 }
 #slider_container {
   display: flex;
@@ -153,44 +152,19 @@ margin-bottom: 200px;
   position: relative;
   min-width: 100%;
   overflow-y: auto;
-
-  /* overflow: scroll; */
 }
-
 .image_content {
   position: relative;
   display: flex;
-  /* border: 1px solid; */
+  border: 1px solid;
   overflow: hidden;
-  /* height: 600px; */
+  height: 360px;
   align-items: center;
-
-  width: 100%;
-  height: auto;
-  min-height: 570px;
-
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
 }
 .image_container {
   display: flex;
   width: 100%;
-  height: 100%;
-  /* min-width: 360px; */
-
-  /* min-width: 100%; */
-  /* max-width: 100%; */
-  /* min-height: 100%; */
-  
-  /* width:auto; */
-  /* height: auto; */
-  top:0px;
-  object-fit: cover;
-  position: absolute;
-  vertical-align: middle;
-  /* max-height: 100%; */
+  min-width: 360px;
 }
 
 
@@ -212,7 +186,7 @@ margin-bottom: 200px;
 .buttonTable{
   display: flex;
   position: absolute;
-  top: 60%;
+  top: 53%;
   left: 50%;
   right: 50%;
 }
@@ -220,13 +194,10 @@ margin-bottom: 200px;
   position: absolute;
   left: 40px;
   z-index: 1;
-  background-color: rgba(179, 10, 10, 0.906) ;
+  background-color: rgb(179, 10, 10) ;
   color: #fcb1b1;
   border: 0px;
-  width: 90px;
-  height: 70px;
-  font-size: 30px;
-  border-radius: 20px;
+
 }
 .dislikeBtn:hover{
 background-color: rgb(245, 23, 23);
@@ -236,13 +207,9 @@ background-color: rgb(245, 23, 23);
   position: absolute;
   right: 40px;
   z-index: 1;
-  background-color: rgba(15, 168, 23, 0.892);
+  background-color: rgb(15, 168, 23);
   color:rgb(6, 255, 18);
   border: 0px;
-  width: 90px;
-  height: 70px;
-  font-size: 30px;
-  border-radius: 20px;
 }
 
 .likeBtn:hover{

@@ -40,10 +40,11 @@ async function getRoomMess() {
 
   if (res_json.isErr) {
     // alert(res_json.errMess);
+    window.location = "/group.html";
   } else {
     data = res_json.data;
     renderUpdateMessage();
-    onBottom()
+    onBottom();
   }
 }
 
@@ -57,19 +58,19 @@ async function rej_sendMess_btn_event() {
     document.querySelector(".send-message").value = "";
   });
   message.addEventListener("keypress", (e) => {
-      if(e.keyCode === 13){
-        e.preventDefault();
-        socket.emit("sendMessage", { groupId: groupId, message: message.value });
-        document.querySelector(".send-message").value = "";
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      socket.emit("sendMessage", { groupId: groupId, message: message.value });
+      document.querySelector(".send-message").value = "";
     }
   });
-  
-  let chatBar = document.querySelector(".chatBar")
+
+  let chatBar = document.querySelector(".chatBar");
   message.addEventListener("focus", (e) => {
-    chatBar.classList.add("active")
+    chatBar.classList.add("active");
   });
   message.addEventListener("blur", (e) => {
-    chatBar.classList.remove("active")
+    chatBar.classList.remove("active");
   });
 }
 
@@ -86,7 +87,7 @@ function renderUpdateMessage() {
           `
     )
     .join("");
-    onBottom()
+  onBottom();
 }
 
 socket.on(`updateSendMessage-${groupId}`, (res_json) => {
@@ -129,7 +130,7 @@ socket.on(`updateSendMessage-${groupId}`, (res_json) => {
 
 // });
 
-function onBottom(){
-    let messageContainer = document.querySelector(".messageContainer")
-    messageContainer.scrollTop = messageContainer.scrollHeight
+function onBottom() {
+  let messageContainer = document.querySelector(".messageContainer");
+  messageContainer.scrollTop = messageContainer.scrollHeight;
 }
