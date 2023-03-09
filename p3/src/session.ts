@@ -9,6 +9,6 @@ declare module "express-session" {
   interface SessionData {
     userId?: number;
     isLogin?: boolean;
-    socketId?: number;
+    socketId?: string;
   }
 }

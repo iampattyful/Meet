@@ -55,12 +55,15 @@ async function rej_sendMess_btn_event() {
     e.preventDefault();
     // let message = document.querySelector(".send-message");
     socket.emit("sendMessage", { groupId: groupId, message: message.value });
+    // socket.emit(groupId, { groupId: groupId, message: message.value });
+
     document.querySelector(".send-message").value = "";
   });
   message.addEventListener("keypress", (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
       socket.emit("sendMessage", { groupId: groupId, message: message.value });
+      // socket.emit(groupId, { groupId: groupId, message: message.value });
       document.querySelector(".send-message").value = "";
     }
   });
@@ -90,8 +93,14 @@ function renderUpdateMessage() {
   onBottom();
 }
 
-socket.on(`updateSendMessage-${groupId}`, (res_json) => {
+// socket.on(`updateSendMessage-${groupId}`, (res_json) => {
+//   data = res_json;
+//   renderUpdateMessage();
+// });
+
+socket.on(`${groupId}`, (res_json) => {
   data = res_json;
+  console.log(data);
   renderUpdateMessage();
 });
 

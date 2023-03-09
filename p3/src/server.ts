@@ -5,7 +5,7 @@ import { sessionMiddleware } from "./session";
 import { env_config } from "./env";
 import path from "path";
 import { MeetController } from "./controller/meetController";
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 import http from "http";
 import { knex } from "./db";
 import { EditProfileController } from "./controller/editProfileController";
@@ -24,8 +24,17 @@ io.use((socket, next) => {
   sessionMiddleware(req, res, next as express.NextFunction);
 });
 
+let socketDB = {};
+
 io.on("connection", async (socket) => {
   let req = socket.request as express.Request;
+
+  console.log({ socketId: socket.id });
+
+  req.session.socketId = socket.id;
+
+  socketDB[String(req.session.userId)] = socket;
+  socketDB[socket.id] = req.session.id;
 
   socket.use((__, next) => {
     req.session.reload((err) => {
@@ -41,7 +50,20 @@ io.on("connection", async (socket) => {
 
   // send message
   socket.on("sendMessage", async (data) => {
-    try{
+    try {
+      let userId = req.session.userId;
+      let groupId = data.groupId! as string;
+
+      let groupMate = await knex("group")
+        .select("*")
+        .where("group.id", groupId)
+        .andWhere(function () {
+          this.where("group.matched_user_id1", userId).orWhere(
+            "group.matched_user_id2",
+            userId
+          );
+        });
+
       console.log(data, "sendMess");
       await knex("message").insert([
         {
@@ -62,12 +84,37 @@ io.on("connection", async (socket) => {
           "users.user_icon"
         )
         .where("group.id", data.groupId)
-        .andWhere("group.matched_user_id1", req.session.userId)
-        .orWhere("group.matched_user_id2", req.session.userId)
+        .andWhere(function () {
+          this.where("group.matched_user_id1", userId).orWhere(
+            "group.matched_user_id2",
+            userId
+          );
+        })
         .orderBy("message.created_at", "asc");
-  
-      io.emit(`updateSendMessage-${data.groupId}`, rows);
-    }catch(err){
+
+      // io.emit(`updateSendMessage-${data.groupId}`, rows);
+
+      if (groupMate.length > 0) {
+        let groupMateId = "";
+
+        if (parseInt(groupMate[0].matched_user_id1) == userId) {
+          groupMateId = String(groupMate[0].matched_user_id2);
+        } else {
+          groupMateId = String(groupMate[0].matched_user_id1);
+        }
+
+        // console.log(socket.rooms);
+
+        (socketDB[String(userId)] as Socket).join(groupId);   
+        socket.emit(groupId, rows);     
+
+        (socketDB[groupMateId] as Socket).join(groupId);
+
+        // console.log((socketDB[groupMateId] as Socket).rooms)
+
+        socket.to(groupId).emit(groupId, rows);
+      }
+    } catch (err) {
       console.log(err.message, "sendMessage with error");
     }
   });
@@ -131,11 +178,18 @@ io.on("connection", async (socket) => {
     }
   });
 
-  if (req.session.userId) {
-    // to do something
-  }
+  // if (req.session.userId) {
+  //   // to do something
+  // }
 
-  socket.on("disconnect", () => {});
+  socket.on("disconnect", () => {
+    try {
+      delete socketDB[String(req.session.userId)];
+      delete socketDB[socket.id];
+    } catch (err) {
+      console.error(err);
+    }
+  });
 });
 
 let p2 = path.join(__dirname, "../uploads");
@@ -155,7 +209,6 @@ app.use("/editProfile", editProfileController.routes);
 app.use("/chat", chatController.routes);
 
 app.get("/test", async (req: express.Request, res: express.Response) => {
-  
   // const matchedUsers = (
   //     await knex.raw(
   //       `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max
@@ -171,7 +224,6 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //       order by user_message.max desc`
   //     )
   //   ).rows;
-
   // const lastMessage = await knex("message")
   //   .join(
   //     function () {
@@ -210,7 +262,6 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //   )
   //   // .where("user_message.group_id","message.group_id")
   //   .orderBy("user_message.max", "desc");
-
   // const matchedUsers = await knex("message")
   //     .join("users","users.id","=","message.user_id")
   //     .join("group","group.id","=","message.group_id")
@@ -228,7 +279,6 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //     .groupBy("group_id")
   //     .as("user_message")
   // })
-
   // const lastMessageTime = await knex
   //       .join("message","message.group_id","=","group.id")
   //       .select("group.id")
@@ -237,12 +287,10 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //       .orWhere("matched_user_id1",89)
   //       .max("message.created_at")
   //       .groupBy("message.group_id")
-
   // .as("user_message")
   // const subquery = await knex("liked")
   //   .select("liked_to")
   //   .where("liked_from", 1);
-
   // const matchedUsers = await knex("users")
   // .distinct("*")
   // .join("liked", "users.id", "=", "liked.liked_from")
@@ -261,7 +309,6 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //   { column: "liked.created_at", order: "desc" },
   //   { column: "chatroom.created_at", order: "desc" },
   // ]);
-
   // const matchedUsers = await knex("message")
   // .join("users","users.id","=","message.user_id")
   // .join("group","group.id","=","message.group_id")
@@ -271,7 +318,6 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   // .orderBy("message.created_at","desc")
   // .groupBy("group.id","users.username","users.user_icon","message.message")
   // .max("message.created_at")
-
   //   const subquery = await knex ("message")
   //   .join("group","group_id","=","group.id")
   //   .select("group_id")
@@ -279,7 +325,6 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   //   .orWhere("matched_user_id1",89)
   //   .max("message.created_at")
   //   .groupBy("group_id")
-
   // const matchedUsers = await knex("message")
   // .join(function(){
   //   this.select("group_id")
@@ -293,7 +338,6 @@ app.get("/test", async (req: express.Request, res: express.Response) => {
   // .select("user_message.group_id","users.user_icon","users.username","message.message")
   // .where("user_message.max","=","message.created_at")
   // .orderBy("user_message.max","desc")
-
   // const matchedUsers = (
   //   await knex.raw(
   //     `select user_message.group_id, users.user_icon, users.username, message.message, user_message.max from (select group_id, max(message.created_at) from message, "group" where group_id = "group".id and "group".matched_user_id1 = 89 or "group".matched_user_id2 = 89 group by group_id) as user_message, message, users where user_message.group_id = message.group_id and user_message.max = message.created_at and users.id = message.user_id order by user_message.max desc`

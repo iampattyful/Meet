@@ -70,8 +70,11 @@ export class ChatService {
         "users.user_icon"
       )
       .where("group.id", groupId)
-      .andWhere("group.matched_user_id1", userId)
-      .orWhere("group.matched_user_id2", userId)
+      .andWhere(
+        function() {
+          this.where("group.matched_user_id1", userId).orWhere("group.matched_user_id2", userId)
+        }
+      )
       .orderBy("message.created_at", "asc");
 
     return rows;
