@@ -106,15 +106,6 @@ border-radius: 10px;
 } */
 
 .content {
-<<<<<<< HEAD
-  height: 80vh;
-  position: relative;
-  display: flex;
-  border: 1px solid;
-  overflow: hidden;
-  border-radius: 20px;
-  
-=======
 height: 80vh;
 position: relative;
 display: flex;
@@ -122,7 +113,6 @@ border: 1px solid;
 overflow: hidden;
 border-radius: 20px;
 
->>>>>>> 538cd001a59eb3a70fdc79a4f68183891a2d5749
 }
 #slider_container {
 display: flex;
@@ -158,24 +148,6 @@ font-size: 1px;
 }
 
 .slider {
-<<<<<<< HEAD
-  position: relative;
-  min-width: 100%;
-  overflow-y: auto;
-}
-.image_content {
-  position: relative;
-  display: flex;
-  border: 1px solid;
-  overflow: hidden;
-  height: 360px;
-  align-items: center;
-}
-.image_container {
-  display: flex;
-  width: 100%;
-  min-width: 360px;
-=======
 position: relative;
 min-width: 100%;
 overflow-y: auto;
@@ -192,7 +164,6 @@ align-items: center;
 display: flex;
 width: 100%;
 min-width: 360px;
->>>>>>> 538cd001a59eb3a70fdc79a4f68183891a2d5749
 }
 
 .userImage {
@@ -211,21 +182,6 @@ right: 0px;
 z-index: 1;
 }
 .buttonTable{
-<<<<<<< HEAD
-  display: flex;
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  right: 50%;
-}
-.dislikeBtn{
-  position: absolute;
-  left: 40px;
-  z-index: 1;
-  background-color: rgb(179, 10, 10) ;
-  color: #fcb1b1;
-  border: 0px;
-=======
 display: flex;
 position: absolute;
 top: 53%;
@@ -239,7 +195,6 @@ z-index: 1;
 background-color: rgb(179, 10, 10) ;
 color: #fcb1b1;
 border: 0px;
->>>>>>> 538cd001a59eb3a70fdc79a4f68183891a2d5749
 
 }
 .dislikeBtn:hover{
@@ -247,21 +202,12 @@ background-color: rgb(245, 23, 23);
 
 }
 .likeBtn{
-<<<<<<< HEAD
-  position: absolute;
-  right: 40px;
-  z-index: 1;
-  background-color: rgb(15, 168, 23);
-  color:rgb(6, 255, 18);
-  border: 0px;
-=======
 position: absolute;
 right: 40px;
 z-index: 1;
 background-color: rgb(15, 168, 23);
 color:rgb(6, 255, 18);
 border: 0px;
->>>>>>> 538cd001a59eb3a70fdc79a4f68183891a2d5749
 }
 
 .likeBtn:hover{
@@ -292,4 +238,3 @@ margin:20px
 .editForm{
 margin-bottom: 200px;
 }
-
