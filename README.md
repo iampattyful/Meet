@@ -6,9 +6,10 @@
 
 *Tech Stack*:	OpenCV, Numpy, Sanic, Python, Knex.js, TypeScript, JavaScript, HTML, CSS, Bootstrap, Node.js, Express.js, Socket.IO, PostgreSQL, NGINX, Certbot, AWS EC2, AWS Route 53, AWS S3
 
-> *My contribution in this project:*
+> ### *My contribution in this project:*
 >
-> Please refer to [meet_face_detection_ai_model](https://github.com/iampattyful/meet_face_detection_ai_model) for Artifical Intelligence Pre-trained Model.
+> Please refer to [meet_face_detection_ai_model](https://github.com/iampattyful/meet_face_detection_ai_model) for Artifical Intelligence Pre-trained Model source codes.
+> 
 > **Artifical Intelligence Pre-trained Model**
 > - deployed this python model to AWS EC2 at (https://ai.clsfei.link/)
 > - utilizing Amazon S3 service to post user image from Express server via RESTful API to this face detection model to verify the presence of human face in the posted image
