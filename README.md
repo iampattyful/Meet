@@ -8,7 +8,7 @@
 
 > ### *My contribution in this project:*
 >
-> Please refer to [meet_face_detection_ai_model](https://github.com/iampattyful/meet_face_detection_ai_model) for Artifical Intelligence Pre-trained Model source codes.
+> Please refer to [meet_face_detection_ai_model](https://github.com/iampattyful/meet_face_detection_ai_model) for artifical intelligence pre-trained model source codes.
 > 
 > **Artifical Intelligence Pre-trained Model**
 > - deployed this python model to AWS EC2 at (https://ai.clsfei.link/)
