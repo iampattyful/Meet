@@ -4,7 +4,19 @@
 
 *Summary*:	Meet is a mobile dating web application for users to meet other users using artificial intelligence technology to conduct face detection verification in registration. After registering an account successfully, users can view other users’ profiles based on the filtered result and send instant messaging within the private chat room only if they have liked each other.  
 
-*Tech Stack*:	TypeScript, JavaScript, HTML, CSS, Bootstrap, Node.js, Express.js, bcrypt.js, formidable, Socket.IO, PostgreSQL, AJAX, Async Await, RESTful API, Python, Knex.js, NGINX, Certbot, AWS EC2, AWS Route 53, AWS S3, OpenCV, Numpy, Sanic
+*Tech Stack*:	
+>
+- TypeScript, JavaScript, HTML, CSS, and Bootstrap for frontend development
+- Node.js and Express.js for backend development
+- bcrypt.js for user authentication
+- Formidable for form data processing
+- Socket.IO for real-time communication
+- PostgreSQL for database management
+- AJAX, Async Await, and RESTful API for data exchange
+- Python, Knex.js, NGINX, and Certbot for server management and optimization
+- AWS EC2, AWS Route 53, and AWS S3 for cloud hosting and storage
+- OpenCV and Numpy for face detection verification
+- Sanic for server-side Python development.  
 
 > ### *My contribution in this project:*
 >
