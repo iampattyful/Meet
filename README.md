@@ -41,3 +41,9 @@
 >
 > **Database development**
 > * *Knex Seed:* p3/src/seeds/p3.ts
+
+> ### *Screen captures of user interface:*
+![BAD Group Project](https://user-images.githubusercontent.com/110732415/236171209-dcb170b1-a187-4af4-b4a3-d75ecff70a2e.jpg)
+![BAD Group Project (1)](https://user-images.githubusercontent.com/110732415/236171203-33cf7eb0-2def-4772-a83f-a36e8f1b08ed.jpg)
+![BAD Group Project (2)](https://user-images.githubusercontent.com/110732415/236171191-100ce753-cb08-42ef-9b96-ccd5f99f9370.jpg)
+![BAD Group Project (3)](https://user-images.githubusercontent.com/110732415/236171172-18f70c96-4644-4635-ae1e-e04541c9730a.jpg)
