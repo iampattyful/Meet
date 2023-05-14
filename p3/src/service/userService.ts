@@ -41,7 +41,7 @@ export class UserService {
       let [user] = await this.knex("users")
         .insert({
           username: obj.username,
-          password: obj.password,
+          password: await checkPassword(obj.password),
           gender: obj.gender,
           email: obj.email,
           date_of_birth: obj.date_of_birth,
