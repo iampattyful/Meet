@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 import { knex } from "../db";
-import { checkPassword } from "../hash";
+import { checkPassword, hashPassword } from "../hash";
 import { User } from "../model";
 
 export class UserService {
@@ -41,7 +41,7 @@ export class UserService {
       let [user] = await this.knex("users")
         .insert({
           username: obj.username,
-          password: await checkPassword(obj.password),
+          password: await hashPassword(obj.password),
           gender: obj.gender,
           email: obj.email,
           date_of_birth: obj.date_of_birth,
